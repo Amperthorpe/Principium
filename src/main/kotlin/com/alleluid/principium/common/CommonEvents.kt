@@ -2,9 +2,11 @@ package com.alleluid.principium.common
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.Utils
+import com.alleluid.principium.common.items.ModItems.longFallBoots
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.sun.org.apache.xpath.internal.operations.Bool
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagLong
 import net.minecraftforge.event.entity.living.LivingFallEvent
@@ -40,7 +42,7 @@ object CommonEvents {
     @SubscribeEvent
     fun thing(event: LivingFallEvent){
         val entity = event.entityLiving
-        if (entity is EntityPlayer){
+        if (entity is EntityPlayer && entity.armorInventoryList.contains(ItemStack(longFallBoots))){
 //            event.distance = 0f
             event.damageMultiplier = 0f
         }
