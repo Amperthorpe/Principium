@@ -25,7 +25,7 @@ object TransportRod : BaseItem("transport_rod") {
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add("Right click to teleport to the block you're looking at.")
         tooltip.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
-        tooltip.add("Sneak to teleport through the block you're looking at.")
+        tooltip.add("Sneak click a block to teleport through it.")
         tooltip.add("Left click function TODO")
     }
 
