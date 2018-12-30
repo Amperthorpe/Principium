@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone",
+      "data": 32767
+    }
+  ],
+  "result": {
+    "item": "minecraft:cobblestone"
+  }
+}

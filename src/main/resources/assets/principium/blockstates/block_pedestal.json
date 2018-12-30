@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "principium:block_pedestal"
+    },
+    "inventory": {
+      "model": "principium:block_pedestal",
+      "transform": "forge:default-block"
+    }
+  }
+}

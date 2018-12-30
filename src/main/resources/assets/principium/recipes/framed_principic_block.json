@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "principium:block_principic"
+    }
+  ],
+  "result": {
+    "item": "principium:framed_glow"
+  }
+}

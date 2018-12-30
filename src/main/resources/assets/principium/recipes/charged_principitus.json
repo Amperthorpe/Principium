@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RPR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "blockRedstone"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "dustPrincipic"
+    }
+  },
+  "result": {
+    "item": "principium:charged_principitus"
+  }
+}

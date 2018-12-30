@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "principium:framed_glow"
+    },
+    "inventory": {
+      "model": "principium:framed_glow",
+      "transform": "forge:default-block"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O O",
+    "OdO"
+  ],
+  "key": {
+    "d": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "blockObsidian"
+    }
+  },
+  "result": {
+    "item": "principium:long_fall_boots"
+  }
+}

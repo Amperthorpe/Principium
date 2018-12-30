@@ -1,0 +1,22 @@
+[
+  {
+    "modid": "principium",
+    "name": "Principium",
+    "description": "Alleluid's Mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Alleluid"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "useDependencyInformation": "true",
+    "requiredMods": [],
+    "dependencies": [
+      "ctm"
+    ]
+  }
+]

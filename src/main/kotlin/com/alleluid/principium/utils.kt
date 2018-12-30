@@ -1,0 +1,33 @@
+package com.alleluid.principium
+
+import net.minecraft.client.Minecraft
+import net.minecraft.entity.Entity
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.text.TextComponentString
+import net.minecraft.world.World
+
+object Utils {
+    fun statusMessage(msg: String, actionBar: Boolean = true) {
+        Minecraft.getMinecraft().player.sendStatusMessage(TextComponentString(msg), actionBar)
+    }
+
+    fun chatMessage(msg: String) = statusMessage(msg, false)
+
+    fun TODO(reason: String) {
+        chatMessage("TODO: $reason")
+    }
+
+
+    fun checkHeadspace(world: World, pos: BlockPos): Boolean {
+        return world.isAirBlock(pos) && world.isAirBlock(BlockPos(pos.x, pos.y + 1, pos.z))
+    }
+
+    fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double, yaw: Float, pitch: Float) {
+        this.setPositionAndUpdate(x, y, z)
+        this.setPositionAndRotation(x, y, z, yaw, pitch)
+    }
+
+    fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double) {
+        this.setPositionAndRotationAndUpdate(x, y, z, this.rotationYaw, this.rotationPitch)
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DI ",
+    "ISI",
+    " IC"
+  ],
+  "key": {
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "blockDiamond"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPrincipic"
+    },
+    "S": {
+      "item": "principium:sword_principic"
+    },
+    "C": {
+      "item": "principium:charged_principitus"
+    }
+  },
+  "result": {
+    "item": "principium:laser_drill"
+  }
+}
