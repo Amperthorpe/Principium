@@ -31,8 +31,6 @@ open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(
 }
 
 object PrincipicSword : BaseSword(PrincipiumMod.inertToolMaterial, "sword_principic"){
-    init {
-    }
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
         if (entity.isEntityAlive && entity !is EntityPlayer) {
