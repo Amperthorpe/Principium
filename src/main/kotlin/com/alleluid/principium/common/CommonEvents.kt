@@ -51,8 +51,8 @@ object CommonEvents {
         when (event.entityPlayer.heldItemMainhand.item) {
             PrincipicSword -> {
                 val health = (event.target as EntityLivingBase).health
-                if (health > 1.0){
-                    event.target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), health - 1.0f)
+                if (health > 1.1){
+                    event.target.attackEntityFrom(DamageSource.MAGIC, health - 0.1f)
                 } else {
                 }
                 event.isCanceled = true
