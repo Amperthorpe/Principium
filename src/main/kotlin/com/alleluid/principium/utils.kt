@@ -58,5 +58,7 @@ object Utils {
         const val UNDERLINE = "§n"
         const val ITALIC = "§o"
         const val RESET = "§r"
+
+        const val LORE = DARK_PURPLE + ITALIC
     }
 }
