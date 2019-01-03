@@ -4,12 +4,16 @@ import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.Utils
 import com.alleluid.principium.common.items.ModItems.longFallBoots
 import com.alleluid.principium.common.items.tools.LaserDrill
+import com.alleluid.principium.common.items.tools.PrincipicSword
 import com.sun.org.apache.xpath.internal.operations.Bool
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagLong
+import net.minecraft.util.DamageSource
 import net.minecraftforge.event.entity.living.LivingFallEvent
+import net.minecraftforge.event.entity.player.AttackEntityEvent
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import net.minecraftforge.fml.common.Mod
@@ -21,9 +25,10 @@ object CommonEvents {
 
     @JvmStatic
     @SubscribeEvent
-    fun onPlayerLeftClick(event: PlayerInteractEvent.LeftClickBlock) {
-/*
+    fun onEvent(event: PlayerInteractEvent.LeftClickBlock) {
+
         when (event.itemStack.item) {
+/*
             LaserDrill -> if (!event.world.isRemote && event.itemStack.hasTagCompound()) {
                 var didBreak = false
                 if (event.itemStack.tagCompound!!.getLong("timeWhenUsable") < event.world.totalWorldTime) {
@@ -33,16 +38,33 @@ object CommonEvents {
                     event.itemStack.tagCompound!!.setLong("timeWhenUsable",
                             event.world.totalWorldTime + LaserDrill.breakCooldown)
                 }
-            }
-        }
 */
+//            PrincipicSword -> event.isCanceled = true
+
+        }
+
     }
 
     @JvmStatic
     @SubscribeEvent
-    fun thing(event: LivingFallEvent){
+    fun onEvent(event: AttackEntityEvent) {
+        when (event.entityPlayer.heldItemMainhand.item) {
+            PrincipicSword -> {
+                val health = (event.target as EntityLivingBase).health
+                if (health > 1.0){
+                    event.target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), health - 1.0f)
+                } else {
+                }
+                event.isCanceled = true
+            }
+        }
+    }
+
+    @JvmStatic
+    @SubscribeEvent
+    fun onEvent(event: LivingFallEvent) {
         val entity = event.entityLiving
-        if (entity is EntityPlayer && entity.armorInventoryList.contains(ItemStack(longFallBoots))){
+        if (entity is EntityPlayer && entity.armorInventoryList.contains(ItemStack(longFallBoots))) {
 //            event.distance = 0f
             event.damageMultiplier = 0f
         }

@@ -1,22 +1,21 @@
 package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.MOD_ID
-import com.alleluid.principium.MOD_NAME
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.Utils
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer
+import com.alleluid.principium.Utils.Formatting as ufm
+import com.alleluid.principium.common.items.BaseItem
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemSword
-import net.minecraft.nbt.NBTTagByte
-import net.minecraft.nbt.NBTTagString
-import net.minecraft.nbt.NBTUtil
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
+import net.minecraft.world.World
+
 
 open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(material){
     init {
@@ -30,18 +29,20 @@ open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(
     }
 }
 
-object PrincipicSword : BaseSword(PrincipiumMod.inertToolMaterial, "sword_principic"){
+object PrincipicSword : BaseItem("sword_principic"){
 
-    override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
-        if (entity.isEntityAlive && entity !is EntityPlayer) {
-            player.world.removeEntity(entity)
-        }
-        return super.onLeftClickEntity(stack, player, entity)
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
+        tooltip.add("${ufm.DARK_PURPLE + ufm.ITALIC}The strong will be made weak, and the weak shall bow before me.")
+        tooltip.add("Attacks lower to half a heart, but won't kill.")
+//        tooltip.add("Right click to teleport, sneak click to set position.")
     }
 
+    override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
+        return false //logic moved to CommonEvents.kt
+   }
+
     override fun itemInteractionForEntity(stack: ItemStack, playerIn: EntityPlayer, target: EntityLivingBase, hand: EnumHand): Boolean {
-        target.entityData.setTag("CustomName", NBTTagString(MOD_NAME))
-        target.entityData.setTag("CustomNameVisible", NBTTagByte(1))
+        if (!playerIn.world.isRemote) Utils.statusMessage(target.health.toString())
         return super.itemInteractionForEntity(stack, playerIn, target, hand)
     }
 }
