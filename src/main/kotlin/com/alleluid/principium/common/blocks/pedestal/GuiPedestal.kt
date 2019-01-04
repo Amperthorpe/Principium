@@ -25,6 +25,7 @@ class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) 
         val name = I18n.format( "${BlockPedestal.unlocalizedName}.name")
         fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040)
         fontRenderer.drawString(playerInv.displayName.unformattedText, 8, ySize - 94, 0x404040)
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY)
     }
 
 }

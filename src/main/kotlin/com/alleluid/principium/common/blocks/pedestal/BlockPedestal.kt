@@ -32,9 +32,8 @@ object BlockPedestal : BaseTileEntity<TileEntityPedestal>(Material.ROCK, "block_
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!worldIn.isRemote) {
             if (!playerIn.isSneaking) {
-
-            } else {
                 playerIn.openGui(PrincipiumMod.instance, ModGuiHandler.PEDESTAL, worldIn, pos.x, pos.y, pos.z)
+            } else {
             }
         }
         return true
