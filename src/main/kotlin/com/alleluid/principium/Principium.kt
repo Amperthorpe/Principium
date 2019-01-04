@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 const val MOD_ID = "principium"
@@ -36,7 +37,7 @@ object PrincipiumMod {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, ModGuiHandler())
     }
 
     @Mod.EventHandler

@@ -1,5 +1,6 @@
 package com.alleluid.principium.common.blocks.pedestal
 
+import com.alleluid.principium.ModGuiHandler
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.Utils
 import com.alleluid.principium.common.blocks.BaseTileEntity
@@ -29,26 +30,11 @@ object BlockPedestal : BaseTileEntity<TileEntityPedestal>(Material.ROCK, "block_
     override fun createTileEntity(world: World, state: IBlockState): TileEntityPedestal? = TileEntityPedestal()
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val tile: TileEntityPedestal = getTileEntity(worldIn, pos)
-        val itemHandler: IItemHandler? = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)
         if (!worldIn.isRemote) {
-            val heldItem = playerIn.getHeldItem(hand)
-            if (itemHandler != null) {
-                if (!playerIn.isSneaking) {
-                    if (heldItem.isEmpty) {
-                        playerIn.setHeldItem(hand, itemHandler.extractItem(0, 64, false))
-                    } else {
-                        playerIn.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false))
-                    }
-                    tile.markDirty()
-                }
-            }
-        } else {
-            if (itemHandler != null) {
-                val stack: ItemStack = itemHandler.getStackInSlot(0)
-                if (!stack.isEmpty) {
-                    Utils.statusMessage("${stack.count}x ${stack.displayName}")
-                }
+            if (!playerIn.isSneaking) {
+
+            } else {
+                playerIn.openGui(PrincipiumMod.instance, ModGuiHandler.PEDESTAL, worldIn, pos.x, pos.y, pos.z)
             }
         }
         return true
