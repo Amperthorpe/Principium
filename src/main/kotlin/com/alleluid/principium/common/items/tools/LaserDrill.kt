@@ -25,7 +25,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     init {
         creativeTab = PrincipiumMod.creativeTab
         registryName = ResourceLocation(MOD_ID, "laser_drill")
-        unlocalizedName = "$MOD_ID.laser_drill"
+        translationKey = "$MOD_ID.laser_drill"
     }
 
     fun registerItemModel() = PrincipiumMod.proxy.registerItemRenderer(this, 0, "laser_drill")
@@ -55,7 +55,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                     val lookVec = playerIn.lookVec
                             ?: return super.onItemRightClick(worldIn, playerIn, handIn)
                     val start = Vec3d(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ)
-                    val end = start.addVector(lookVec.x * altReach, lookVec.y * altReach, lookVec.z * altReach)
+                    val end = start.add(lookVec.x * altReach, lookVec.y * altReach, lookVec.z * altReach)
                     val raytrace = worldIn.rayTraceBlocks(start, end)
                             ?: return super.onItemRightClick(worldIn, playerIn, handIn)
                     val blockPos = raytrace.blockPos

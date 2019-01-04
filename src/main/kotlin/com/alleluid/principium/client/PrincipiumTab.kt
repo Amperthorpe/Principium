@@ -6,7 +6,7 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
 
 object PrincipiumTab : CreativeTabs(MOD_ID){
-    override fun getTabIconItem(): ItemStack {
+    override fun createIcon(): ItemStack {
         return ItemStack(ModItems.principitus)
     }
 }

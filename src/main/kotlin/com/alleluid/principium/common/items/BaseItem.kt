@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary
 
 open class BaseItem(val name: String): Item(){
     init {
-        unlocalizedName = "$MOD_ID.$name"
+        translationKey = "$MOD_ID.$name"
         registryName = ResourceLocation(MOD_ID, name)
         creativeTab = PrincipiumMod.creativeTab
     }

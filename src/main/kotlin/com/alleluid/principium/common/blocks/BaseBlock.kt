@@ -15,12 +15,9 @@ import java.util.*
 
 open class BaseBlock(material: Material, val name: String): Block(material){
     init {
-        unlocalizedName= "$MOD_ID.$name"
+        translationKey= "$MOD_ID.$name"
         registryName = ResourceLocation(MOD_ID, name)
-    }
-
-    override fun getCreativeTabToDisplayOn(): CreativeTabs {
-        return PrincipiumMod.creativeTab
+        creativeTab = PrincipiumMod.creativeTab
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item {

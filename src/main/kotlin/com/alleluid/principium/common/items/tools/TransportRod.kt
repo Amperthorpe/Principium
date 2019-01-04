@@ -33,7 +33,7 @@ object TransportRod : BaseItem("transport_rod") {
             val lookVec = playerIn.lookVec
                     ?: return super.onItemRightClick(worldIn, playerIn, handIn)
             val start = Vec3d(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ)
-            val end = start.addVector(lookVec.x * teleRange, lookVec.y * teleRange, lookVec.z * teleRange)
+            val end = start.add(lookVec.x * teleRange, lookVec.y * teleRange, lookVec.z * teleRange)
             val raytrace = worldIn.rayTraceBlocks(start, end)
                     ?: return super.onItemRightClick(worldIn, playerIn, handIn)
             val pos = raytrace.blockPos

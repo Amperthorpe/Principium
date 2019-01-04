@@ -15,7 +15,7 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
     const val name = "double_pick"
 
     init {
-        unlocalizedName = "$MOD_ID.$name"
+        translationKey = "$MOD_ID.$name"
         registryName = ResourceLocation(MOD_ID, name)
         creativeTab = PrincipiumMod.creativeTab
     }

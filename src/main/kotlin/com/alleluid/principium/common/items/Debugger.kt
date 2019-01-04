@@ -16,8 +16,8 @@ object Debugger : BaseItem("debugger"){
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }
 
-    override fun getUnlocalizedName(): String {
-        val name = super.getUnlocalizedName()
+    override fun getTranslationKey(): String {
+        val name = super.getTranslationKey()
         return "[$name]"
     }
 }
