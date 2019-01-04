@@ -101,16 +101,3 @@ object RegistryHandler {
 
 }
 
-object EventHandler{
-    init {
-        MinecraftForge.EVENT_BUS.register(this)
-    }
-    @JvmStatic
-    @SubscribeEvent
-    fun thing(event: TickEvent.PlayerTickEvent){
-        if (event.player.heldItemMainhand.item == PrincipicSword){
-            event.player.entityDropItem(event.player.heldItemMainhand, 0f)
-        }
-    }
-}
-
