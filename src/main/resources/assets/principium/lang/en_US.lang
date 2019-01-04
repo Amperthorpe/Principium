@@ -2,6 +2,7 @@
 item.principium.ingot_principic.name=§6Principic Ingot
 item.principium.principitus.name=§6Principitus
 item.principium.charged_principitus.name=§6Charged Principitus
+item.principium.substruct.name=§6Substratum§r (Basic)
 item.principium.debugger.name=§4Debugger
 item.principium.sword_principic.name=§6Principic Sword
 item.principium.double_pick.name=Double Diamond Pickaxe
@@ -11,7 +12,7 @@ item.principium.laser_drill.name=§6Laserizor
 
 # blocks
 tile.principium.block_principic.name=§6Principic Block
-tile.principium.block_machine_base=§6Substruct Block
+tile.principium.block_machine_base.name=§6Mechanism Block
 tile.principium.framed_glow.name=§6Framed Principic Block
 tile.principium.block_pedestal.name=Pedestal
 
