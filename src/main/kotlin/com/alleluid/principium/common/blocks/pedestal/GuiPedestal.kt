@@ -23,8 +23,8 @@ class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) 
     
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: float) {
         super.drawScreen(mouseX, mouseY, partialTicks)
-        drawDefaultBackground();
-        renderHoveredToolTip(mouseX, mouseY);
+        drawDefaultBackground()
+        renderHoveredToolTip(mouseX, mouseY)
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
