@@ -5,14 +5,10 @@ import com.alleluid.principium.common.blocks.ModBlocks
 import com.alleluid.principium.common.commands.myCommand
 import com.alleluid.principium.common.items.ModItems
 import com.alleluid.principium.common.items.registerSmeltingRecipes
-import com.alleluid.principium.common.items.tools.PrincipicSword
 import com.alleluid.principium.proxy.CommonProxy
 import net.minecraft.block.Block
-import net.minecraft.init.Items
 import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraftforge.client.event.ModelRegistryEvent
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.EnumHelper
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
@@ -21,11 +17,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
-import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.gameevent.TickEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
-import net.minecraftforge.fml.common.registry.GameRegistry
 
 const val MOD_ID = "principium"
 const val MOD_NAME = "Principium"
