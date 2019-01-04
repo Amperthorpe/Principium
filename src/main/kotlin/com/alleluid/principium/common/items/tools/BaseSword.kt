@@ -32,7 +32,7 @@ open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(
 object PrincipicSword : BaseItem("sword_principic"){
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("${ufm.DARK_PURPLE + ufm.ITALIC}The strong will be made weak, and the weak shall bow before me.")
+        tooltip.add("${ufm.LORE}The strong will be made weak, and the weak shall bow before me.")
         tooltip.add("Attacks lower to half a heart, but won't kill.")
 //        tooltip.add("Right click to teleport, sneak click to set position.")
     }

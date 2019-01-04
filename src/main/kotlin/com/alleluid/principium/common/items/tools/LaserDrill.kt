@@ -2,6 +2,7 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
+import com.alleluid.principium.Utils.Formatting as umf
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
@@ -34,7 +35,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     override fun canHarvestBlock(state: IBlockState, stack: ItemStack): Boolean = true
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("Instant Pickaxe + Laser Deletion Gun")
+        tooltip.add("${umf.LORE}This drill is the drill that will pierce the heavens!")
         tooltip.add("Left click to burst mine, right click is single block Silk Touch.")
     }
 
