@@ -14,8 +14,8 @@ class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) 
     private val BG_TEXTURE: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/single_slot.png")
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
+        drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-//        drawDefaultBackground()
         renderHoveredToolTip(mouseX, mouseY)
     }
 
