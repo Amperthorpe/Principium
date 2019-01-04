@@ -13,6 +13,7 @@ object ModItems{
     val principitus = BaseItem("principitus").initOreDict("dustPrincipic")
     val chargedPrincipitus = BaseItem("charged_principitus")
     val ingotPrincipic = BaseItem("ingot_principic").initOreDict("ingotPrincipic")
+    val itemSubstruct = BaseItem("substruct")
     val longFallBoots = LongFallBootsBase(EntityEquipmentSlot.FEET, "long_fall_boots")
 
     @JvmStatic
@@ -26,7 +27,8 @@ object ModItems{
                 TransportRod,
                 LaserDrill,
                 DoublePick,
-                longFallBoots
+                longFallBoots,
+                itemSubstruct
         )
     }
 
@@ -41,5 +43,6 @@ object ModItems{
         LaserDrill.registerItemModel()
         DoublePick.registerItemModel()
         longFallBoots.registerItemModel()
+        itemSubstruct.registerItemModel()
     }
 }
