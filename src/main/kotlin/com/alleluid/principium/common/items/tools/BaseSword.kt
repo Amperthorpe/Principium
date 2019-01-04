@@ -17,19 +17,19 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 
 
-open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(material){
+open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(material) {
     init {
         unlocalizedName = "$MOD_ID.$name"
         registryName = ResourceLocation(MOD_ID, name)
         creativeTab = PrincipiumMod.creativeTab
     }
 
-    fun registerItemModel(){
+    fun registerItemModel() {
         PrincipiumMod.proxy.registerItemRenderer(this, 0, name)
     }
 }
 
-object PrincipicSword : BaseItem("sword_principic"){
+object PrincipicSword : BaseItem("sword_principic") {
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add("${ufm.LORE}The strong will be made weak, and the weak shall bow before me.")
@@ -39,7 +39,7 @@ object PrincipicSword : BaseItem("sword_principic"){
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
         return false //logic moved to CommonEvents.kt
-   }
+    }
 
     override fun itemInteractionForEntity(stack: ItemStack, playerIn: EntityPlayer, target: EntityLivingBase, hand: EnumHand): Boolean {
         if (!playerIn.world.isRemote) Utils.statusMessage(target.health.toString())

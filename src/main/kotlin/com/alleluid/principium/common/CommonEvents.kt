@@ -39,8 +39,6 @@ object CommonEvents {
                             event.world.totalWorldTime + LaserDrill.breakCooldown)
                 }
 */
-//            PrincipicSword -> event.isCanceled = true
-
         }
 
     }

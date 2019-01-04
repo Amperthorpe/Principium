@@ -16,9 +16,6 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 object TransportRod : BaseItem("transport_rod") {
-    init {
-    }
-
     const val teleRange = 128.0
     const val maxBlocksSearched = 5
 
