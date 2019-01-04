@@ -61,4 +61,8 @@ object Utils {
 
         const val LORE = DARK_PURPLE + ITALIC
     }
+
+    fun String.mcFormat(format: String): String{
+        return format + this + Formatting.RESET
+    }
 }
