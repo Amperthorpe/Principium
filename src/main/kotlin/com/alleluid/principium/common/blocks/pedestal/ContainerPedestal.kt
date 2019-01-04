@@ -17,13 +17,13 @@ class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPede
             }
         })
 
-        for (i in 0..3){
-            for (j in 0..9){
+        for (i in 0..2){
+            for (j in 0..8){
                 addSlotToContainer(Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
             }
         }
 
-        for (k in 0..9){
+        for (k in 0..8){
             addSlotToContainer(Slot(playerInv, k, 8 + k * 18, 142))
         }
     }
@@ -31,12 +31,12 @@ class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPede
     override fun canInteractWith(p0: EntityPlayer): Boolean = true
 
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
-        var itemstack = ItemStack.EMPTY
+        var itemstackCopy = ItemStack.EMPTY
         val slot = inventorySlots[index]
 
         if (slot != null && slot.hasStack){
             val itemstack1 = slot.stack
-            itemstack = itemstack1.copy()
+            itemstackCopy = itemstack1.copy()
 
             val containerSlots = inventorySlots.size - playerIn.inventory.mainInventory.size
 
@@ -54,13 +54,13 @@ class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPede
                 slot.onSlotChanged()
             }
 
-            if (itemstack1.count == itemstack.count) {
+            if (itemstack1.count == itemstackCopy.count) {
                 return ItemStack.EMPTY
             }
 
             slot.onTake(playerIn, itemstack1)
         }
-        return itemstack
+        return itemstackCopy
     }
 
 }
