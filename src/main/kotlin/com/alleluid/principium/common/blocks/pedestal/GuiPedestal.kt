@@ -13,18 +13,18 @@ import net.minecraft.client.resources.I18n
 class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container){
     private val BG_TEXTURE: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/single_slot.png")
 
+    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
+        super.drawScreen(mouseX, mouseY, partialTicks)
+//        drawDefaultBackground()
+        renderHoveredToolTip(mouseX, mouseY)
+    }
+
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         GlStateManager.color(1f, 1f, 1f, 1f)
         mc.textureManager.bindTexture(BG_TEXTURE)
         val x = (width - xSize) / 2
         val y = (height - ySize) / 2
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
-    }
-    
-    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
-        super.drawScreen(mouseX, mouseY, partialTicks)
-        drawDefaultBackground()
-        renderHoveredToolTip(mouseX, mouseY)
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
