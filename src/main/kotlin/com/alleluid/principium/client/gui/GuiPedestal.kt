@@ -1,4 +1,4 @@
-package com.alleluid.principium.common.blocks.pedestal
+package com.alleluid.principium.client.gui
 
 import com.alleluid.principium.MOD_ID
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -6,7 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.util.ResourceLocation
 import net.minecraft.client.renderer.GlStateManager
-import com.alleluid.principium.common.blocks.ModBlocks
+import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
 import net.minecraft.client.resources.I18n
 
 

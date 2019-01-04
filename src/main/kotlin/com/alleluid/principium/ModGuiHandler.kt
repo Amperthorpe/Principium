@@ -1,7 +1,7 @@
 package com.alleluid.principium
 
 import com.alleluid.principium.common.blocks.pedestal.ContainerPedestal
-import com.alleluid.principium.common.blocks.pedestal.GuiPedestal
+import com.alleluid.principium.client.gui.GuiPedestal
 import com.alleluid.principium.common.blocks.pedestal.TileEntityPedestal
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
