@@ -20,6 +20,12 @@ class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) 
         val y = (height - ySize) / 2
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
     }
+    
+    override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: float) {
+        super.drawScreen(mouseX, mouseY, partialTicks)
+        drawDefaultBackground();
+        renderHoveredToolTip(mouseX, mouseY);
+    }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         val name = I18n.format( "${BlockPedestal.unlocalizedName}.name")
