@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-abstract class BaseTileEntity<TE : TileEntity>(material: Material, val name_: String) : BaseBlock(material, name_){
+abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, val name_: String) : BaseBlock(material, name_){
     init {
 
     }

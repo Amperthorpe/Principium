@@ -2,13 +2,11 @@ package com.alleluid.principium.common.blocks.pedestal
 
 import com.alleluid.principium.ModGuiHandler
 import com.alleluid.principium.PrincipiumMod
-import com.alleluid.principium.Utils
-import com.alleluid.principium.common.blocks.BaseTileEntity
+import com.alleluid.principium.common.blocks.BaseBlockTileEntity
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
@@ -16,7 +14,7 @@ import net.minecraft.world.World
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandler
 
-object BlockPedestal : BaseTileEntity<TileEntityPedestal>(Material.ROCK, "block_pedestal") {
+object BlockPedestal : BaseBlockTileEntity<TileEntityPedestal>(Material.ROCK, "block_pedestal") {
     init {
         blockHardness = 3f
     }

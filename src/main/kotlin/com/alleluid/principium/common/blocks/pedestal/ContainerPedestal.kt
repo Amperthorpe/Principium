@@ -28,5 +28,5 @@ class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPede
         }
     }
 
-    override fun canInteractWith(p0: EntityPlayer): Boolean = true
+    override fun canInteractWith(playerIn: EntityPlayer): Boolean = true
 }
