@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "principium:blocks/machine_base",
+    "front": "principium:blocks/machine_smelter",
+    "side": "principium:blocks/machine_base"
+  }
+}

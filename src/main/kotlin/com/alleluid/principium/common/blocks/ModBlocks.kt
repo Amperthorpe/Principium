@@ -3,6 +3,7 @@ package com.alleluid.principium.common.blocks
 import com.alleluid.principium.Utils.mcFormat
 import com.alleluid.principium.common.blocks.counter.BlockCounter
 import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
+import com.alleluid.principium.common.blocks.smelter.BlockSmelter
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -44,7 +45,8 @@ object ModBlocks {
                 blockPrincipic,
                 FramedGlowBlock,
                 BlockCounter,
-                BlockPedestal
+                BlockPedestal,
+                BlockSmelter
 
         )
 
@@ -58,7 +60,8 @@ object ModBlocks {
                 blockPrincipic.createItemBlock(),
                 FramedGlowBlock.createItemBlock(),
                 BlockCounter.createItemBlock(),
-                BlockPedestal.createItemBlock()
+                BlockPedestal.createItemBlock(),
+                BlockSmelter.createItemBlock()
         )
     }
 
@@ -70,5 +73,6 @@ object ModBlocks {
         FramedGlowBlock.registerItemModel()
         BlockCounter.registerItemModel()
         BlockPedestal.registerItemModel()
+        BlockSmelter.registerItemModel()
     }
 }

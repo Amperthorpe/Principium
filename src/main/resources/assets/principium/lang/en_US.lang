@@ -13,6 +13,7 @@ item.principium.laser_drill.name=§6Laserizor
 # blocks
 tile.principium.block_principic.name=§6Principic Block
 tile.principium.block_machine_base.name=§6Mechanism Block
+tile.principium.block_smelter.name=§6Smelter Mechanism
 tile.principium.framed_glow.name=§6Framed Principic Block
 tile.principium.block_pedestal.name=Pedestal
 tile.principium.block_egg.name=Weird Egg

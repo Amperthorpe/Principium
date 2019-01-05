@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "principium:block_smelter"
+    },
+    "inventory": {
+      "model": "principium:block_smelter",
+      "transform": "forge:default-block"
+    }
+  }
+}
