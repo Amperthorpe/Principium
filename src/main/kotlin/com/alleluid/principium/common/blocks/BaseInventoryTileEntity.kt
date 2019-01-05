@@ -1,4 +1,4 @@
-package com.alleluid.principium.common.blocks.smelter
+package com.alleluid.principium.common.blocks
 
 import com.alleluid.principium.MOD_ID
 import net.minecraft.nbt.NBTTagCompound
