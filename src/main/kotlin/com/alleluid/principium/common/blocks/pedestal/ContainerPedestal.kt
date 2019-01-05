@@ -1,14 +1,14 @@
 package com.alleluid.principium.common.blocks.pedestal
 
+import com.alleluid.principium.common.BaseContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
-import net.minecraft.inventory.*
-import net.minecraft.item.ItemStack
+import net.minecraft.inventory.Slot
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPedestal) : Container(){
+class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPedestal) : BaseContainer(){
     init {
         val inventory = pedestal.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         addSlotToContainer(object : SlotItemHandler(inventory, 0, 80, 35) {
@@ -29,38 +29,4 @@ class ContainerPedestal(playerInv: InventoryPlayer, val pedestal: TileEntityPede
     }
 
     override fun canInteractWith(p0: EntityPlayer): Boolean = true
-
-    override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
-        var itemstackCopy = ItemStack.EMPTY
-        val slot = inventorySlots[index]
-
-        if (slot != null && slot.hasStack){
-            val itemstack1 = slot.stack
-            itemstackCopy = itemstack1.copy()
-
-            val containerSlots = inventorySlots.size - playerIn.inventory.mainInventory.size
-
-            if (index < containerSlots) {
-                if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size, true)){
-                    return ItemStack.EMPTY
-                }
-            } else if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)){
-                return ItemStack.EMPTY
-            }
-
-            if (itemstack1.count == 0){
-                slot.putStack(ItemStack.EMPTY)
-            } else {
-                slot.onSlotChanged()
-            }
-
-            if (itemstack1.count == itemstackCopy.count) {
-                return ItemStack.EMPTY
-            }
-
-            slot.onTake(playerIn, itemstack1)
-        }
-        return itemstackCopy
-    }
-
 }
