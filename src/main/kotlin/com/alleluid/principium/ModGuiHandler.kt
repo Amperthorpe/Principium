@@ -1,7 +1,7 @@
 package com.alleluid.principium
 
-import com.alleluid.principium.common.blocks.pedestal.ContainerPedestal
 import com.alleluid.principium.client.gui.GuiPedestal
+import com.alleluid.principium.common.blocks.pedestal.ContainerPedestal
 import com.alleluid.principium.common.blocks.pedestal.TileEntityPedestal
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
 
-class ModGuiHandler() : IGuiHandler{
+class ModGuiHandler : IGuiHandler{
     companion object {
         val PEDESTAL = 0
     }

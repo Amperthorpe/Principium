@@ -1,20 +1,17 @@
 package com.alleluid.principium.common.blocks
 
+import com.alleluid.principium.Utils.mcFormat
+import com.alleluid.principium.common.blocks.counter.BlockCounter
+import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.Minecraft
-import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.Item
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.TextComponentBase
-import net.minecraft.util.text.TextComponentString
-import net.minecraftforge.client.event.RenderGameOverlayEvent
+import net.minecraft.item.ItemStack
+import net.minecraft.world.World
 import net.minecraftforge.registries.IForgeRegistry
-import com.alleluid.principium.Utils
-import com.alleluid.principium.common.blocks.counter.BlockCounter
-import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
-import java.util.*
+import com.alleluid.principium.Utils.Formatting as mcf
 
 object ModBlocks {
 
@@ -30,6 +27,10 @@ object ModBlocks {
     object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg"){
         override fun isOpaqueCube(state: IBlockState): Boolean = false
         override fun isFullBlock (state: IBlockState): Boolean = false
+        override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
+            tooltip.add("¯\\_(ツ)_/¯".mcFormat(mcf.DARK_PURPLE))
+            super.addInformation(stack, worldIn, tooltip, flagIn)
+        }
     }
 
     val blockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
