@@ -27,6 +27,11 @@ object ModBlocks {
         }
     }
 
+    object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg"){
+        override fun isOpaqueCube(state: IBlockState): Boolean = false
+        override fun isFullBlock (state: IBlockState): Boolean = false
+    }
+
     val blockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
 
 
@@ -34,10 +39,12 @@ object ModBlocks {
     fun register(registry: IForgeRegistry<Block>) {
         registry.registerAll(
                 blockMachineBase,
+                blockEgg,
                 blockPrincipic,
                 FramedGlowBlock,
                 BlockCounter,
                 BlockPedestal
+
         )
 
     }
@@ -46,6 +53,7 @@ object ModBlocks {
     fun registerItemBlocks(registry: IForgeRegistry<Item>) {
         registry.registerAll(
                 blockMachineBase.createItemBlock(),
+                blockEgg.createItemBlock(),
                 blockPrincipic.createItemBlock(),
                 FramedGlowBlock.createItemBlock(),
                 BlockCounter.createItemBlock(),
@@ -56,6 +64,7 @@ object ModBlocks {
     @JvmStatic
     fun registerModels() {
         blockMachineBase.registerItemModel()
+        blockEgg.registerItemModel()
         blockPrincipic.registerItemModel()
         FramedGlowBlock.registerItemModel()
         BlockCounter.registerItemModel()

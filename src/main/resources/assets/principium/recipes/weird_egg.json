@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CeC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "e": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "principium:block_egg"
+  }
+}
