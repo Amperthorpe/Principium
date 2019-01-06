@@ -1,64 +1,52 @@
 package com.alleluid.principium.common.blocks.smelter
 
-import com.alleluid.principium.Utils
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
 import com.alleluid.principium.common.items.ModItems
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.nbt.NBTTagLong
 import net.minecraft.util.ITickable
+import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.items.ItemStackHandler
-import kotlin.math.abs
 
-class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable {
-    val maxPotentia = 300L
-    var potentia = 0L
+object TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable, IEnergyStorage
+{
+    const val SLOT_INPUT = 0
+    const val SLOT_FUEL = 1
+    const val SLOT_OUTPUT = 2
 
-    private fun setPotentia(value: Long): Long {
-        if (potentia + value <= maxPotentia) {
-            potentia = value
-            return 0L
-        } else {
-            val previousVal = potentia
-            potentia = maxPotentia
-            return abs((maxPotentia - previousVal) - value)
-        }
+    @JvmField var energy = 0
+    @JvmField val capacity = 100_000
+    @JvmField var maxReceive = 1000
+    @JvmField var maxExtract = 1000
+
+    override fun canExtract() = this.maxExtract > 0
+    override fun canReceive() = this.maxReceive > 0
+    override fun getMaxEnergyStored() = this.capacity
+    override fun getEnergyStored() = this.energy
+
+
+    override fun extractEnergy(maxExtract: Int, simulate: Boolean): Int {
+        if (!canExtract())
+            return 0
+
+        val energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract))
+        if (!simulate)
+            energy -= energyExtracted
+        return energyExtracted
     }
 
-    private infix fun addPotentia(value: Long): Long {
-        return setPotentia(value + potentia)
+    override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
+        if (!canReceive())
+            return 0
+
+        val energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive))
+        if (!simulate)
+            energy += energyReceived
+        return energyReceived
     }
 
-    companion object {
-        const val SLOT_INPUT = 0
-        const val SLOT_FUEL = 1
-        const val SLOT_OUTPUT = 2
-
-        //Item meta to amount of potentia
-        val fuelValues = mapOf<Int, Long>(
-                0 to 10,
-                1 to 25,
-                2 to 50,
-                3 to 100
-        )
-    }
 
     override fun update() {
-        if (!world.isRemote) {
-            val fuelStack = inventory.getStackInSlot(SLOT_FUEL)
-
-            if (!fuelStack.isEmpty) {
-                for (i in 1..fuelStack.count) {
-                    val leftOver = addPotentia(fuelValues[fuelStack.metadata] ?: 0)
-                    if (leftOver > 0) {
-                        break
-                    } else {
-                        inventory.extractItem(SLOT_FUEL, 1, false)
-                    }
-                }
-                Utils.chatMessage("Machine has $potentia P")
-            }
-        }
     }
 
     override val inventory = object : ItemStackHandler(3) {
@@ -79,13 +67,11 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
     override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
         compound.setTag("inventory", inventory.serializeNBT())
-        compound.setTag("potentia", NBTTagLong(this.potentia))
         return super.writeToNBT(compound)
     }
 
     override fun readFromNBT(compound: NBTTagCompound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"))
-        potentia = compound.getLong("potentia")
         super.readFromNBT(compound)
     }
 

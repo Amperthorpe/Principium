@@ -22,7 +22,7 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, "blo
     override val tileEntityClass: Class<TileEntitySmelter>
         get() = TileEntitySmelter::class.java
 
-    override fun createTileEntity(world: World, state: IBlockState) = TileEntitySmelter()
+    override fun createTileEntity(world: World, state: IBlockState) = TileEntitySmelter
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!worldIn.isRemote) {
