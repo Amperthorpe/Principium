@@ -15,7 +15,7 @@ open class BaseInventoryTileEntity(name: String, size: Int) : TileEntity() {
         GameRegistry.registerTileEntity(this::class.java, ResourceLocation(MOD_ID, name))
     }
 
-    internal val inventory = object : ItemStackHandler(size) {
+    open val inventory = object : ItemStackHandler(size) {
         override fun onContentsChanged(slot: Int) {
             super.onContentsChanged(slot)
             markDirty()

@@ -1,12 +1,14 @@
 package com.alleluid.principium.common
 
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
+import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
 
-abstract class BaseContainer : Container(){
+abstract class BaseContainer(playerInv: InventoryPlayer) : Container(){
     abstract override fun canInteractWith(playerIn: EntityPlayer): Boolean
-//    init {
+    init {
 //        val inventory = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
 //        addSlotToContainer(object : SlotItemHandler(inventory, 0, 80, 35) {
 //            override fun onSlotChanged() {
@@ -14,16 +16,17 @@ abstract class BaseContainer : Container(){
 //            }
 //        })
 //
-//        for (i in 0..2){
-//            for (j in 0..8){
-//                addSlotToContainer(Slot(playerIn.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
-//            }
-//        }
-//
-//        for (k in 0..8){
-//            addSlotToContainer(Slot(playerIn.inventory, k, 8 + k * 18, 142))
-//        }
-//    }
+        // Player inventory slots
+        for (i in 0..2){
+            for (j in 0..8){
+                addSlotToContainer(Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
+            }
+        }
+
+        for (k in 0..8){
+            addSlotToContainer(Slot(playerInv, k, 8 + k * 18, 142))
+        }
+    }
 
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
         var itemstackCopy = ItemStack.EMPTY
