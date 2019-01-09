@@ -3,7 +3,6 @@ package com.alleluid.principium.common.blocks
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.Utils.Formatting
-import com.alleluid.principium.Utils.mcFormat
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -26,7 +25,7 @@ open class BaseBlock(material: Material, val name: String): Block(material){
     internal val loreText: MutableList<String> = mutableListOf()
     internal val infoText: MutableList<String> = mutableListOf()
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        this.loreText.forEach { tooltip.add(it.mcFormat(Formatting.LORE)) }
+        this.loreText.forEach { tooltip.add(Formatting.LORE + it + Formatting.RESET) }
         this.infoText.forEach { tooltip.add(it) }
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }

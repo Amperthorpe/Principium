@@ -3,9 +3,7 @@ package com.alleluid.principium.common.items.tools
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.Utils
-import com.alleluid.principium.Utils.Formatting as ufm
 import com.alleluid.principium.common.items.BaseItem
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -14,7 +12,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemSword
 import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
-import net.minecraft.world.World
+import com.alleluid.principium.Utils.Formatting as ufm
 
 
 open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(material) {
@@ -30,11 +28,11 @@ open class BaseSword(material: Item.ToolMaterial, val name: String) : ItemSword(
 }
 
 object PrincipicSword : BaseItem("sword_principic") {
+    init {
+        loreText.add("The strong will be made weak, and the weak shall bow before me.")
+        infoText.add("Attacks lower to half a heart, but won't kill.")
+//        infoText.add("Right click to teleport, sneak click to set position.")
 
-    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("${ufm.LORE}The strong will be made weak, and the weak shall bow before me.")
-        tooltip.add("Attacks lower to half a heart, but won't kill.")
-//        tooltip.add("Right click to teleport, sneak click to set position.")
     }
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {

@@ -3,8 +3,6 @@ package com.alleluid.principium.common.items.tools
 import com.alleluid.principium.Utils
 import com.alleluid.principium.Utils.setPositionAndRotationAndUpdate
 import com.alleluid.principium.common.items.BaseItem
-import net.minecraft.client.audio.SoundList
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
@@ -19,11 +17,11 @@ object TransportRod : BaseItem("transport_rod") {
     const val teleRange = 128.0
     const val maxBlocksSearched = 5
 
-    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("Right click to teleport to the block you're looking at.")
-        tooltip.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
-        tooltip.add("Sneak click a block to teleport through it.")
-        tooltip.add("Left click function TODO")
+    init {
+        infoText.add("Right click to teleport to the block you're looking at.")
+        infoText.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
+        infoText.add("Sneak click a block to teleport through it.")
+        infoText.add("Left click function TODO")
     }
 
     override fun getItemStackLimit(stack: ItemStack): Int = 1
