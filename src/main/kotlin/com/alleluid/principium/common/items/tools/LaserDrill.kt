@@ -2,7 +2,6 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
-import com.alleluid.principium.Utils.Formatting as umf
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
@@ -17,6 +16,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
+import com.alleluid.principium.Utils.Formatting as umf
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     private const val breakCooldown = 8
@@ -67,7 +67,9 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                         if (worldIn.isAirBlock(blockPos) || state.getBlockHardness(worldIn, blockPos) < 0) return super.onItemRightClick(worldIn, playerIn, handIn)
                         didBreak = true
                         val itemToCollect: ItemStack = if (state.block.canSilkHarvest(worldIn, blockPos, state, playerIn)) {
-                            ItemStack(Item.getItemFromBlock(state.block), 1)
+                            val item = Item.getItemFromBlock(state.block)
+                            val i = if (item.hasSubtypes){state.block.getMetaFromState(state)} else {0}
+                            ItemStack(item, 1, i)
                         } else {
                             ItemStack(
                                     state.block.getItemDropped(state, Random(), 0),
