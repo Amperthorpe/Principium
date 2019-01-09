@@ -26,10 +26,10 @@ object ModBlocks {
     }
 
     object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg"){
-        override fun isOpaqueCube(state: IBlockState): Boolean = false
+        override fun isOpaqueCube(state: IBlockState) = false
         override fun isFullBlock (state: IBlockState): Boolean = false
         override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-            tooltip.add("¯\\_(ツ)_/¯".mcFormat(mcf.DARK_PURPLE))
+                tooltip.add("¯\\_(ツ)_/¯".mcFormat(mcf.DARK_PURPLE))
             super.addInformation(stack, worldIn, tooltip, flagIn)
         }
     }
@@ -46,7 +46,8 @@ object ModBlocks {
                 FramedGlowBlock,
                 BlockCounter,
                 BlockPedestal,
-                BlockSmelter
+                BlockSmelter,
+                BlockPillow
 
         )
 
@@ -61,7 +62,8 @@ object ModBlocks {
                 FramedGlowBlock.createItemBlock(),
                 BlockCounter.createItemBlock(),
                 BlockPedestal.createItemBlock(),
-                BlockSmelter.createItemBlock()
+                BlockSmelter.createItemBlock(),
+                BlockPillow.createItemBlock()
         )
     }
 
@@ -74,5 +76,6 @@ object ModBlocks {
         BlockCounter.registerItemModel()
         BlockPedestal.registerItemModel()
         BlockSmelter.registerItemModel()
+        BlockPillow.registerItemModel()
     }
 }
