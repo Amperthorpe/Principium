@@ -9,22 +9,15 @@ import net.minecraft.item.ItemStack
 abstract class BaseContainer(playerInv: InventoryPlayer) : Container(){
     abstract override fun canInteractWith(playerIn: EntityPlayer): Boolean
     init {
-//        val inventory = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
-//        addSlotToContainer(object : SlotItemHandler(inventory, 0, 80, 35) {
-//            override fun onSlotChanged() {
-//                tileEntity.markDirty()
-//            }
-//        })
-//
         // Player inventory slots
         for (i in 0..2){
             for (j in 0..8){
-                addSlotToContainer(Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
+                this.addSlotToContainer(Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
             }
         }
 
         for (k in 0..8){
-            addSlotToContainer(Slot(playerInv, k, 8 + k * 18, 142))
+            this.addSlotToContainer(Slot(playerInv, k, 8 + k * 18, 142))
         }
     }
 
