@@ -24,7 +24,8 @@ abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private 
     abstract override fun createTileEntity(world: World, state: IBlockState): TE?
 
     fun getTileEntity(world: IBlockAccess, pos: BlockPos): TE {
-        return world.getTileEntity(pos) as TE
+        val tile = world.getTileEntity(pos)
+        return  tile as TE
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
