@@ -10,7 +10,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-object BlockCounter : BaseBlockTileEntity<TileEntityCounter>(Material.ROCK, "counter") {
+object BlockCounter : BaseBlockTileEntity<TileEntityCounter>(Material.ROCK, null,"counter") {
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!worldIn.isRemote) {
