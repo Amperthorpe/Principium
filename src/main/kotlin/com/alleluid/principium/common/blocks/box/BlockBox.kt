@@ -1,7 +1,6 @@
 package com.alleluid.principium.common.blocks.box
 
 import com.alleluid.principium.ModGuiID
-import com.alleluid.principium.Utils.Formatting
 import com.alleluid.principium.common.blocks.BaseBlockTileEntity
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -20,7 +19,7 @@ object BlockBox : BaseBlockTileEntity<TileEntityBox>(Material.WOOD, ModGuiID.BOX
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("${Formatting.LORE}Two chests in one full size block")
+        tooltip.add("Two chests in one full size block")
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }
 
