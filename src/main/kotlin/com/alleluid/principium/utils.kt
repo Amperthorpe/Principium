@@ -19,7 +19,7 @@ object Utils {
 
 
     fun checkHeadspace(world: World, pos: BlockPos): Boolean {
-        return world.isAirBlock(pos) && world.isAirBlock(BlockPos(pos.x, pos.y + 1, pos.z))
+        return world.isAirBlock(pos) && world.isAirBlock(pos.up())
     }
 
     fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double, yaw: Float, pitch: Float) {
