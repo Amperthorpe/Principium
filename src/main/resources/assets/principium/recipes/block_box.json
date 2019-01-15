@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LCL",
+    "CLC",
+    "LCL"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "L": {
+      "item": "minecraft:log",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "principium:block_box"
+  }
+}
