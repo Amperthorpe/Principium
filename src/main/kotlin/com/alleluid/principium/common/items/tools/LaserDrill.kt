@@ -60,26 +60,28 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                             ?: return super.onItemRightClick(worldIn, playerIn, handIn)
                     val blockPos = raytrace.blockPos
                     val state = worldIn.getBlockState(blockPos)
-
-                    if (playerIn.isSneaking) {
-                        //Maybe make this do something?
-                    } else {
-                        if (worldIn.isAirBlock(blockPos) || state.getBlockHardness(worldIn, blockPos) < 0) return super.onItemRightClick(worldIn, playerIn, handIn)
-                        didBreak = true
-                        val itemToCollect: ItemStack = if (state.block.canSilkHarvest(worldIn, blockPos, state, playerIn)) {
-                            val item = Item.getItemFromBlock(state.block)
-                            val i = if (item.hasSubtypes){state.block.getMetaFromState(state)} else {0}
-                            ItemStack(item, 1, i)
-                        } else {
-                            ItemStack(
-                                    state.block.getItemDropped(state, Random(), 0),
-                                    state.block.quantityDropped(Random())
-                            )
-                        }
-                        val itemAttempt = playerIn.addItemStackToInventory(itemToCollect)
-                        if (!itemAttempt) playerIn.entityDropItem(itemToCollect, 0f)?.setNoPickupDelay()
-                        worldIn.destroyBlock(blockPos, false)
+                    // Returns if block is air, is unbreakable, or has a TileEntity. TODO: make it work with TEs
+                    if (worldIn.isAirBlock(blockPos) || state.getBlockHardness(worldIn, blockPos) < 0 || state.block.hasTileEntity(state)) {
+                        return super.onItemRightClick(worldIn, playerIn, handIn)
                     }
+                    didBreak = true
+                    val itemToCollect: ItemStack = if (state.block.canSilkHarvest(worldIn, blockPos, state, playerIn)) {
+                        val item = Item.getItemFromBlock(state.block)
+                        val i = if (item.hasSubtypes) {
+                            state.block.getMetaFromState(state)
+                        } else {
+                            0
+                        }
+                        ItemStack(item, 1, i)
+                    } else {
+                        ItemStack(
+                                state.block.getItemDropped(state, Random(), 0),
+                                state.block.quantityDropped(Random())
+                        )
+                    }
+                    val itemAttempt = playerIn.addItemStackToInventory(itemToCollect)
+                    if (!itemAttempt) playerIn.entityDropItem(itemToCollect, 0f)?.setNoPickupDelay()
+                    worldIn.destroyBlock(blockPos, false)
                 }
                 if (didBreak) {
                     stack.tagCompound!!.setLong("timeWhenUsable",
