@@ -1,5 +1,6 @@
 package com.alleluid.principium.common.blocks
 
+import com.alleluid.principium.common.blocks.box.BlockBox
 import com.alleluid.principium.common.blocks.counter.BlockCounter
 import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
 import com.alleluid.principium.common.blocks.smelter.BlockSmelter
@@ -42,7 +43,8 @@ object ModBlocks {
                 BlockCounter,
                 BlockPedestal,
                 BlockSmelter,
-                BlockPillow
+                BlockPillow,
+                BlockBox
 
         )
 
@@ -58,7 +60,8 @@ object ModBlocks {
                 BlockCounter.createItemBlock(),
                 BlockPedestal.createItemBlock(),
                 BlockSmelter.createItemBlock(),
-                BlockPillow.createItemBlock()
+                BlockPillow.createItemBlock(),
+                BlockBox.createItemBlock()
         )
     }
 
@@ -72,5 +75,6 @@ object ModBlocks {
         BlockPedestal.registerItemModel()
         BlockSmelter.registerItemModel()
         BlockPillow.registerItemModel()
+        BlockBox.registerItemModel()
     }
 }

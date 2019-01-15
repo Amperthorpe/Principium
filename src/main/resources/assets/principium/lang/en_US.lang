@@ -18,6 +18,7 @@ tile.principium.framed_glow.name=§6Framed Principic Block
 tile.principium.block_pedestal.name=Pedestal
 tile.principium.block_egg.name=Weird Egg
 tile.principium.block_pillow.name=Pillow Block
+tile.principium.block_box.name=Storage Box
 
 # commands
 commands.principium.usage=/prin [nothing]
