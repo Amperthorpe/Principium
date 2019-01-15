@@ -18,7 +18,6 @@ class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContain
                 count++
             }
         }
-//    Slot(box.inventory, j + i * 9 + 9, 8 + j * 18, 11 + i * 18)
     }
 
     override fun playerInventorySetup() {
@@ -34,7 +33,7 @@ class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContain
     }
 
 
-    override fun canInteractWith(playerIn: EntityPlayer) = true
+    override fun canInteractWith(playerIn: EntityPlayer) = !playerIn.isSneaking
 
 }
 
