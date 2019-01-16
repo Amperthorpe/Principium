@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 
 class TileEntityCounter : TileEntity(){
+
     var count: Int = 0
         set(value) {
             field = value

@@ -19,7 +19,7 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, ModG
     override val tileEntityClass: Class<TileEntitySmelter>
         get() = TileEntitySmelter::class.java
 
-    override fun createTileEntity(world: World, state: IBlockState) = TileEntitySmelter
+    override fun createTileEntity(world: World, state: IBlockState) = TileEntitySmelter()
 
     override fun breakBlock(worldIn: World, pos: BlockPos, state: IBlockState) {
         val tile: TileEntitySmelter = getTileEntity(worldIn, pos)

@@ -36,6 +36,7 @@ object PrincipiumMod {
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
         registerSmeltingRecipes()
+        ModBlocks.registerTileEntities()
     }
 
     @Mod.EventHandler
@@ -88,9 +89,10 @@ object RegistryHandler {
 
     @JvmStatic
     @Mod.EventHandler
-    fun onCommandRegister(event: FMLServerStartingEvent) {
+    fun onOtherRegister(event: FMLServerStartingEvent) {
         event.registerServerCommand(myCommand)
     }
+
 
 }
 

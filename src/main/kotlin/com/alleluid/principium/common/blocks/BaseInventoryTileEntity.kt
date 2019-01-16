@@ -10,9 +10,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 
-open class BaseInventoryTileEntity(name: String, size: Int) : TileEntity() {
-    init {
-        GameRegistry.registerTileEntity(this::class.java, ResourceLocation(MOD_ID, name))
+open class BaseInventoryTileEntity(val name: String, size: Int) : TileEntity() {
+
+    fun registerTE(){
+        GameRegistry.registerTileEntity(this::class.java, ResourceLocation(MOD_ID, this.name))
     }
 
     internal open val inventory = object : ItemStackHandler(size) {

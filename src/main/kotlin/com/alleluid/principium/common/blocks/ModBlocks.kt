@@ -1,14 +1,21 @@
 package com.alleluid.principium.common.blocks
 
+import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.common.blocks.box.BlockBox
+import com.alleluid.principium.common.blocks.box.TileEntityBox
 import com.alleluid.principium.common.blocks.counter.BlockCounter
+import com.alleluid.principium.common.blocks.counter.TileEntityCounter
 import com.alleluid.principium.common.blocks.pedestal.BlockPedestal
+import com.alleluid.principium.common.blocks.pedestal.TileEntityPedestal
 import com.alleluid.principium.common.blocks.smelter.BlockSmelter
+import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.Item
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistry
 import com.alleluid.principium.Utils.Formatting as mcf
 
@@ -24,10 +31,13 @@ object ModBlocks {
         }
     }
 
-    object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg"){
-        init { loreText.add("¯\\_(ツ)_/¯") }
+    object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg") {
+        init {
+            loreText.add("¯\\_(ツ)_/¯")
+        }
+
         override fun isOpaqueCube(state: IBlockState) = false
-        override fun isFullBlock (state: IBlockState): Boolean = false
+        override fun isFullBlock(state: IBlockState): Boolean = false
     }
 
     val blockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
@@ -76,5 +86,15 @@ object ModBlocks {
         BlockSmelter.registerItemModel()
         BlockPillow.registerItemModel()
         BlockBox.registerItemModel()
+    }
+
+    @JvmStatic
+    fun registerTileEntities() {
+        GameRegistry.registerTileEntity(TileEntityCounter::class.java,
+                ResourceLocation(MOD_ID, "tile_entity_counter"))
+
+        TileEntityBox().registerTE()
+        TileEntitySmelter().registerTE()
+        TileEntityPedestal().registerTE()
     }
 }
