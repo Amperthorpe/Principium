@@ -8,11 +8,11 @@ import net.minecraft.util.ITickable
 import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.items.ItemStackHandler
 
-object TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable, IEnergyStorage
+class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable, IEnergyStorage
 {
-    const val SLOT_INPUT = 0
-    const val SLOT_FUEL = 1
-    const val SLOT_OUTPUT = 2
+    val SLOT_INPUT = 0
+    val SLOT_FUEL = 1
+    val SLOT_OUTPUT = 2
 
     @JvmField var energy = 0
     @JvmField val capacity = 100_000
