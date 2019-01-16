@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 
+@Suppress("UNCHECKED_CAST")
 open class BaseInventoryTileEntity(val name: String, size: Int) : TileEntity() {
 
     fun registerTE(){
