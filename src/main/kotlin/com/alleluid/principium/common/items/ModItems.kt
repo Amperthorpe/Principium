@@ -10,14 +10,14 @@ import net.minecraftforge.registries.IForgeRegistry
 
 object ModItems{
 
-    val principitus = BaseItem("principitus").initOreDict("dustPrincipic")
+    val principitus = BaseItem("principitus")
     val chargedPrincipitus = BaseItem("charged_principitus")
-    val ingotPrincipic = BaseItem("ingot_principic").initOreDict("ingotPrincipic")
+    val ingotPrincipic = BaseItem("ingot_principic")
     val itemSubstruct = BaseItem("substruct")
     val longFallBoots = LongFallBootsBase(EntityEquipmentSlot.FEET, "long_fall_boots")
 
     @JvmStatic
-    fun register(registry: IForgeRegistry<Item>){
+    fun registerItems(registry: IForgeRegistry<Item>){
         registry.registerAll(
                 ingotPrincipic,
                 principitus,
@@ -44,5 +44,11 @@ object ModItems{
         DoublePick.registerItemModel()
         longFallBoots.registerItemModel()
         itemSubstruct.registerItemModel()
+    }
+
+    @JvmStatic
+    fun registerOreDict(){
+        principitus.initOreDict("dustPrincipic")
+        ingotPrincipic.initOreDict("ingotPrincipic")
     }
 }

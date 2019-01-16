@@ -31,6 +31,7 @@ object PrincipiumMod {
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, ModGuiHandler())
+        ModItems.registerOreDict()
     }
 
     @Mod.EventHandler
@@ -70,7 +71,7 @@ object RegistryHandler {
     @JvmStatic
     @SubscribeEvent
     fun onItemRegister(event: RegistryEvent.Register<Item>) {
-        ModItems.register(event.registry)
+        ModItems.registerItems(event.registry)
         ModBlocks.registerItemBlocks(event.registry)
     }
 
