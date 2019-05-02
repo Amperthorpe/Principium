@@ -38,6 +38,12 @@ object Utils {
         else
             Unit
     }
+    fun World.ifClient(func: () -> Any): Any {
+        return if (this.isRemote)
+            func()
+        else
+            Unit
+    }
 
     object Formatting{
         // Reference: https://minecraft.gamepedia.com/Formatting_codes

@@ -2,6 +2,8 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.Utils
 import com.alleluid.principium.Utils.setPositionAndRotationAndUpdate
+import com.alleluid.principium.Utils.ifServer
+import com.alleluid.principium.Utils.ifClient
 import com.alleluid.principium.common.items.BaseItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -86,7 +88,8 @@ object TransportRod : BaseItem("transport_rod") {
     }
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
-        if (player.world.isRemote) Utils.TODO("Make this do something.")
+        player.world.ifClient { Utils.TODO("Make this do something.") }
+
         return false
     }
 }
