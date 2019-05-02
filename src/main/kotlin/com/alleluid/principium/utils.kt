@@ -1,5 +1,6 @@
 package com.alleluid.principium
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.Entity
 import net.minecraft.util.math.BlockPos
@@ -29,6 +30,13 @@ object Utils {
 
     fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double) {
         this.setPositionAndRotationAndUpdate(x, y, z, this.rotationYaw, this.rotationPitch)
+    }
+
+    fun World.ifServer(func: () -> Any): Any {
+        return if (!this.isRemote)
+            func()
+        else
+            Unit
     }
 
     object Formatting{
