@@ -26,10 +26,6 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
         tooltip.add("Also a bit of a multitool.")
     }
 
-    override fun getDestroySpeed(stack: ItemStack, state: IBlockState): Float {
-        return super.getDestroySpeed(stack, state) + 3f
-    }
-
     fun registerItemModel() {
         PrincipiumMod.proxy.registerItemRenderer(this, 0, name)
     }
