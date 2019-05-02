@@ -9,6 +9,7 @@ item.principium.double_pick.name=Double Diamond Pickaxe
 item.principium.long_fall_boots.name=Long Fall Boots
 item.principium.transport_rod.name=§6Transport Rod
 item.principium.laser_drill.name=§6Laserizor
+item.principium.item_weapon_pistol.name=Weird Pistol
 
 # blocks
 tile.principium.block_principic.name=§6Principic Block

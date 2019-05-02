@@ -9,10 +9,5 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 abstract class BaseWeapon(name: String) : BaseItem(name){
-    override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
-        Utils.statusMessage("Pew pew")
-        return super.onItemRightClick(worldIn, playerIn, handIn)
-    }
-
-    abstract fun onWeaponFire(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): Boolean
+    abstract fun onWeaponFire(worldIn: World, playerIn: EntityPlayer): Boolean
 }

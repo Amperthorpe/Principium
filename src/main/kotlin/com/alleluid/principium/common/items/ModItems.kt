@@ -4,6 +4,7 @@ import com.alleluid.principium.common.items.tools.DoublePick
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.tools.TransportRod
 import com.alleluid.principium.common.items.weapons.PrincipicSword
+import com.alleluid.principium.common.items.weapons.WeaponPistol
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.Item
 import net.minecraftforge.registries.IForgeRegistry
@@ -28,7 +29,8 @@ object ModItems{
                 LaserDrill,
                 DoublePick,
                 longFallBoots,
-                itemSubstruct
+                itemSubstruct,
+                WeaponPistol
         )
     }
 
@@ -44,6 +46,7 @@ object ModItems{
         DoublePick.registerItemModel()
         longFallBoots.registerItemModel()
         itemSubstruct.registerItemModel()
+        WeaponPistol.registerItemModel()
     }
 
     @JvmStatic
