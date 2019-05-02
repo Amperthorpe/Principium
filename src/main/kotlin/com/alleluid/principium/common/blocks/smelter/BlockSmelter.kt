@@ -19,13 +19,15 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, ModG
     override val tileEntityClass: Class<TileEntitySmelter>
         get() = TileEntitySmelter::class.java
 
+    override fun isToolEffective(type: String, state: IBlockState) = type == "pickaxe"
+
     override fun createTileEntity(world: World, state: IBlockState) = TileEntitySmelter()
 
     override fun breakBlock(worldIn: World, pos: BlockPos, state: IBlockState) {
         val tile: TileEntitySmelter = getTileEntity(worldIn, pos)
         val itemHandler: IItemHandler? = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         if (itemHandler != null){
-            for (slot in 0..itemHandler.slots) {
+            for (slot in 0 until itemHandler.slots) {
                 val stack = itemHandler.getStackInSlot(slot)
                 if (!stack.isEmpty) {
                     val item = EntityItem(worldIn, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), stack)

@@ -28,6 +28,7 @@ class ContainerSmelter(playerInv: InventoryPlayer, val smelter: TileEntitySmelte
             }
         })
 
+        playerInventorySetup(0, 0)
     }
 
     override fun canInteractWith(playerIn: EntityPlayer) = true

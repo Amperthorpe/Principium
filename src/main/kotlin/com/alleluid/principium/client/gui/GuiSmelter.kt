@@ -2,6 +2,8 @@ package com.alleluid.principium.client.gui
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.common.blocks.smelter.BlockSmelter
+import com.alleluid.principium.common.blocks.smelter.ContainerSmelter
+import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.resources.I18n
@@ -9,7 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.util.ResourceLocation
 
-class GuiSmelter(container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container) {
+class GuiSmelter(val container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container) {
     private val BG_TEXTURE: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/gui_energy_furnace_blank.png")
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
@@ -30,6 +32,11 @@ class GuiSmelter(container: Container, private val playerInv: InventoryPlayer) :
         val name = I18n.format( "${BlockSmelter.translationKey}.name")
         fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040)
         fontRenderer.drawString(playerInv.displayName.unformattedText, 8, ySize - 94, 0x404040)
+        if (container is ContainerSmelter) {
+            val smelter: TileEntitySmelter = container.smelter
+            fontRenderer.drawString(smelter.energy.toString(), 20, ySize - 125, 0x404040)
+            fontRenderer.drawString(smelter.timer.toString(), 20, ySize - 135, 0x404040)
+        }
         super.drawGuiContainerForegroundLayer(mouseX, mouseY)
     }
 

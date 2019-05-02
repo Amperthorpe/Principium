@@ -4,6 +4,7 @@ import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
 import com.alleluid.principium.common.items.ModItems
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.NBTTagInt
 import net.minecraft.util.ITickable
 import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.items.ItemStackHandler
@@ -23,7 +24,6 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
     override fun canReceive() = this.maxReceive > 0
     override fun getMaxEnergyStored() = this.capacity
     override fun getEnergyStored() = this.energy
-
 
     override fun extractEnergy(maxExtract: Int, simulate: Boolean): Int {
         if (!canExtract())
@@ -45,8 +45,20 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         return energyReceived
     }
 
-
+    var timer = 0
     override fun update() {
+        val fuel = inventory.getStackInSlot(SLOT_FUEL)
+        if (world.totalWorldTime % 20 == 0L && !fuel.isEmpty){
+            receiveEnergy(1000, false)
+        }
+
+//        val fuelValue = 100
+//        val fuel = inventory.getStackInSlot(SLOT_FUEL)
+//        if (!fuel.isEmpty && fuel.item == ModItems.itemSubstruct && energy + fuelValue < maxEnergyStored){
+//            val quotient = (fuel.count * fuelValue) / maxEnergyStored
+//            receiveEnergy(fuelValue * quotient, false)
+//            fuel.shrink(quotient)
+//        }
     }
 
     override val inventory = object : ItemStackHandler(3) {
@@ -67,11 +79,18 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
     override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
         compound.setTag("inventory", inventory.serializeNBT())
+        compound.setInteger("energy", energy)
         return super.writeToNBT(compound)
+    }
+
+    fun debugMe(): Int{
+        this.tileData.setInteger("energy", energy)
+        return this.tileData.getInteger("energy")
     }
 
     override fun readFromNBT(compound: NBTTagCompound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"))
+        energy = compound.getInteger("energy")
         super.readFromNBT(compound)
     }
 
