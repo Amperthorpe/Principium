@@ -11,7 +11,7 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 
 @Suppress("UNCHECKED_CAST")
-open class BaseInventoryTileEntity(val name: String, size: Int) : TileEntity() {
+open class BaseInventoryTileEntity(val name: String, val size: Int) : TileEntity() {
 
     fun registerTE(){
         GameRegistry.registerTileEntity(this::class.java, ResourceLocation(MOD_ID, this.name))
