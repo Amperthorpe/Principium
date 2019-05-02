@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class ContainerSmelter(playerInv: InventoryPlayer, val smelter: TileEntitySmelter) : BaseContainer(playerInv) {
+class ContainerSmelter(playerInv: InventoryPlayer, val smelter: TileEntitySmelter) : BaseContainer(playerInv, smelter) {
 //    var maxPotentia = smelter.maxPotentia
 //    var potentia = smelter.potentia
     init {
