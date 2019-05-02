@@ -2,10 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "LCL",
-    "CLC",
+    "CiC",
     "LCL"
   ],
   "key": {
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
     "C": {
       "item": "minecraft:chest"
     },
