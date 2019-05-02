@@ -25,7 +25,7 @@ const val MOD_NAME = "Principium"
 const val VERSION = "1.0.0"
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = VERSION, modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter",
-        useMetadata = true)
+        useMetadata = true, dependencies = "required-after:forgelin;")
 object PrincipiumMod {
 
     @Mod.EventHandler
@@ -38,6 +38,7 @@ object PrincipiumMod {
     fun init(event: FMLInitializationEvent) {
         registerSmeltingRecipes()
         ModBlocks.registerTileEntities()
+        PacketHandler.registerMessages()
     }
 
     @Mod.EventHandler

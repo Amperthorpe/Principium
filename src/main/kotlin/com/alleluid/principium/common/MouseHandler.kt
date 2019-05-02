@@ -1,6 +1,8 @@
 package com.alleluid.principium.common
 
 import com.alleluid.principium.MOD_ID
+import com.alleluid.principium.PacketHandler
+import com.alleluid.principium.ShootMessage
 import com.alleluid.principium.Utils
 import com.alleluid.principium.common.items.weapons.BaseWeapon
 import net.minecraft.client.Minecraft
@@ -23,8 +25,10 @@ object MouseHandler {
         val heldItem = mc.player.getHeldItem(EnumHand.MAIN_HAND).item
         if (heldItem != Items.AIR && heldItem is BaseWeapon){
             if (event.button == 0 && event.isButtonstate){
-                if (heldItem.onWeaponFire(mc.world, mc.player, EnumHand.MAIN_HAND))
-                    event.isCanceled = true
+                val count = mc.player.inventory.getStackInSlot(0).count
+                Utils.statusMessage(count.toString())
+                PacketHandler.INSTANCE.sendToServer(ShootMessage(count.toFloat()))
+                event.isCanceled = true
             }
         }
     }
