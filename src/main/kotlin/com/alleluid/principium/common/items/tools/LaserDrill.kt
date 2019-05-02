@@ -31,7 +31,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     fun registerItemModel() = PrincipiumMod.proxy.registerItemRenderer(this, 0, "laser_drill")
 
     override fun getDestroySpeed(stack: ItemStack, state: IBlockState): Float = 1600f
-    override fun canItemEditBlocks(): Boolean = true
+    override fun canItemEditBlocks(): Boolean = true // It can edit any block, it's a laser drill.
     override fun canHarvestBlock(state: IBlockState, stack: ItemStack): Boolean = true
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
@@ -40,6 +40,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     }
 
     override fun onUpdate(stack: ItemStack, worldIn: World, entityIn: Entity, itemSlot: Int, isSelected: Boolean) {
+        // Ensures this item always has an NBT tag.
         if (stack.tagCompound == null) {
             stack.tagCompound = NBTTagCompound()
         }
@@ -60,7 +61,8 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                             ?: return super.onItemRightClick(worldIn, playerIn, handIn)
                     val blockPos = raytrace.blockPos
                     val state = worldIn.getBlockState(blockPos)
-                    // Returns if block is air, is unbreakable, or has a TileEntity. TODO: make it work with TEs
+
+                    // Prevent breaking if block is air, is unbreakable, or has a TileEntity. TODO: make it work with TEs
                     if (worldIn.isAirBlock(blockPos) || state.getBlockHardness(worldIn, blockPos) < 0 || state.block.hasTileEntity(state)) {
                         return super.onItemRightClick(worldIn, playerIn, handIn)
                     }
