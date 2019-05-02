@@ -23,7 +23,8 @@ object MouseHandler {
         val heldItem = mc.player.getHeldItem(EnumHand.MAIN_HAND).item
         if (heldItem != Items.AIR && heldItem is BaseWeapon){
             if (event.button == 0 && event.isButtonstate){
-                heldItem.onWeaponFire(mc.world, mc.player)
+                if (heldItem.onWeaponFire(mc.world, mc.player, EnumHand.MAIN_HAND))
+                    event.isCanceled = true
             }
         }
     }

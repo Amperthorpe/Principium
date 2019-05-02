@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "principium:items/item_weapon_pistol"
+  }
+}

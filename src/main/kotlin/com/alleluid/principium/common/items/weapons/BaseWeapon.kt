@@ -9,5 +9,5 @@ import net.minecraft.util.EnumHand
 import net.minecraft.world.World
 
 abstract class BaseWeapon(name: String) : BaseItem(name){
-    abstract fun onWeaponFire(worldIn: World, playerIn: EntityPlayer): Boolean
+    abstract fun onWeaponFire(worldIn: World, playerIn: EntityPlayer, enumHand: EnumHand): Boolean
 }
