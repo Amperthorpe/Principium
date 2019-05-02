@@ -19,7 +19,7 @@ class LongFallBootsBase(slot: EntityEquipmentSlot, val name: String) : ItemArmor
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("${Utils.Formatting.LORE}We asked this test subject to just try to land on her head.")
+        tooltip.add("${Utils.Formatting.LORE}We asked this test subject to just try and land on her head.")
         tooltip.add("Negates fall damage")
         tooltip.add("${Utils.Formatting.LORE}Heheh. She can't do it. Good job boots.")
 
