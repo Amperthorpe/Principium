@@ -2,8 +2,8 @@ package com.alleluid.principium.common.items
 
 import com.alleluid.principium.common.items.tools.DoublePick
 import com.alleluid.principium.common.items.tools.LaserDrill
-import com.alleluid.principium.common.items.tools.PrincipicSword
 import com.alleluid.principium.common.items.tools.TransportRod
+import com.alleluid.principium.common.items.weapons.PrincipicSword
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.Item
 import net.minecraftforge.registries.IForgeRegistry

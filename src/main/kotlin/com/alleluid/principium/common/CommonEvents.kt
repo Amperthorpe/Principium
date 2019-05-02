@@ -2,7 +2,7 @@ package com.alleluid.principium.common
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.common.items.ModItems.longFallBoots
-import com.alleluid.principium.common.items.tools.PrincipicSword
+import com.alleluid.principium.common.items.weapons.PrincipicSword
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

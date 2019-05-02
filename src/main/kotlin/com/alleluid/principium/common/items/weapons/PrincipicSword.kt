@@ -1,4 +1,4 @@
-package com.alleluid.principium.common.items.tools
+package com.alleluid.principium.common.items.weapons
 
 import com.alleluid.principium.Utils
 import com.alleluid.principium.common.items.BaseItem
