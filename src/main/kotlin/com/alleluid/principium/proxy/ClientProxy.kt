@@ -6,7 +6,7 @@ import net.minecraft.item.Item
 import net.minecraftforge.client.model.ModelLoader
 
 
-open class ClientProxy : CommonProxy() {
+class ClientProxy : CommonProxy() {
     override fun registerItemRenderer(item: Item, meta: Int, id: String) {
         ModelLoader.setCustomModelResourceLocation(
                 item, meta, ModelResourceLocation("$MOD_ID:$id", "inventory")

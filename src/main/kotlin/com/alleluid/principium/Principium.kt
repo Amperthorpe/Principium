@@ -3,6 +3,7 @@ package com.alleluid.principium
 import com.alleluid.principium.client.PrincipiumTab
 import com.alleluid.principium.common.blocks.ModBlocks
 import com.alleluid.principium.common.commands.myCommand
+import com.alleluid.principium.common.entities.ModEntities
 import com.alleluid.principium.common.items.ModItems
 import com.alleluid.principium.common.items.registerSmeltingRecipes
 import com.alleluid.principium.proxy.CommonProxy
@@ -32,6 +33,7 @@ object PrincipiumMod {
     fun preInit(event: FMLPreInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, ModGuiHandler())
         ModItems.registerOreDict()
+        ModEntities.registerEntities()
     }
 
     @Mod.EventHandler
