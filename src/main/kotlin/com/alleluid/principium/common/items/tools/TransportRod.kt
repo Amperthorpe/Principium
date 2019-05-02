@@ -18,6 +18,7 @@ object TransportRod : BaseItem("transport_rod") {
     const val maxBlocksSearched = 5
 
     init {
+        loreText.add("zzvoop!")
         infoText.add("Right click to teleport to the block you're looking at.")
         infoText.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
         infoText.add("Sneak click a block to teleport through it.")
