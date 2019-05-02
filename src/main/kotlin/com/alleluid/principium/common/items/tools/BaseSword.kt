@@ -31,7 +31,6 @@ object PrincipicSword : BaseItem("sword_principic") {
     init {
         loreText.add("The strong will be made weak, and the weak shall bow before me.")
         infoText.add("Damages to half a heart, but won't kill.")
-//        infoText.add("Right click to teleport, sneak click to set position.")
 
     }
 
