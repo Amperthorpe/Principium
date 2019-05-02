@@ -8,20 +8,18 @@ import net.minecraft.item.ItemStack
 
 abstract class BaseContainer(val playerInv: InventoryPlayer) : Container(){
     abstract override fun canInteractWith(playerIn: EntityPlayer): Boolean
-    init {
-        // Player inventory slots
-        this.playerInventorySetup()
-    }
 
-    open fun playerInventorySetup(){
+    open fun playerInventorySetup(xOffset: Int, yOffset: Int){
         for (i in 0..2){
             for (j in 0..8){
-                this.addSlotToContainer(Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
+                this.addSlotToContainer(Slot(playerInv, j + i * 9 + 9,
+                        xOffset + 8 + j * 18, yOffset + 84 + i * 18))
             }
         }
 
         for (k in 0..8){
-            this.addSlotToContainer(Slot(playerInv, k, 8 + k * 18, 142))
+            this.addSlotToContainer(Slot(playerInv, k,
+                    xOffset + 8 + k * 18, yOffset + 142))
         }
 
     }
