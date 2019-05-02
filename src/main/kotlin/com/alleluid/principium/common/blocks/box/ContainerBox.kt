@@ -7,10 +7,9 @@ import net.minecraft.inventory.Slot
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
-class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContainer(playerInv){
+class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContainer(playerInv, box){
 
     init {
-        playerInventorySetup(0, 37)
         val inventory = box.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         var count = 0
         for (i in 0 until 6){
@@ -19,10 +18,11 @@ class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContain
                 count++
             }
         }
+        playerInventorySetup(0, 37)
     }
 
 
-    override fun canInteractWith(playerIn: EntityPlayer) = !playerIn.isSneaking
+    override fun canInteractWith(playerIn: EntityPlayer) = !playerIn.isSneaking //TODO: Make this more robust
 
 }
 

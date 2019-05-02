@@ -31,7 +31,7 @@ object BlockBox : BaseBlockTileEntity<TileEntityBox>(Material.WOOD, ModGuiID.BOX
         }
     }
 
-    override fun isOpaqueCube(state: IBlockState): Boolean = false
+    override fun isOpaqueCube(state: IBlockState): Boolean = true
 
     override val tileEntityClass: Class<TileEntityBox>
         get() = TileEntityBox::class.java
