@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.*
@@ -38,7 +39,7 @@ object BlockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg") {
 
                 worldIn.ifClient {
                     worldIn.spawnParticle(EnumParticleTypes.HEART, false, it.x.toDouble(), it.y.toDouble(), it.z.toDouble(), 0.0, 0.0, 0.0)
-                    playerIn.playSound(SoundEvent(ResourceLocation("block.stone.place")), 1f, 1f)
+                    playerIn.playSound(SoundEvents.BLOCK_STONE_PLACE, 1f, 1f)
                 }
             }
         }
