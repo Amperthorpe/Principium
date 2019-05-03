@@ -11,6 +11,12 @@
     },
     "e": {
       "item": "principium:block_egg"
+    },
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {
