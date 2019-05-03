@@ -1,7 +1,6 @@
 package com.alleluid.principium.common.blocks
 
 import com.alleluid.principium.MOD_ID
-import com.alleluid.principium.common.BlockEgg
 import com.alleluid.principium.common.blocks.box.BlockBox
 import com.alleluid.principium.common.blocks.box.TileEntityBox
 import com.alleluid.principium.common.blocks.counter.BlockCounter
@@ -13,12 +12,8 @@ import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
-import net.minecraft.block.state.IBlockState
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
-import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistry
 import com.alleluid.principium.Utils.Formatting as mcf

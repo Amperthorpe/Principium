@@ -1,12 +1,10 @@
-package com.alleluid.principium.common
+package com.alleluid.principium.common.blocks
 
 import com.alleluid.principium.Utils.ifClient
-import com.alleluid.principium.common.blocks.BaseBlock
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.*
