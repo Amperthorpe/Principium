@@ -2,7 +2,10 @@
 item.principium.ingot_principic.name=§6Principic Ingot
 item.principium.principitus.name=§6Principitus
 item.principium.charged_principitus.name=§6Charged Principitus
-item.principium.substruct.name=§6Substratum§r (Basic)
+item.principium.substruct_basic.name=§6Substratum§r (Basic)
+item.principium.substruct_iron.name=§6Substratum§r (Iron)
+item.principium.substruct_golden.name=§6Substratum§r (Golden)
+item.principium.substruct_diamond.name=§6Substratum§r (Diamond)
 item.principium.debugger.name=§4Debugger
 item.principium.sword_principic.name=§6Principic Sword
 item.principium.double_pick.name=Double Diamond Pickaxe

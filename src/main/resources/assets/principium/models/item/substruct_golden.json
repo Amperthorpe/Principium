@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "principium:items/substruct_base"
+    "layer0": "principium:items/substruct_golden"
   }
 }

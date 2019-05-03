@@ -2,9 +2,9 @@ package com.alleluid.principium.common.blocks.smelter
 
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
 import com.alleluid.principium.common.items.ModItems
+import com.alleluid.principium.common.items.basic.ItemSubstruct
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.nbt.NBTTagInt
 import net.minecraft.util.ITickable
 import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.items.ItemStackHandler
@@ -54,7 +54,7 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
 //        val fuelValue = 100
 //        val fuel = inventory.getStackInSlot(SLOT_FUEL)
-//        if (!fuel.isEmpty && fuel.item == ModItems.itemSubstruct && energy + fuelValue < maxEnergyStored){
+//        if (!fuel.isEmpty && fuel.item == ModItems.ItemSubstruct && energy + fuelValue < maxEnergyStored){
 //            val quotient = (fuel.count * fuelValue) / maxEnergyStored
 //            receiveEnergy(fuelValue * quotient, false)
 //            fuel.shrink(quotient)
@@ -70,7 +70,7 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
             return when (slot) {
                 0 -> true
-                1 -> stack.item == ModItems.itemSubstruct
+                1 -> stack.item == ItemSubstruct
                 2 -> false
                 else -> false
             }

@@ -1,5 +1,6 @@
 package com.alleluid.principium.common.items
 
+import com.alleluid.principium.common.items.basic.ItemSubstruct
 import com.alleluid.principium.common.items.tools.DoublePick
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.tools.TransportRod
@@ -14,7 +15,6 @@ object ModItems{
     val principitus = BaseItem("principitus")
     val chargedPrincipitus = BaseItem("charged_principitus")
     val ingotPrincipic = BaseItem("ingot_principic")
-    val itemSubstruct = BaseItem("substruct")
     val longFallBoots = LongFallBootsBase(EntityEquipmentSlot.FEET, "long_fall_boots")
 
     @JvmStatic
@@ -29,7 +29,7 @@ object ModItems{
                 LaserDrill,
                 DoublePick,
                 longFallBoots,
-                itemSubstruct,
+                ItemSubstruct,
                 WeaponPistol
         )
     }
@@ -45,7 +45,7 @@ object ModItems{
         LaserDrill.registerItemModel()
         DoublePick.registerItemModel()
         longFallBoots.registerItemModel()
-        itemSubstruct.registerItemModel()
+        ItemSubstruct.registerItemModel()
         WeaponPistol.registerItemModel()
     }
 
