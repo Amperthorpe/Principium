@@ -2,6 +2,7 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
+import com.alleluid.principium.Utils
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
@@ -17,6 +18,9 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 import com.alleluid.principium.Utils.Formatting as umf
+import com.alleluid.principium.Utils.ifClient
+import net.minecraft.entity.player.EntityPlayerMP
+import java.util.jar.Attributes
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     private const val breakCooldown = 8
@@ -34,6 +38,17 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     override fun canItemEditBlocks(): Boolean = true // It can edit any block, it's a laser drill.
     override fun canHarvestBlock(state: IBlockState, stack: ItemStack): Boolean = true
 
+    fun onPrecisionMine(worldIn: World, playerIn: EntityPlayerMP){
+        val dist = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).attributeValue
+
+        val lookVec = playerIn.lookVec
+        val start = Vec3d(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ)
+        val end = start.add(lookVec.x * dist, lookVec.y * dist, lookVec.z * dist)
+        val raytrace = worldIn.rayTraceBlocks(start, end) ?: return
+        val pos = raytrace.blockPos
+        worldIn.destroyBlock(pos, true)
+    }
+
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add("${umf.LORE}This drill is the drill that will pierce the heavens!")
         tooltip.add("Left click to burst mine, right click is single block Silk Touch.")
@@ -42,15 +57,17 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     override fun onUpdate(stack: ItemStack, worldIn: World, entityIn: Entity, itemSlot: Int, isSelected: Boolean) {
         // Ensures this item always has an NBT tag.
         if (stack.tagCompound == null) {
-            stack.tagCompound = NBTTagCompound()
+            stack.tagCompound = NBTTagCompound().apply {
+                setBoolean("preciseMode", false)
+            }
         }
         super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected)
     }
 
     override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
-        if (!worldIn.isRemote) {
-            val stack = playerIn.getHeldItem(handIn)
-            if (stack.hasTagCompound()) {
+        val stack = playerIn.getHeldItem(handIn)
+        if (!playerIn.isSneaking) {
+            if (!worldIn.isRemote && stack.hasTagCompound()) {
                 var didBreak = false
                 if (stack.tagCompound!!.getLong("timeWhenUsable") < worldIn.totalWorldTime) {
                     val lookVec = playerIn.lookVec
@@ -88,10 +105,14 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                 if (didBreak) {
                     stack.tagCompound!!.setLong("timeWhenUsable",
                             worldIn.totalWorldTime + breakCooldown)
+
                 }
             }
-
-
+        } else {
+            // Precise Mode Toggle
+            val preciseMode = stack.tagCompound!!.getBoolean("preciseMode")
+            stack.tagCompound!!.setBoolean("preciseMode", !preciseMode)
+            worldIn.ifClient { Utils.statusMessage("preciseMode: ${!preciseMode}") }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn)
     }

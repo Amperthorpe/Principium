@@ -1,6 +1,7 @@
 package com.alleluid.principium
 
 import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
+import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.weapons.BaseWeapon
 import com.alleluid.principium.common.items.weapons.WeaponPistol
 import io.netty.buffer.ByteBuf
@@ -29,6 +30,7 @@ object PacketHandler {
     fun registerMessages() {
         INSTANCE.registerMessage(ShootMessage.ShootMessageHandler::class.java, ShootMessage::class.java, uid++, Side.SERVER)
         INSTANCE.registerMessage(MachineSyncMessage.MachineSyncMesssageHandler::class.java, MachineSyncMessage::class.java, uid++, Side.CLIENT)
+        INSTANCE.registerMessage(MineBlockMessage.MineBlockMesssageHandler::class.java, MineBlockMessage::class.java, uid++, Side.SERVER)
     }
 }
 
@@ -51,6 +53,22 @@ class ShootMessage(var toSend: Float = 0f) : IMessage {
                 if (num > 0f && heldItem is BaseWeapon) {
                     heldItem.onWeaponFire(serverPlayer.serverWorld, serverPlayer, EnumHand.MAIN_HAND, num)
                 }
+            }
+            return null
+        }
+    }
+}
+
+class MineBlockMessage : IMessage {
+    override fun toBytes(buf: ByteBuf?) {}
+    override fun fromBytes(buf: ByteBuf?) {}
+
+    class MineBlockMesssageHandler : IMessageHandler<MineBlockMessage, IMessage> {
+        override fun onMessage(message: MineBlockMessage?, ctx: MessageContext?): IMessage? {
+            val playerMP = ctx!!.serverHandler.player
+            val heldItem  = playerMP.heldItemMainhand.item
+            if (heldItem is LaserDrill){
+                heldItem.onPrecisionMine(playerMP.world, playerMP)
             }
             return null
         }
@@ -84,11 +102,12 @@ class MachineSyncMessage(var energy: Int, var pos: BlockPos) : IMessage {
             Minecraft.getMinecraft().addScheduledTask {
                 val te = player.world.getTileEntity(pos)
                 if (te is TileEntitySmelter)
-                te.energy = energy
+                    te.energy = energy
             }
 
             return null
         }
     }
 }
+
 
