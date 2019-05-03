@@ -5,6 +5,7 @@ import com.alleluid.principium.PrincipiumMod
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
 import net.minecraft.item.ItemPickaxe
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -34,7 +35,8 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
             val secondPos = if (player.position.y < pos.y) pos.down() else pos.up()
             val state = player.world.getBlockState(secondPos)
             if (state.getBlockHardness(player.world, pos) >= 0 && player.canHarvestBlock(state))
-                player.world.destroyBlock(secondPos, true)
+                if (player.world.destroyBlock(secondPos, true))
+                    itemstack.damageItem(1, player)
         }
         return super.onBlockStartBreak(itemstack, pos, player)
     }
