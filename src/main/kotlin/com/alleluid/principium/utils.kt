@@ -35,10 +35,10 @@ object Utils {
                         }
     }
     fun particleGroup(world: World, type: EnumParticleTypes, entity: Entity){
-        Utils.particleGroup(
+        particleGroup(
                 world, type,
                 entity.posX,
-                entity.posY + entity.height - entity.height * 0.8,
+                entity.posY + entity.height - entity.height * 0.2,
                 entity.posZ
             )
     }
