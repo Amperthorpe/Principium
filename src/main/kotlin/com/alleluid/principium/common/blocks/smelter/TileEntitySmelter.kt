@@ -15,10 +15,10 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
     val SLOT_FUEL = 1
     val SLOT_OUTPUT = 2
 
-    @JvmField var energy = 0
-    @JvmField val capacity = 100_000
-    @JvmField var maxReceive = 1000
-    @JvmField var maxExtract = 1000
+    var energy = 0
+    val capacity = 100_000
+    var maxReceive = 1000
+    var maxExtract = 1000
 
     override fun canExtract() = this.maxExtract > 0
     override fun canReceive() = this.maxReceive > 0
@@ -49,7 +49,10 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
     override fun update() {
         val fuel = inventory.getStackInSlot(SLOT_FUEL)
         if (world.totalWorldTime % 20 == 0L && !fuel.isEmpty){
-            receiveEnergy(1000, false)
+            if (receiveEnergy(1000, false) > 0){
+                if (!world.isRemote)
+                    fuel.shrink(1)
+            }
         }
 
 //        val fuelValue = 100
@@ -81,11 +84,6 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         compound.setTag("inventory", inventory.serializeNBT())
         compound.setInteger("energy", energy)
         return super.writeToNBT(compound)
-    }
-
-    fun debugMe(): Int{
-        this.tileData.setInteger("energy", energy)
-        return this.tileData.getInteger("energy")
     }
 
     override fun readFromNBT(compound: NBTTagCompound) {

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraftforge.energy.IEnergyStorage
@@ -47,7 +48,7 @@ class ShootMessage(var toSend: Float = 0f) : IMessage {
             val num = message?.toSend ?: 0f
             serverPlayer.serverWorld.addScheduledTask {
                 val heldItem = serverPlayer.getHeldItem(EnumHand.MAIN_HAND).item
-                if (num > 0f && heldItem is BaseWeapon){
+                if (num > 0f && heldItem is BaseWeapon) {
                     heldItem.onWeaponFire(serverPlayer.serverWorld, serverPlayer, EnumHand.MAIN_HAND, num)
                 }
             }
@@ -62,30 +63,32 @@ class MachineSyncMessage(var energy: Int, var pos: BlockPos) : IMessage {
         buf?.writeInt(pos.x)
         buf?.writeInt(pos.y)
         buf?.writeInt(pos.z)
+
     }
 
     override fun fromBytes(buf: ByteBuf?) {
-        energy = buf?.readInt() ?: -1
+        energy = buf?.readInt() ?: -2
         val x = buf?.readInt() ?: 0
         val y = buf?.readInt() ?: 0
         val z = buf?.readInt() ?: 0
 
         pos = BlockPos(x, y, z)
+
     }
 
     class MachineSyncMesssageHandler : IMessageHandler<MachineSyncMessage, IMessage> {
+        private var energy = 0
         override fun onMessage(message: MachineSyncMessage?, ctx: MessageContext?): IMessage? {
             val player = Minecraft.getMinecraft().player
-            val energy = message?.energy ?: -2
             val pos = message?.pos ?: BlockPos.ORIGIN
             Minecraft.getMinecraft().addScheduledTask {
-                val TE = player.world.getTileEntity(pos)
-                if (TE is IEnergyStorage && TE is TileEntitySmelter){
-                    TE.energy = energy
-                }
+                val te = player.world.getTileEntity(pos)
+                if (te is TileEntitySmelter)
+                te.energy = energy
             }
+
             return null
         }
     }
-
 }
+

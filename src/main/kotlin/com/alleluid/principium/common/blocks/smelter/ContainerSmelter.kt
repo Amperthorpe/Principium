@@ -8,8 +8,6 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
 class ContainerSmelter(playerInv: InventoryPlayer, val smelter: TileEntitySmelter) : BaseContainer(playerInv, smelter) {
-//    var maxPotentia = smelter.maxPotentia
-//    var potentia = smelter.potentia
     init {
         val inventory = smelter.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         addSlotToContainer(object : SlotItemHandler(inventory, 0, 77, 20) {
@@ -29,6 +27,8 @@ class ContainerSmelter(playerInv: InventoryPlayer, val smelter: TileEntitySmelte
         })
 
         playerInventorySetup(0, 0)
+
+
     }
 
     override fun canInteractWith(playerIn: EntityPlayer) = true
