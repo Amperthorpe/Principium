@@ -2,7 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "principium:block_principic"
+      "type": "forge:ore_dict",
+      "ore": "blockPrincipic"
     }
   ],
   "result": {

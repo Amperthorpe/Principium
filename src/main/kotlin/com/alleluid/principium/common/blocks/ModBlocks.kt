@@ -26,7 +26,6 @@ object ModBlocks {
             blockHardness = 0.3f
             blockSoundType = SoundType.GLASS
             setHarvestLevel("any", 10)
-            initOreDict("blockPrincipic")
         }
     }
 

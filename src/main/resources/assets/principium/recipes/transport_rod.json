@@ -18,7 +18,8 @@
       "ore": "gemDiamond"
     },
     "P": {
-      "item": "principium:block_principic"
+      "type": "forge:ore_dict",
+      "ore": "blockPrincipic"
     },
     "C": {
       "item": "principium:charged_principitus"
