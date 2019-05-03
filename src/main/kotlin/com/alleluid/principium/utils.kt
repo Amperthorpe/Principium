@@ -3,6 +3,7 @@ package com.alleluid.principium
 import com.sun.org.apache.xpath.internal.operations.Bool
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.Entity
+import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.world.World
@@ -21,6 +22,25 @@ object Utils {
 
     fun checkHeadspace(world: World, pos: BlockPos): Boolean {
         return world.isAirBlock(pos) && world.isAirBlock(pos.up())
+    }
+
+    fun particleGroup(world: World, type: EnumParticleTypes, posX: Double, posY: Double, posZ: Double){
+        for (i in 0..10) {
+                            world.spawnParticle(type, false,
+                                    posX,
+                                    posY,
+                                    posZ,
+                                    world.rand.nextGaussian(), 0.05, world.rand.nextGaussian()
+                            )
+                        }
+    }
+    fun particleGroup(world: World, type: EnumParticleTypes, entity: Entity){
+        Utils.particleGroup(
+                world, type,
+                entity.posX,
+                entity.posY + entity.height - entity.height * 0.8,
+                entity.posZ
+            )
     }
 
     fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double, yaw: Float, pitch: Float) {
