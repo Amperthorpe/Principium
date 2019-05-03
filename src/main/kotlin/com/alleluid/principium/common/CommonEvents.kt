@@ -7,6 +7,9 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.DamageSource
+import net.minecraft.util.EnumParticleTypes
+import net.minecraft.util.ResourceLocation
+import net.minecraft.util.SoundEvent
 import net.minecraftforge.event.entity.living.LivingFallEvent
 import net.minecraftforge.event.entity.player.AttackEntityEvent
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
@@ -41,9 +44,28 @@ object CommonEvents {
         when (event.entityPlayer.heldItemMainhand.item) {
             PrincipicSword -> {
                 val health = (event.target as EntityLivingBase).health
+                val world = event.entityPlayer.world
                 if (health > 1.1){
-                    event.target.attackEntityFrom(DamageSource.MAGIC, health - 0.1f)
-                } else {
+                    event.target.attackEntityFrom(DamageSource.DRAGON_BREATH, health - 0.1f)
+                    if (world.isRemote){
+                        for (i in 0..10) {
+                            world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, false,
+                                    event.target.posX,
+                                    event.target.posY + event.target.height - 0.3,
+                                    event.target.posZ,
+                                    world.rand.nextGaussian(), 0.05, world.rand.nextGaussian()
+                            )
+                        }
+                    }
+                } else if (world.isRemote) {
+
+                    world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, false,
+                            event.target.posX,
+                            event.target.posY + event.target.height - 0.3,
+                            event.target.posZ,
+                            0.0, 0.05, 0.0
+                    )
+                    event.entityPlayer.playSound(SoundEvent(ResourceLocation("block.fire.extinguish")), 0.7f, 2f)
                 }
                 event.isCanceled = true
             }
