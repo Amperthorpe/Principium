@@ -1,18 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " Ie",
+    "dIe",
     "bPI",
-    "Cb "
+    "Cbd"
   ],
   "key": {
     "e": {
-      "type": "forge:ore_dict",
-      "ore": "blockDiamond"
+      "item": "minecraft:ender_pearl"
     },
     "I": {
       "type": "forge:ore_dict",
       "ore": "ingotPrincipic"
+    },
+    "d": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
     },
     "P": {
       "item": "principium:block_principic"
