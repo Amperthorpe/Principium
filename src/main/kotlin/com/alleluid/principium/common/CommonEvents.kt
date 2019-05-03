@@ -6,6 +6,7 @@ import com.alleluid.principium.common.items.ModItems.longFallBoots
 import com.alleluid.principium.common.items.weapons.PrincipicSword
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
 import net.minecraft.util.DamageSource
 import net.minecraft.util.EnumParticleTypes
@@ -58,7 +59,7 @@ object CommonEvents {
                             event.target.posZ,
                             0.0, 0.05, 0.0
                     )
-                    event.entityPlayer.playSound(SoundEvent(ResourceLocation("block.fire.extinguish")), 0.7f, 2f)
+                    event.entityPlayer.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.7f, 2f)
                 }
                 event.isCanceled = true
             }

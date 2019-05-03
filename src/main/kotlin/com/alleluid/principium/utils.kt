@@ -24,22 +24,37 @@ object Utils {
         return world.isAirBlock(pos) && world.isAirBlock(pos.up())
     }
 
-    fun particleGroup(world: World, type: EnumParticleTypes, posX: Double, posY: Double, posZ: Double){
+    fun particleGroup(world: World, type: EnumParticleTypes, posX: Double, posY: Double, posZ: Double, velocityMulti: Float = 1f){
         for (i in 0..10) {
                             world.spawnParticle(type, false,
                                     posX,
                                     posY,
                                     posZ,
-                                    world.rand.nextGaussian(), 0.05, world.rand.nextGaussian()
+                                    world.rand.nextGaussian() * velocityMulti,
+                                    0.05,
+                                    world.rand.nextGaussian() * velocityMulti
                             )
                         }
     }
-    fun particleGroup(world: World, type: EnumParticleTypes, entity: Entity){
+    fun particleGroup(world: World, type: EnumParticleTypes, posX: Int, posY: Int, posZ: Int, velocityMulti: Float = 1f){
+        for (i in 0..10) {
+                            world.spawnParticle(type, false,
+                                    posX + 0.5,
+                                    posY.toDouble(),
+                                    posZ + 0.5,
+                                    world.rand.nextGaussian() * velocityMulti,
+                                    0.05,
+                                    world.rand.nextGaussian() * velocityMulti
+                            )
+                        }
+    }
+    fun particleGroup(world: World, type: EnumParticleTypes, entity: Entity, velocityMulti: Float = 1f){
         particleGroup(
                 world, type,
                 entity.posX,
                 entity.posY + entity.height - entity.height * 0.2,
-                entity.posZ
+                entity.posZ,
+                velocityMulti
             )
     }
 
