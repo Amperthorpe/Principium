@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bi ",
+    "iei",
+    " iC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cauldron"
+    },
+    "e": {
+      "item": "principium:block_egg"
+    }
+  },
+  "result": {
+    "item": "principium:item_weapon_pistol"
+  }
+}

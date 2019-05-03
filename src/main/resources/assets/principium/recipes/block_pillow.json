@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "ccc",
-    "WfW",
+    "fff",
     "ccc"
   ],
   "key": {
@@ -12,10 +12,6 @@
     },
     "f": {
       "item": "minecraft:feather"
-    },
-    "W": {
-      "item": "minecraft:wool",
-      "data": 32767
     }
   },
   "result": {

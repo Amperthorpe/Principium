@@ -1,17 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "O O",
-    "OdO"
+    "OdO",
+    "OdO",
+    "b b"
   ],
   "key": {
     "d": {
       "type": "forge:ore_dict",
       "ore": "gemDiamond"
     },
+    "b": {
+      "item": "minecraft:iron_boots"
+    },
     "O": {
-      "type": "forge:ore_dict",
-      "ore": "blockObsidian"
+      "item": "minecraft:obsidian"
     }
   },
   "result": {

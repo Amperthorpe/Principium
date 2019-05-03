@@ -32,12 +32,13 @@ object PrincipiumMod {
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, ModGuiHandler())
-        ModItems.registerOreDict()
         ModEntities.registerEntities()
     }
 
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
+        ModItems.registerOreDict()
+        ModBlocks.registerOreDict()
         registerSmeltingRecipes()
         ModBlocks.registerTileEntities()
         PacketHandler.registerMessages()

@@ -1,6 +1,7 @@
 package com.alleluid.principium.common.blocks
 
 import com.alleluid.principium.MOD_ID
+import com.alleluid.principium.common.BlockEgg
 import com.alleluid.principium.common.blocks.box.BlockBox
 import com.alleluid.principium.common.blocks.box.TileEntityBox
 import com.alleluid.principium.common.blocks.counter.BlockCounter
@@ -15,6 +16,9 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistry
 import com.alleluid.principium.Utils.Formatting as mcf
@@ -31,15 +35,6 @@ object ModBlocks {
         }
     }
 
-    object blockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg") {
-        init {
-            loreText.add("¯\\_(ツ)_/¯")
-        }
-
-        override fun isOpaqueCube(state: IBlockState) = false
-        override fun isFullBlock(state: IBlockState): Boolean = false
-    }
-
     val blockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
 
 
@@ -47,7 +42,7 @@ object ModBlocks {
     fun register(registry: IForgeRegistry<Block>) {
         registry.registerAll(
                 blockMachineBase,
-                blockEgg,
+                BlockEgg,
                 blockPrincipic,
                 FramedGlowBlock,
                 BlockCounter,
@@ -64,7 +59,7 @@ object ModBlocks {
     fun registerItemBlocks(registry: IForgeRegistry<Item>) {
         registry.registerAll(
                 blockMachineBase.createItemBlock(),
-                blockEgg.createItemBlock(),
+                BlockEgg.createItemBlock(),
                 blockPrincipic.createItemBlock(),
                 FramedGlowBlock.createItemBlock(),
                 BlockCounter.createItemBlock(),
@@ -78,7 +73,7 @@ object ModBlocks {
     @JvmStatic
     fun registerModels() {
         blockMachineBase.registerItemModel()
-        blockEgg.registerItemModel()
+        BlockEgg.registerItemModel()
         blockPrincipic.registerItemModel()
         FramedGlowBlock.registerItemModel()
         BlockCounter.registerItemModel()
@@ -96,5 +91,10 @@ object ModBlocks {
         TileEntityBox().registerTE()
         TileEntitySmelter().registerTE()
         TileEntityPedestal().registerTE()
+    }
+
+    @JvmStatic
+    fun registerOreDict(){
+        blockPrincipic.initOreDict("blockPrincipic")
     }
 }

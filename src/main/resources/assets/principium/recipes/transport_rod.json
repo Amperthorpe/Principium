@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Ie",
+    "bPI",
+    "Cb "
+  ],
+  "key": {
+    "e": {
+      "type": "forge:ore_dict",
+      "ore": "blockDiamond"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPrincipic"
+    },
+    "P": {
+      "item": "principium:block_principic"
+    },
+    "C": {
+      "item": "principium:charged_principitus"
+    },
+    "b": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "principium:transport_rod"
+  }
+}
