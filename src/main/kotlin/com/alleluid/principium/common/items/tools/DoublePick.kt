@@ -23,7 +23,6 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add("Always mines the two blocks in front of you.")
         tooltip.add("Sneak to mine normally.")
-        tooltip.add("Also a bit of a multitool.")
     }
 
     fun registerItemModel() {
