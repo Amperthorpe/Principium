@@ -23,8 +23,8 @@ import net.minecraft.entity.player.EntityPlayerMP
 import java.util.jar.Attributes
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
-    private const val breakCooldown = 8
-    private const val altReach = 10.0
+    private const val breakCooldown = 6
+    private const val altReach = 6.0
 
     init {
         creativeTab = PrincipiumMod.creativeTab
@@ -52,6 +52,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add("${umf.LORE}This drill is the drill that will pierce the heavens!")
         tooltip.add("Left click to burst mine, right click is single block Silk Touch.")
+        tooltip.add("Shift right click will switch to Precise Mode.")
     }
 
     override fun onUpdate(stack: ItemStack, worldIn: World, entityIn: Entity, itemSlot: Int, isSelected: Boolean) {
