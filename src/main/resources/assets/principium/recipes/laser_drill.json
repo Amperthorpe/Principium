@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "DI ",
-    "ISI",
-    " IC"
+    "DB ",
+    "BSB",
+    " BC"
   ],
   "key": {
     "D": {
       "type": "forge:ore_dict",
       "ore": "blockDiamond"
     },
-    "I": {
+    "B": {
       "type": "forge:ore_dict",
-      "ore": "ingotPrincipic"
+      "ore": "blockPrincipic"
     },
     "S": {
       "item": "principium:sword_principic"
