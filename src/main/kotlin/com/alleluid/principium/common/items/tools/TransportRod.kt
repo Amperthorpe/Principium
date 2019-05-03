@@ -6,6 +6,7 @@ import com.alleluid.principium.Utils.ifServer
 import com.alleluid.principium.Utils.ifClient
 import com.alleluid.principium.common.items.BaseItem
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.item.ItemStack
@@ -21,11 +22,12 @@ object TransportRod : BaseItem("transport_rod") {
     var didAltTeleport: Boolean = false
 
     init {
+        // Change index below before before adding/removing infoText lines.
         loreText.add("Zzzvoop!")
         infoText.add("Right click to teleport to the block you're looking at.")
         infoText.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
         infoText.add("Right click a block to teleport through it.")
-        infoText.add("Left click function TODO")
+        infoText.add("Shift right click a block to set as destination. Left click entity to teleport them there.")
     }
 
     override fun getItemStackLimit(stack: ItemStack) = 1
@@ -79,10 +81,12 @@ object TransportRod : BaseItem("transport_rod") {
                 worldIn.playSound(player, newPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
                 EnumActionResult.SUCCESS
             } else {
-                //Utils.statusMessage("§4Invalid Location")
                 didAltTeleport = false
                 EnumActionResult.FAIL
             }
+        } else {
+            player.getHeldItem(hand).tagCompound!!.setIntArray("storedPos", IntArray(0).plus(listOf(pos.x, pos.y + 1, pos.z)))
+            worldIn.ifClient { Utils.statusMessage("Set to ${pos.x}, ${pos.y + 1}, ${pos.z}") }
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
@@ -96,8 +100,14 @@ object TransportRod : BaseItem("transport_rod") {
     }
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
-        player.world.ifClient { Utils.TODO("Make this do something.") }
-
+        if (entity is EntityPlayer && !entity.isSneaking){
+            player.world.ifClient { Utils.statusMessage("Players must be sneaking to teleport.") }
+            return false
+        } else if (entity is EntityLivingBase) {
+            val array = stack.tagCompound!!.getIntArray("storedPos") ?: return false
+            entity.setPositionAndRotationAndUpdate(array[0] + 0.5, array[1].toDouble(), array[2] + 0.5)
+            return true
+        }
         return false
     }
 }
