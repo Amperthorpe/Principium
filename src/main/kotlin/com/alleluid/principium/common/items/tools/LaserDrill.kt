@@ -21,14 +21,21 @@ import java.util.*
 import com.alleluid.principium.GeneralUtils.Formatting as umf
 import com.alleluid.principium.GeneralUtils.ifClient
 import jdk.nashorn.internal.ir.Block
+import net.minecraft.enchantment.Enchantment
+import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.init.Enchantments
+import net.minecraft.nbt.NBTTagInt
+import net.minecraft.nbt.NBTTagString
 import net.minecraft.world.WorldServer
+import net.minecraftforge.common.util.Constants
 import net.minecraftforge.common.util.FakePlayer
 import net.minecraftforge.common.util.FakePlayerFactory
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     private const val breakCooldown = 6
     private const val altReach = 6.0
+    private const val directDrops = true
 
     init {
         creativeTab = PrincipiumMod.creativeTab
@@ -49,13 +56,41 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
         val end = start.add(lookVec.x * dist, lookVec.y * dist, lookVec.z * dist)
         val raytrace = worldIn.rayTraceBlocks(start, end) ?: return
         val pos = raytrace.blockPos
+
+        val compound = playerIn.heldItemMainhand.tagCompound
+        val tagList = compound?.getTagList("ench", Constants.NBT.TAG_COMPOUND)
+        var isSilky = false
+        var fortuneLvl = 0
+
+        if (tagList != null) {
+            for (enchCompound in tagList) {
+                val id = (enchCompound as NBTTagCompound).getShort("id")
+                val lvl = enchCompound.getShort("lvl")
+                when (Enchantment.getEnchantmentByID(id.toInt())) {
+                    Enchantments.SILK_TOUCH -> {
+                        isSilky = true
+                    }
+                    Enchantments.FORTUNE -> {
+                        fortuneLvl = lvl.toInt()
+                    }
+                }
+            }
+        }
+        val dropsList: MutableList<ItemStack> = mutableListOf()
         if (BlockUtils.canBlockBeBroken(worldIn, playerIn, pos)) {
-            // TODO: Make this able to handle fortune + silktouch
-            val drops = BlockUtils.getBlockDrops(worldIn, playerIn, pos)
-            for (item in drops){
-                if (!playerIn.addItemStackToInventory(item))
+            val block = worldIn.getBlockState(pos).block
+            if (isSilky && block.canSilkHarvest(worldIn, pos, worldIn.getBlockState(pos), playerIn)) {
+                dropsList.add(block.getPickBlock(worldIn.getBlockState(pos), raytrace, worldIn, pos, playerIn))
+            } else {
+                dropsList.addAll(BlockUtils.getBlockDrops(worldIn, playerIn, pos, fortuneLvl))
+            }
+
+            for (item in dropsList) {
+                //TODO make it less direct when off
+                if (!directDrops && !playerIn.addItemStackToInventory(item))
                     playerIn.entityDropItem(item, 0f)?.setNoPickupDelay()
             }
+
             worldIn.destroyBlock(pos, false)
         }
     }
@@ -92,7 +127,8 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
                     if (!BlockUtils.canBlockBeBroken(worldIn, playerIn, blockPos)) {
                         return super.onItemRightClick(worldIn, playerIn, handIn)
                     }
-                    val itemsToCollect = BlockUtils.getBlockDrops(worldIn, playerIn, blockPos, isSilkTouch = true)
+                    //TODO: silk doesn't work, fix it
+                    val itemsToCollect = BlockUtils.getBlockDrops(worldIn, playerIn, blockPos)
                     for (item in itemsToCollect) {
                         val itemAttempt = playerIn.addItemStackToInventory(item)
                         if (!itemAttempt) playerIn.entityDropItem(item, 0f)?.setNoPickupDelay()

@@ -128,11 +128,11 @@ object BlockUtils {
         return !event.isCanceled
     }
 
-    fun getBlockDrops(world: World, player: EntityPlayer, pos: BlockPos, fortune: Int = 0, isSilkTouch: Boolean = false): List<ItemStack> {
+    fun getBlockDrops(world: World, player: EntityPlayer, pos: BlockPos, fortune: Int = 0): List<ItemStack> {
         val state = world.getBlockState(pos)
         val stacks = NonNullList.create<ItemStack>()
         state.block.getDrops(stacks, world, pos, state, fortune)
-        val event = BlockEvent.HarvestDropsEvent(world, pos, world.getBlockState(pos), fortune, 1f, stacks, player, isSilkTouch)
+        val event = BlockEvent.HarvestDropsEvent(world, pos, world.getBlockState(pos), fortune, 1f, stacks, player, false)
         MinecraftForge.EVENT_BUS.post(event)
         return event.drops
     }
