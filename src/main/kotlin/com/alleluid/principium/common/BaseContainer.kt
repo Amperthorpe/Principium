@@ -1,13 +1,12 @@
 package com.alleluid.principium.common
 
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
-import com.alleluid.principium.Utils.ifClient
+import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntity
 
 abstract class BaseContainer(val playerInv: InventoryPlayer, val TEInv: BaseInventoryTileEntity) : Container(){
     abstract override fun canInteractWith(playerIn: EntityPlayer): Boolean

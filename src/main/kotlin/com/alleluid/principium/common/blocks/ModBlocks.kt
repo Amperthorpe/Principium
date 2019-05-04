@@ -16,7 +16,7 @@ import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistry
-import com.alleluid.principium.Utils.Formatting as mcf
+import com.alleluid.principium.GeneralUtils.Formatting as mcf
 
 object ModBlocks {
 

@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.entity.Entity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import com.alleluid.principium.Utils.Formatting as mcf
+import com.alleluid.principium.GeneralUtils.Formatting as mcf
 
 object BlockPillow : BaseBlock(Material.CARPET, "block_pillow"){
     init {

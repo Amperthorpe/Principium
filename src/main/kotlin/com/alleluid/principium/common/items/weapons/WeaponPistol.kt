@@ -1,6 +1,5 @@
 package com.alleluid.principium.common.items.weapons
 
-import com.alleluid.principium.Utils
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.EntityArrow
 import net.minecraft.entity.projectile.EntityTippedArrow

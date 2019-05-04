@@ -2,7 +2,7 @@ package com.alleluid.principium.common.items
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
-import com.alleluid.principium.Utils
+import com.alleluid.principium.GeneralUtils
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
@@ -19,9 +19,9 @@ class LongFallBootsBase(slot: EntityEquipmentSlot, val name: String) : ItemArmor
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("${Utils.Formatting.LORE}We asked this test subject to just try and land on her head.")
+        tooltip.add("${GeneralUtils.Formatting.LORE}We asked this test subject to just try and land on her head.")
         tooltip.add("Negates fall damage")
-        tooltip.add("${Utils.Formatting.LORE}Heheh. She can't do it. Good work boots.")
+        tooltip.add("${GeneralUtils.Formatting.LORE}Heheh. She can't do it. Good work boots.")
 
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }

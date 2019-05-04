@@ -1,13 +1,13 @@
 package com.alleluid.principium.common.items.weapons
 
-import com.alleluid.principium.Utils
+import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.items.BaseItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
-import com.alleluid.principium.Utils.Formatting as ufm
+import com.alleluid.principium.GeneralUtils.Formatting as ufm
 
 
 object PrincipicSword : BaseItem("sword_principic") {
@@ -22,7 +22,7 @@ object PrincipicSword : BaseItem("sword_principic") {
     }
 
     override fun itemInteractionForEntity(stack: ItemStack, playerIn: EntityPlayer, target: EntityLivingBase, hand: EnumHand): Boolean {
-        if (!playerIn.world.isRemote) Utils.statusMessage(target.health.toString())
+        if (!playerIn.world.isRemote) GeneralUtils.statusMessage(target.health.toString())
         return super.itemInteractionForEntity(stack, playerIn, target, hand)
     }
 }

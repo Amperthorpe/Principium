@@ -1,9 +1,9 @@
 package com.alleluid.principium.common.items.tools
 
-import com.alleluid.principium.Utils
-import com.alleluid.principium.Utils.setPositionAndRotationAndUpdate
-import com.alleluid.principium.Utils.ifServer
-import com.alleluid.principium.Utils.ifClient
+import com.alleluid.principium.GeneralUtils
+import com.alleluid.principium.GeneralUtils.setPositionAndRotationAndUpdate
+import com.alleluid.principium.GeneralUtils.ifServer
+import com.alleluid.principium.GeneralUtils.ifClient
 import com.alleluid.principium.common.items.BaseItem
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -44,7 +44,7 @@ object TransportRod : BaseItem("transport_rod") {
             for (i in 1..maxBlocksSearched) {
                 // Check two blocks to ensure no suffocation
                 val adjustedPos = BlockPos(pos.x, pos.y + i, pos.z)
-                if (Utils.checkHeadspace(worldIn, adjustedPos)) {
+                if (GeneralUtils.checkHeadspace(worldIn, adjustedPos)) {
                     worldIn.ifServer {
                         playerIn.fallDistance = 0f
                         playerIn.setPositionAndRotationAndUpdate(adjustedPos.x + 0.5, adjustedPos.y.toDouble(), adjustedPos.z + 0.5)
@@ -52,11 +52,11 @@ object TransportRod : BaseItem("transport_rod") {
                     worldIn.ifClient {
 //                        playerIn.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, 1f)
                         worldIn.playSound(playerIn, adjustedPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
-                        Utils.particleGroup(worldIn, EnumParticleTypes.DRAGON_BREATH, adjustedPos.x, adjustedPos.y, adjustedPos.z, 0.5f)
+                        GeneralUtils.particleGroup(worldIn, EnumParticleTypes.DRAGON_BREATH, adjustedPos.x, adjustedPos.y, adjustedPos.z, 0.5f)
                     }
                     break
                 } else if (i >= maxBlocksSearched) {
-                    Utils.statusMessage("§4Invalid Location")
+                    GeneralUtils.statusMessage("§4Invalid Location")
                 }
             }
         } else {
@@ -76,7 +76,7 @@ object TransportRod : BaseItem("transport_rod") {
                 EnumFacing.WEST -> BlockPos(pos.x + 1, pos.y, pos.z)
                 EnumFacing.EAST -> BlockPos(pos.x - 1, pos.y, pos.z)
             }
-            return if (Utils.checkHeadspace(worldIn, newPos)) {
+            return if (GeneralUtils.checkHeadspace(worldIn, newPos)) {
                 player.setPositionAndRotationAndUpdate(newPos.x + 0.5, newPos.y.toDouble(), newPos.z + 0.5)
                 worldIn.playSound(player, newPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
                 EnumActionResult.SUCCESS
@@ -86,7 +86,7 @@ object TransportRod : BaseItem("transport_rod") {
             }
         } else {
             player.getHeldItem(hand).tagCompound!!.setIntArray("storedPos", IntArray(0).plus(listOf(pos.x, pos.y + 1, pos.z)))
-            worldIn.ifClient { Utils.statusMessage("Set to ${pos.x}, ${pos.y + 1}, ${pos.z}") }
+            worldIn.ifClient { GeneralUtils.statusMessage("Set to ${pos.x}, ${pos.y + 1}, ${pos.z}") }
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
@@ -101,7 +101,7 @@ object TransportRod : BaseItem("transport_rod") {
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
         if (entity is EntityPlayer && !entity.isSneaking){
-            player.world.ifClient { Utils.statusMessage("Players must be sneaking to teleport.") }
+            player.world.ifClient { GeneralUtils.statusMessage("Players must be sneaking to teleport.") }
             return false
         } else if (entity is EntityLivingBase) {
             val array = stack.tagCompound!!.getIntArray("storedPos") ?: return false

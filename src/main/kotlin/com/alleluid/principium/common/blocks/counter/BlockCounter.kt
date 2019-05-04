@@ -1,6 +1,6 @@
 package com.alleluid.principium.common.blocks.counter
 
-import com.alleluid.principium.Utils
+import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.blocks.BaseBlockTileEntity
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -20,7 +20,7 @@ object BlockCounter : BaseBlockTileEntity<TileEntityCounter>(Material.ROCK, null
             } else if (facing == EnumFacing.UP) {
                 tile.count++
             }
-            Utils.statusMessage("Count: ${tile.count}")
+            GeneralUtils.statusMessage("Count: ${tile.count}")
         }
         return true
     }

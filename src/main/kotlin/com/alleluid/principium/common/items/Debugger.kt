@@ -1,8 +1,6 @@
 package com.alleluid.principium.common.items
 
-import com.alleluid.principium.Utils
-import com.alleluid.principium.Utils.ifClient
-import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
+import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing

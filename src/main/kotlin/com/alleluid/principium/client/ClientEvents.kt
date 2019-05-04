@@ -25,7 +25,7 @@ object ClientHandler {
                 is BaseWeapon -> {
                     if (event.button == 0 && event.isButtonstate) {
                         val count = mc.player.inventory.getStackInSlot(0).count
-                        Utils.statusMessage(count.toString())
+                        GeneralUtils.statusMessage(count.toString())
                         PacketHandler.INSTANCE.sendToServer(ShootMessage(count.toFloat()))
                         event.isCanceled = true
                     }

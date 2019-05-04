@@ -7,8 +7,15 @@ import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.world.World
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.world.BlockEvent
+import net.minecraft.util.NonNullList
+import net.minecraft.item.ItemStack
+import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.player.EntityPlayer
 
-object Utils {
+
+object GeneralUtils {
     fun statusMessage(msg: String, actionBar: Boolean = true) {
         Minecraft.getMinecraft().player.sendStatusMessage(TextComponentString(msg), actionBar)
     }
@@ -109,5 +116,24 @@ object Utils {
         const val RESET = "§r"
 
         const val LORE = DARK_PURPLE + ITALIC
+    }
+}
+
+object BlockUtils {
+    fun canBlockBeBroken(world: World, player: EntityPlayer, pos: BlockPos): Boolean {
+        val state = world.getBlockState(pos)
+        if (world.isAirBlock(pos) || state.block.getBlockHardness(state, world, pos) < 0) return false
+        val event = BlockEvent.BreakEvent(world, pos, world.getBlockState(pos), player)
+        MinecraftForge.EVENT_BUS.post(event)
+        return !event.isCanceled
+    }
+
+    fun getBlockDrops(world: World, player: EntityPlayer, pos: BlockPos, fortune: Int = 0, isSilkTouch: Boolean = false): List<ItemStack> {
+        val state = world.getBlockState(pos)
+        val stacks = NonNullList.create<ItemStack>()
+        state.block.getDrops(stacks, world, pos, state, fortune)
+        val event = BlockEvent.HarvestDropsEvent(world, pos, world.getBlockState(pos), fortune, 1f, stacks, player, isSilkTouch)
+        MinecraftForge.EVENT_BUS.post(event)
+        return event.drops
     }
 }

@@ -1,6 +1,6 @@
 package com.alleluid.principium.common.blocks
 
-import com.alleluid.principium.Utils.ifClient
+import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer

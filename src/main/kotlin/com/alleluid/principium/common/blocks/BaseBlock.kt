@@ -2,7 +2,7 @@ package com.alleluid.principium.common.blocks
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
-import com.alleluid.principium.Utils.Formatting
+import com.alleluid.principium.GeneralUtils.Formatting
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
