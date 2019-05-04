@@ -33,8 +33,6 @@ import net.minecraftforge.common.util.FakePlayer
 import net.minecraftforge.common.util.FakePlayerFactory
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
-    private const val breakCooldown = 6
-    private const val altReach = 6.0
     private const val directDrops = true
 
     init {
@@ -113,32 +111,8 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
 
     override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
         val stack = playerIn.getHeldItem(handIn)
-        if (!playerIn.isSneaking) {
-            if (!worldIn.isRemote && stack.hasTagCompound()) {
-                if (stack.tagCompound!!.getLong("timeWhenUsable") < worldIn.totalWorldTime) {
-                    val lookVec = playerIn.lookVec
-                            ?: return super.onItemRightClick(worldIn, playerIn, handIn)
-                    val start = Vec3d(playerIn.posX, playerIn.posY + playerIn.eyeHeight, playerIn.posZ)
-                    val end = start.add(lookVec.x * altReach, lookVec.y * altReach, lookVec.z * altReach)
-                    val raytrace = worldIn.rayTraceBlocks(start, end)
-                            ?: return super.onItemRightClick(worldIn, playerIn, handIn)
-                    val blockPos = raytrace.blockPos
-
-                    if (!BlockUtils.canBlockBeBroken(worldIn, playerIn, blockPos)) {
-                        return super.onItemRightClick(worldIn, playerIn, handIn)
-                    }
-                    //TODO: silk doesn't work, fix it
-                    val itemsToCollect = BlockUtils.getBlockDrops(worldIn, playerIn, blockPos)
-                    for (item in itemsToCollect) {
-                        val itemAttempt = playerIn.addItemStackToInventory(item)
-                        if (!itemAttempt) playerIn.entityDropItem(item, 0f)?.setNoPickupDelay()
-                    }
-                    worldIn.destroyBlock(blockPos, false)
-                    stack.tagCompound!!.setLong("timeWhenUsable",
-                            worldIn.totalWorldTime + breakCooldown)
-
-                }
-            }
+        if (!playerIn.isSneaking){
+            // Weapon TODO: Implement weapon
         } else {
             // Precise Mode Toggle
             val preciseMode = stack.tagCompound!!.getBoolean("preciseMode")
