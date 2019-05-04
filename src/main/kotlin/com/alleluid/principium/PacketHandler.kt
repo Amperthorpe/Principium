@@ -68,7 +68,7 @@ class MineBlockMessage : IMessage {
             val playerMP = ctx!!.serverHandler.player
             val heldItem  = playerMP.heldItemMainhand.item
             if (heldItem is LaserDrill){
-                heldItem.onPrecisionMine(playerMP.world, playerMP)
+                heldItem.onPrecisionMine(playerMP.serverWorld, playerMP)
             }
             return null
         }
