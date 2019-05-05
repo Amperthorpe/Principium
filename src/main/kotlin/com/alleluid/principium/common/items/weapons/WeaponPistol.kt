@@ -13,6 +13,7 @@ object WeaponPistol : BaseWeapon("item_weapon_pistol"){
             val entityArrow = EntityTippedArrow(worldIn, playerIn!!)
             entityArrow.shoot(playerIn, playerIn.rotationPitch + 0.1f, playerIn.rotationYaw, 0.0f, 5.0f, 0.1f)
             entityArrow.damage = damage.toDouble()
+            entityArrow.isCritical = true
             entityArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY
             worldIn.spawnEntity(entityArrow)
             true
