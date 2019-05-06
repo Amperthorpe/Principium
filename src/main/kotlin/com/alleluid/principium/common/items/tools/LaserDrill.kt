@@ -58,7 +58,7 @@ object LaserDrill : BaseItem("laser_drill") {
             map.put(SharedMonsterAttributes.ATTACK_SPEED.name,
                     AttributeModifier(ATTACK_SPEED_MODIFIER,
                             SharedMonsterAttributes.ATTACK_SPEED.name,
-                            -4.0, 0
+                            -3.0, 0
                     )
             )
         }
@@ -164,13 +164,21 @@ object LaserDrill : BaseItem("laser_drill") {
             }
 
             if (worldIn.isRemote && effectsEndPoint != null) {
-                worldIn.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE,
-                        effectsEndPoint.x, effectsEndPoint.y, effectsEndPoint.z,
-                        0.0, 0.0, 0.0
-                )
+                if (entTrace != null && (blockTrace == null || blockTrace.typeOfHit == RayTraceResult.Type.MISS)) {
+                    for (i in 0..50) {
+                        worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                                entTrace.entityHit.posX,
+                                entTrace.entityHit.posY + entTrace.entityHit.eyeHeight,
+                                entTrace.entityHit.posZ,
+                                worldIn.rand.nextGaussian() * 0.1,
+                                worldIn.rand.nextGaussian() * 0.1,
+                                worldIn.rand.nextGaussian() * 0.1
+                        )
+                    }
+                }
                 for (i in 1..(eyePos.distanceTo(effectsEndPoint) * 5).toInt()) {
-                    val lookEye = look.add(eyePos)
-                    worldIn.spawnParticle(EnumParticleTypes.REDSTONE,
+                    val lookEye = look.add(eyePos.subtract(0.0, 1.0, 0.0))
+                    worldIn.spawnParticle(EnumParticleTypes.SPELL,
                             true,
                             lookEye.x + (i / 5 * look.x),
                             lookEye.y + (i / 5 * look.y),
