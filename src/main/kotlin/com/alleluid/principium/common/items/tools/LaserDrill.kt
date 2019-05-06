@@ -21,12 +21,15 @@ import java.util.*
 import com.alleluid.principium.GeneralUtils.Formatting as umf
 import com.alleluid.principium.GeneralUtils.ifClient
 import jdk.nashorn.internal.ir.Block
+import net.minecraft.block.BlockShulkerBox
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
 import net.minecraft.nbt.NBTTagInt
 import net.minecraft.nbt.NBTTagString
+import net.minecraft.tileentity.TileEntityShulkerBox
 import net.minecraft.world.WorldServer
 import net.minecraftforge.common.util.Constants
 import net.minecraftforge.common.util.FakePlayer
@@ -76,8 +79,17 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
         }
         val dropsList: MutableList<ItemStack> = mutableListOf()
         if (BlockUtils.canBlockBeBroken(worldIn, playerIn, pos)) {
-            val block = worldIn.getBlockState(pos).block
-            if (isSilky && block.canSilkHarvest(worldIn, pos, worldIn.getBlockState(pos), playerIn)) {
+            val state = worldIn.getBlockState(pos)
+            val block = state.block
+
+            // Special handling for shulker boxes; add to drops then ensure no dropping as item
+            if (block is BlockShulkerBox){
+                dropsList.add(block.getItem(worldIn, pos, state))
+                val shulker = worldIn.getTileEntity(pos) as TileEntityShulkerBox
+                shulker.isDestroyedByCreativePlayer = true
+                shulker.clear()
+
+            } else if (isSilky && block.canSilkHarvest(worldIn, pos, worldIn.getBlockState(pos), playerIn)) {
                 dropsList.add(block.getPickBlock(worldIn.getBlockState(pos), raytrace, worldIn, pos, playerIn))
             } else {
                 dropsList.addAll(BlockUtils.getBlockDrops(worldIn, playerIn, pos, fortuneLvl))
@@ -85,7 +97,7 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
 
             for (item in dropsList) {
                 //TODO make it less direct when off
-                if (!directDrops && !playerIn.addItemStackToInventory(item))
+                if (!playerIn.addItemStackToInventory(item) && !directDrops)
                     playerIn.entityDropItem(item, 0f)?.setNoPickupDelay()
             }
 
