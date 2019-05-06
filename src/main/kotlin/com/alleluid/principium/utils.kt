@@ -1,6 +1,5 @@
 package com.alleluid.principium
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.Entity
 import net.minecraft.util.EnumParticleTypes
@@ -11,8 +10,12 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.world.BlockEvent
 import net.minecraft.util.NonNullList
 import net.minecraft.item.ItemStack
-import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.ai.attributes.AttributeModifier
+import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.math.Vec3d
+import com.google.common.collect.Multimap
+import java.util.*
 
 
 object GeneralUtils {
@@ -65,6 +68,15 @@ object GeneralUtils {
             )
     }
 
+    fun World.spawnParticleVec(type: EnumParticleTypes, vec3d: Vec3d, posScalar: Double = 1.0, gaussianFactor: Double? = null){
+        val speed = if (gaussianFactor != null){
+            this.rand.nextGaussian() * gaussianFactor
+        } else {
+            0.0
+        }
+        this.spawnParticle(type, vec3d.x * posScalar, vec3d.y * posScalar, vec3d.z * posScalar, speed, speed, speed)
+    }
+
     fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double, yaw: Float, pitch: Float) {
         this.setPositionAndUpdate(x, y, z)
         this.setPositionAndRotation(x, y, z, yaw, pitch)
@@ -85,6 +97,21 @@ object GeneralUtils {
             func()
         else
             Unit
+    }
+
+    fun replaceModifer(modMap: Multimap<String, AttributeModifier>, attribute: IAttribute, id: UUID, multi: Double){
+        // Get modifers for specified attribute
+        val modifiers: Collection<AttributeModifier> = modMap[attribute.name]
+
+        // Find the modifer with the specified ID, if any
+        val modiferOptional = modifiers.stream().filter { attributeModifier -> attributeModifier.id == id }.findFirst()
+
+        if (modiferOptional.isPresent){ // If it exists;
+            val modifer: AttributeModifier = modiferOptional.get()
+            modifiers.minus(modifer) // Remove it
+            // Add the new modifier
+            modifiers.plus(AttributeModifier(modifer.id, modifer.name, modifer.amount * multi, modifer.operation))
+        }
     }
 
     object Formatting{
