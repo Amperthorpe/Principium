@@ -1,8 +1,10 @@
 package com.alleluid.principium
 
 import com.alleluid.principium.client.PrincipiumTab
+import com.alleluid.principium.client.render.RenderBullet
 import com.alleluid.principium.common.blocks.ModBlocks
 import com.alleluid.principium.common.commands.myCommand
+import com.alleluid.principium.common.entities.EntityBullet
 import com.alleluid.principium.common.entities.ModEntities
 import com.alleluid.principium.common.items.ModItems
 import com.alleluid.principium.common.items.registerSmeltingRecipes
@@ -12,6 +14,7 @@ import net.minecraft.item.Item
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.common.util.EnumHelper
 import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.fml.client.registry.RenderingRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -20,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
+import kotlin.reflect.jvm.javaMethod
 
 const val MOD_ID = "principium"
 const val MOD_NAME = "Principium"
@@ -33,6 +37,9 @@ object PrincipiumMod {
     fun preInit(event: FMLPreInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, ModGuiHandler())
         ModEntities.registerEntities()
+        RenderingRegistry.registerEntityRenderingHandler(EntityBullet::class.java) {
+            it.getEntityClassRenderObject<EntityBullet>(EntityBullet::class.java)
+        }
     }
 
     @Mod.EventHandler
