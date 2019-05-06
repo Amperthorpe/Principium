@@ -1,14 +1,10 @@
 package com.alleluid.principium.common.items.tools
 
-import com.alleluid.principium.BlockUtils
-import com.alleluid.principium.MOD_ID
-import com.alleluid.principium.PrincipiumMod
-import com.alleluid.principium.GeneralUtils
+import com.alleluid.principium.*
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemPickaxe
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -17,26 +13,21 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import java.util.*
 import com.alleluid.principium.GeneralUtils.Formatting as umf
 import com.alleluid.principium.GeneralUtils.ifClient
-import jdk.nashorn.internal.ir.Block
 import net.minecraft.block.BlockShulkerBox
 import net.minecraft.enchantment.Enchantment
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.init.Blocks
 import net.minecraft.init.Enchantments
-import net.minecraft.nbt.NBTTagInt
-import net.minecraft.nbt.NBTTagString
 import net.minecraft.tileentity.TileEntityShulkerBox
+import net.minecraft.util.EnumParticleTypes
+import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.WorldServer
 import net.minecraftforge.common.util.Constants
-import net.minecraftforge.common.util.FakePlayer
-import net.minecraftforge.common.util.FakePlayerFactory
 
 object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     private const val directDrops = true
+    private const val weaponTraceDist = 100.0
 
     init {
         creativeTab = PrincipiumMod.creativeTab
@@ -124,7 +115,32 @@ object LaserDrill : ItemPickaxe(PrincipiumMod.principicToolMaterial) {
     override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
         val stack = playerIn.getHeldItem(handIn)
         if (!playerIn.isSneaking){
-            // Weapon TODO: Implement weapon
+            // Weapon
+            val look = playerIn.lookVec
+            val eyePos = playerIn.getPositionEyes(1f)
+            val endPoint = eyePos.add(look.x * weaponTraceDist, look.y * weaponTraceDist, look.z * weaponTraceDist)
+            // Credit to Gigaherz for this method
+            val entTrace = JavaUtils.getEntityIntercept(worldIn, playerIn, eyePos, look, endPoint, null)
+
+            val blockTrace = worldIn.rayTraceBlocks(eyePos, entTrace?.hitVec ?: endPoint)
+            val effectsEndPoint = if (entTrace != null){
+                if (blockTrace == null || blockTrace.typeOfHit == RayTraceResult.Type.MISS) {
+                    val hitPos = entTrace.hitVec
+                    val entPos = entTrace.entityHit.positionVector
+                    val whoKnows = entPos.subtract(hitPos).normalize()
+                    entTrace.entityHit.setVelocity(-whoKnows.x, -whoKnows.y, -whoKnows.z)
+                    hitPos
+                } else { blockTrace.hitVec }
+
+            } else { blockTrace?.hitVec }
+
+            if (worldIn.isRemote && effectsEndPoint != null){
+                worldIn.spawnParticle(EnumParticleTypes.CRIT,
+                        effectsEndPoint.x, effectsEndPoint.y, effectsEndPoint.z,
+                        0.0, 0.0, 0.0
+                )
+            }
+
         } else {
             // Precise Mode Toggle
             val preciseMode = stack.tagCompound!!.getBoolean("preciseMode")
