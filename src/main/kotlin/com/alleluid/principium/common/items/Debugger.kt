@@ -2,6 +2,9 @@ package com.alleluid.principium.common.items
 
 import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.inventory.EntityEquipmentSlot
+import net.minecraft.item.ItemStack
+import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -21,6 +24,12 @@ object Debugger : BaseItem("debugger"){
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
+    }
+
+    override fun onItemRightClick(worldIn: World, playerIn: EntityPlayer, handIn: EnumHand): ActionResult<ItemStack> {
+        if (handIn == EnumHand.OFF_HAND)
+            println(this.getAttributeModifiers(EntityEquipmentSlot.MAINHAND, playerIn.heldItemMainhand))
+        return super.onItemRightClick(worldIn, playerIn, handIn)
     }
 
 }
