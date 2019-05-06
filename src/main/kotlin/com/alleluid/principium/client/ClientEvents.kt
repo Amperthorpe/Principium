@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
 import net.minecraft.util.EnumHand
 import net.minecraftforge.client.event.MouseEvent
+import net.minecraftforge.client.event.RenderTooltipEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
@@ -41,5 +42,15 @@ object ClientHandler {
             }
         }
 
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    fun onTooltipEvent(event: RenderTooltipEvent){
+        when (event.stack.item){
+            is LaserDrill -> {
+                event.lines.add("test")
+            }
+        }
     }
 }
