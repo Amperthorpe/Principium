@@ -164,7 +164,7 @@ object LaserDrill : BaseItem("laser_drill") {
             }
 
             if (worldIn.isRemote && effectsEndPoint != null) {
-                if (entTrace != null && (blockTrace == null || blockTrace.typeOfHit == RayTraceResult.Type.MISS)) {
+                if (entTrace != null && entTrace.typeOfHit == RayTraceResult.Type.ENTITY && (blockTrace == null || blockTrace.typeOfHit == RayTraceResult.Type.MISS)) {
                     for (i in 0..50) {
                         worldIn.spawnParticle(EnumParticleTypes.FLAME,
                                 entTrace.entityHit.posX,
@@ -177,15 +177,16 @@ object LaserDrill : BaseItem("laser_drill") {
                     }
                 }
                 for (i in 1..(eyePos.distanceTo(effectsEndPoint) * 5).toInt()) {
-                    val lookEye = look.add(eyePos.subtract(0.0, 1.0, 0.0))
-                    worldIn.spawnParticle(EnumParticleTypes.SPELL,
+//                    val lookEye = look.add(eyePos.subtract(0.0, 1.0, 0.0))
+                    val lookEye = look
+                    worldIn.spawnParticle(EnumParticleTypes.END_ROD,
                             true,
                             lookEye.x + (i / 5 * look.x),
                             lookEye.y + (i / 5 * look.y),
                             lookEye.z + (i / 5 * look.z),
-                            worldIn.rand.nextGaussian() * 0.1,
-                            worldIn.rand.nextGaussian() * 0.1,
-                            worldIn.rand.nextGaussian() * 0.1
+                            worldIn.rand.nextGaussian() * (0.1 * look.x),
+                            worldIn.rand.nextGaussian() * (0.1 * look.y),
+                            worldIn.rand.nextGaussian() * (0.1 * look.z)
                     )
                 }
             }
