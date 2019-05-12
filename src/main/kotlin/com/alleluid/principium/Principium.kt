@@ -70,10 +70,6 @@ object PrincipiumMod {
     @JvmStatic
     val principicToolMaterial =  EnumHelper.addToolMaterial(
             "PRINCIPIC", 10, -1, 20f, 10f, 1)!!
-
-    @JvmStatic
-    val inertToolMaterial =  EnumHelper.addToolMaterial(
-            "INERT", 10, -1, 0f, 0f, 0)!!
 }
 
 

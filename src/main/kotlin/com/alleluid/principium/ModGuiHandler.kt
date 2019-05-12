@@ -27,7 +27,6 @@ class ModGuiHandler : IGuiHandler{
             ModGuiID.PEDESTAL -> GuiPedestal(getServerGuiElement(ID, player, world, x, y, z)!!, player.inventory)
             ModGuiID.SMELTER -> GuiSmelter(getServerGuiElement(ID, player, world, x, y, z)!!, player.inventory)
             ModGuiID.BOX -> GuiBox(getServerGuiElement(ID, player, world, x, y, z)!!, player.inventory)
-            else -> null
         }
     }
 
@@ -36,7 +35,6 @@ class ModGuiHandler : IGuiHandler{
             ModGuiID.PEDESTAL -> ContainerPedestal(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntityPedestal)
             ModGuiID.SMELTER -> ContainerSmelter(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntitySmelter)
             ModGuiID.BOX -> ContainerBox(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntityBox)
-            else -> null
         }
     }
 
