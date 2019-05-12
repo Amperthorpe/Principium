@@ -23,22 +23,20 @@ abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private 
 
     abstract override fun createTileEntity(world: World, state: IBlockState): TE?
 
-    fun getTileEntity(world: IBlockAccess, pos: BlockPos): TE {
-        val tile = world.getTileEntity(pos)
-        return  tile as TE
-    }
+    fun getTileEntity(world: IBlockAccess, pos: BlockPos): TE = world.getTileEntity(pos) as TE
+
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (guiID != null) {
+        return if (guiID != null) {
             if (!worldIn.isRemote) {
                 if (!playerIn.isSneaking) {
                     playerIn.openGui(PrincipiumMod.instance, guiID.ordinal, worldIn, pos.x, pos.y, pos.z)
                 } else {
                 }
             }
-            return true
+            true
         } else {
-            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
+            super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
         }
     }
 }

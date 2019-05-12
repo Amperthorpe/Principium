@@ -37,12 +37,14 @@ class GuiSmelter(val container: Container, private val playerInv: InventoryPlaye
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         val name = I18n.format( "${BlockSmelter.translationKey}.name")
-        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040)
-        fontRenderer.drawString(playerInv.displayName.unformattedText, 8, ySize - 94, 0x404040)
-        if (container is ContainerSmelter) {
-            val smelter: TileEntitySmelter = container.smelter
-            fontRenderer.drawString(energy.toString(), 20, ySize - 125, 0x404040)
-            fontRenderer.drawString(smelter.timer.toString(), 20, ySize - 135, 0x404040)
+        fontRenderer.run {
+            drawString(name, xSize / 2 - this.getStringWidth(name) / 2, 6, 0x404040)
+            drawString(playerInv.displayName.unformattedText, 8, ySize - 94, 0x404040)
+            if (container is ContainerSmelter) {
+                val smelter: TileEntitySmelter = container.smelter
+                drawString(energy.toString(), 20, ySize - 125, 0x404040)
+                drawString(smelter.timer.toString(), 20, ySize - 135, 0x404040)
+            }
         }
         super.drawGuiContainerForegroundLayer(mouseX, mouseY)
     }
