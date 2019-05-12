@@ -1,6 +1,7 @@
 package com.alleluid.principium.common.items
 
-import com.alleluid.principium.common.items.basic.ItemSubstruct
+import com.alleluid.principium.common.items.basic.ItemSubstructBasic
+import com.alleluid.principium.common.items.basic.Substructs
 import com.alleluid.principium.common.items.tools.DoublePick
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.tools.TransportRod
@@ -19,6 +20,7 @@ object ModItems{
 
     @JvmStatic
     fun registerItems(registry: IForgeRegistry<Item>){
+        // Register individuals
         registry.registerAll(
                 ingotPrincipic,
                 principitus,
@@ -29,9 +31,10 @@ object ModItems{
                 LaserDrill,
                 DoublePick,
                 longFallBoots,
-                ItemSubstruct,
                 WeaponPistol
         )
+        // Register variants TODO: figure out metadata maybe? It's not long for this world...
+        Substructs.variants.forEach { registry.register(it) }
     }
 
     @JvmStatic
@@ -45,8 +48,9 @@ object ModItems{
         LaserDrill.registerItemModel()
         DoublePick.registerItemModel()
         longFallBoots.registerItemModel()
-        ItemSubstruct.registerItemModel()
         WeaponPistol.registerItemModel()
+
+        Substructs.variants.forEach { it.registerItemModel() }
     }
 
     @JvmStatic

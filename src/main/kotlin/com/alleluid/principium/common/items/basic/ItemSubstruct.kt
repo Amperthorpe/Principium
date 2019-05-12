@@ -3,27 +3,19 @@ package com.alleluid.principium.common.items.basic
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.common.items.BaseItem
 
-object ItemSubstruct : BaseItem("substruct") {
-    init {
-        maxDamage = 0
-        hasSubtypes = true
-        setNoRepair()
-    }
+abstract class ItemSubstruct(suffix: String) : BaseItem("substruct_$suffix")
 
-    val variants: List<String> = listOf(
-            "basic",
-            "iron",
-            "golden",
-            "diamond"
+object ItemSubstructBasic : ItemSubstruct("basic")
+object ItemSubstructIron : ItemSubstruct("iron")
+object ItemSubstructGold : ItemSubstruct("golden")
+object ItemSubstructDiamond : ItemSubstruct("diamond")
+
+object Substructs {
+    @JvmStatic
+    val variants = listOf(
+            ItemSubstructBasic,
+            ItemSubstructIron,
+            ItemSubstructGold,
+            ItemSubstructDiamond
     )
-
-    override fun isDamageable() = false
-
-
-    override fun registerItemModel() {
-        var idx = 0
-        variants.forEach {
-            PrincipiumMod.proxy.registerItemRenderer(this, idx++, "${name}_$it")
-        }
-    }
 }

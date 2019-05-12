@@ -73,7 +73,7 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
             return when (slot) {
                 0 -> true
-                1 -> stack.item == ItemSubstruct
+                1 -> stack.item is ItemSubstruct
                 2 -> false
                 else -> false
             }
