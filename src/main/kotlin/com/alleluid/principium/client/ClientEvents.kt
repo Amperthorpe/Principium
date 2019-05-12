@@ -43,14 +43,4 @@ object ClientHandler {
         }
 
     }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    fun onTooltipEvent(event: RenderTooltipEvent){
-        when (event.stack.item){
-            is LaserDrill -> {
-                event.lines.add("test")
-            }
-        }
-    }
 }
