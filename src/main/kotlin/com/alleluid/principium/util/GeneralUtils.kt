@@ -84,20 +84,6 @@ fun Entity.setPositionAndRotationAndUpdate(x: Double, y: Double, z: Double) {
     this.setPositionAndRotationAndUpdate(x, y, z, this.rotationYaw, this.rotationPitch)
 }
 
-fun World.ifServer(func: () -> Any): Any {
-    return if (!this.isRemote)
-        func()
-    else
-        Unit
-}
-
-fun World.ifClient(func: () -> Any): Any {
-    return if (this.isRemote)
-        func()
-    else
-        Unit
-}
-
 fun replaceModifer(modMap: Multimap<String, AttributeModifier>, attribute: IAttribute, id: UUID, multi: Double) {
     // Get modifers for specified attribute
     val modifiers: Collection<AttributeModifier> = modMap[attribute.name]
