@@ -2,15 +2,12 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.*
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemPickaxe
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import com.alleluid.principium.GeneralUtils.Formatting as umf
@@ -18,17 +15,16 @@ import com.alleluid.principium.GeneralUtils.ifClient
 import com.alleluid.principium.GeneralUtils.replaceModifer
 import com.alleluid.principium.GeneralUtils.spawnParticleVec
 import com.alleluid.principium.common.items.BaseItem
+import com.alleluid.principium.util.BlockUtils
 import com.google.common.collect.Multimap
 import net.minecraft.block.BlockShulkerBox
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnumEnchantmentType
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
-import net.minecraft.entity.ai.attributes.IAttributeInstance
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Enchantments
 import net.minecraft.inventory.EntityEquipmentSlot
-import net.minecraft.item.Item
 import net.minecraft.tileentity.TileEntityShulkerBox
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.RayTraceResult
