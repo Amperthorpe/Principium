@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private val guiID: ModGuiID?, name_: String) : BaseBlock(material, name_) {
     init {
 
@@ -30,7 +31,7 @@ abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private 
         return if (guiID != null) {
             if (!worldIn.isRemote) {
                 if (!playerIn.isSneaking) {
-                    playerIn.openGui(PrincipiumMod.instance, guiID.ordinal, worldIn, pos.x, pos.y, pos.z)
+                    playerIn.openGui(PrincipiumMod, guiID.ordinal, worldIn, pos.x, pos.y, pos.z)
                 } else {
                 }
             }
