@@ -36,12 +36,12 @@ object PacketHandler {
 
 class ShootMessage(var toSend: Float = 0f) : IMessage {
 
-    override fun toBytes(buf: ByteBuf?) {
-        buf?.writeFloat(toSend)
+    override fun toBytes(buf: ByteBuf) {
+        buf.writeFloat(toSend)
     }
 
-    override fun fromBytes(buf: ByteBuf?) {
-        toSend = buf?.readFloat() ?: 0f
+    override fun fromBytes(buf: ByteBuf) {
+        toSend = buf.readFloat()
     }
 
     class ShootMessageHandler : IMessageHandler<ShootMessage, IMessage> {
@@ -76,19 +76,19 @@ class MineBlockMessage : IMessage {
 }
 
 class MachineSyncMessage(var energy: Int, var pos: BlockPos) : IMessage {
-    override fun toBytes(buf: ByteBuf?) {
-        buf?.writeInt(energy)
-        buf?.writeInt(pos.x)
-        buf?.writeInt(pos.y)
-        buf?.writeInt(pos.z)
+    override fun toBytes(buf: ByteBuf) {
+        buf.writeInt(energy)
+        buf.writeInt(pos.x)
+        buf.writeInt(pos.y)
+        buf.writeInt(pos.z)
 
     }
 
-    override fun fromBytes(buf: ByteBuf?) {
-        energy = buf?.readInt() ?: -2
-        val x = buf?.readInt() ?: 0
-        val y = buf?.readInt() ?: 0
-        val z = buf?.readInt() ?: 0
+    override fun fromBytes(buf: ByteBuf) {
+        energy = buf.readInt()
+        val x = buf.readInt()
+        val y = buf.readInt()
+        val z = buf.readInt()
 
         pos = BlockPos(x, y, z)
 
