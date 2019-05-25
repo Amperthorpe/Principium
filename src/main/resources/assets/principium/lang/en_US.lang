@@ -14,6 +14,16 @@ item.principium.transport_rod.name=§6Transport Rod
 item.principium.laser_drill.name=§6Laserizor
 item.principium.item_weapon_pistol.name=Weird Pistol
 
+# item info (tooltips)
+info.principium.laser_drill.lore1=This drill is the drill that will pierce the heavens!
+info.principium.laser_drill.info1=Left click to burst mine, right click is a laser blast.
+info.principium.laser_drill.info2=Shift right click will switch to Precise Mode.
+
+info.principium.debugger.lore1=Pay no attention to the item behind the curtain.
+
+info.principium.double_pick.info1=Will always mine the two blocks in front of you.
+info.principium.double_pick.info2=Sneak to mine normally.
+
 # blocks
 tile.principium.block_principic.name=§6Principic Block
 tile.principium.block_machine_base.name=Mechanism Block
@@ -23,6 +33,17 @@ tile.principium.block_pedestal.name=Pedestal
 tile.principium.block_egg.name=Weird Egg
 tile.principium.block_pillow.name=Pillow Block
 tile.principium.block_box.name=Storage Box
+
+# block info (tooltips)
+info.principium.block_pillow.lore1=IT'S SO FLUFFY
+info.principium.block_pillow.info1=Negates fall damage when landed on.
+
+# status
+status.principium.laser_drill.precise_mode=Precise Mode: %s
+
+status.principium.transport_rod.invalid_loc=§4Invalid Location
+status.principium.transport_rod.set_stored_pos="Set to %s, %s, %s"
+status.principium.transport_rod.target_not_sneaking="Players must be sneaking to teleport."
 
 # commands
 commands.principium.usage=/prin [nothing]
