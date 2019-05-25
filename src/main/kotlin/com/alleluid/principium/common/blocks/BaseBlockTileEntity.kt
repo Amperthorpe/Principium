@@ -14,9 +14,6 @@ import net.minecraft.world.World
 
 @Suppress("UNCHECKED_CAST")
 abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private val guiID: ModGuiID?, name_: String) : BaseBlock(material, name_) {
-    init {
-
-    }
 
     abstract val tileEntityClass: Class<TE>
 
