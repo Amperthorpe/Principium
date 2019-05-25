@@ -3,7 +3,6 @@ package com.alleluid.principium.common.items
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.util.Formatting
-import com.alleluid.principium.util.ITooltipped
 import com.alleluid.principium.util.LangType
 import com.alleluid.principium.util.langKey
 import net.minecraft.client.resources.I18n
