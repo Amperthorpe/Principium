@@ -1,9 +1,9 @@
 package com.alleluid.principium.common
 
 import com.alleluid.principium.MOD_ID
-import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.items.ModItems.longFallBoots
 import com.alleluid.principium.common.items.weapons.PrincipicSword
+import com.alleluid.principium.util.particleGroup
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
@@ -48,7 +48,7 @@ object CommonEvents {
                 if (health > 1.1){
                     event.target.attackEntityFrom(DamageSource.DRAGON_BREATH, health - 0.1f)
                     if (world.isRemote){
-                        GeneralUtils.particleGroup(world, EnumParticleTypes.CRIT_MAGIC, event.target)
+                        particleGroup(world, EnumParticleTypes.CRIT_MAGIC, event.target)
                     }
                 } else if (world.isRemote) {
                     world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, false,
