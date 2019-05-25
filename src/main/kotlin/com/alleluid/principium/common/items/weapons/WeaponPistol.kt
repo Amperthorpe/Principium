@@ -16,7 +16,7 @@ object WeaponPistol : BaseWeapon("item_weapon_pistol"){
 
     override fun onWeaponFire(worldIn: World, playerIn: EntityPlayer, enumHand: EnumHand, damage: Float): Boolean {
         return if (!worldIn.isRemote) {
-            val entityArrow = EntityBullet(worldIn, playerIn!!)
+            val entityArrow = EntityBullet(worldIn, playerIn)
             bullet = entityArrow
             entityArrow.shoot(playerIn, playerIn.rotationPitch + 0.1f, playerIn.rotationYaw, 0.0f, 5.0f, 0.1f)
             entityArrow.damage = damage.toDouble()
