@@ -1,7 +1,7 @@
 package com.alleluid.principium.common.blocks.counter
 
-import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.blocks.BaseBlockTileEntity
+import com.alleluid.principium.util.noTranslateMessage
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
@@ -20,7 +20,8 @@ object BlockCounter : BaseBlockTileEntity<TileEntityCounter>(Material.ROCK, null
             } else if (facing == EnumFacing.UP) {
                 tile.count++
             }
-            GeneralUtils.statusMessage("Count: ${tile.count}")
+            //Debug item, not bothering with translation
+            noTranslateMessage(playerIn, "Count: ${tile.count}", true)
         }
         return true
     }
