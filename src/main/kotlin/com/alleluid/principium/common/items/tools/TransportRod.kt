@@ -1,10 +1,10 @@
 package com.alleluid.principium.common.items.tools
 
-import com.alleluid.principium.GeneralUtils
-import com.alleluid.principium.GeneralUtils.setPositionAndRotationAndUpdate
-import com.alleluid.principium.GeneralUtils.ifServer
-import com.alleluid.principium.GeneralUtils.ifClient
 import com.alleluid.principium.common.items.BaseItem
+import com.alleluid.principium.util.checkHeadspace
+import com.alleluid.principium.util.particleGroup
+import com.alleluid.principium.util.setPositionAndRotationAndUpdate
+import com.alleluid.principium.util.statusMessage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -23,11 +23,11 @@ object TransportRod : BaseItem("transport_rod") {
 
     init {
         // Change index below before before adding/removing infoText lines.
-        loreText.add("Zzzvoop!")
-        infoText.add("Right click to teleport to the block you're looking at.")
-        infoText.add("Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space.")
-        infoText.add("Right click a block to teleport through it.")
-        infoText.add("Shift right click a block to set as destination. Left click entity to teleport them there.")
+        loreText.addNamedKey("lore1") //"Zzzvoop!"
+        infoText.addNamedKey("info1") //"Right click to teleport to the block you're looking at."
+        infoText.addNamedKey("info2", teleRange.toInt(), maxBlocksSearched) //"Range §f§l${teleRange.toInt()}§r§7. Will search upwards §f§l$maxBlocksSearched§r§7 blocks for a space."
+        infoText.addNamedKey("info3") //"Right click a block to teleport through it."
+        infoText.addNamedKey("info4") //"Shift right click a block to set as destination. Left click entity to teleport them there."
     }
 
     override fun getItemStackLimit(stack: ItemStack) = 1
@@ -44,19 +44,18 @@ object TransportRod : BaseItem("transport_rod") {
             for (i in 1..maxBlocksSearched) {
                 // Check two blocks to ensure no suffocation
                 val adjustedPos = BlockPos(pos.x, pos.y + i, pos.z)
-                if (GeneralUtils.checkHeadspace(worldIn, adjustedPos)) {
-                    worldIn.ifServer {
+                if (checkHeadspace(worldIn, adjustedPos)) {
+                    if (!worldIn.isRemote) {
                         playerIn.fallDistance = 0f
                         playerIn.setPositionAndRotationAndUpdate(adjustedPos.x + 0.5, adjustedPos.y.toDouble(), adjustedPos.z + 0.5)
-                    }
-                    worldIn.ifClient {
+                    } else {
 //                        playerIn.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, 1f)
                         worldIn.playSound(playerIn, adjustedPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
-                        GeneralUtils.particleGroup(worldIn, EnumParticleTypes.DRAGON_BREATH, adjustedPos.x, adjustedPos.y, adjustedPos.z, 0.5f)
+                        particleGroup(worldIn, EnumParticleTypes.DRAGON_BREATH, adjustedPos.x, adjustedPos.y, adjustedPos.z, 0.5f)
                     }
                     break
                 } else if (i >= maxBlocksSearched) {
-                    GeneralUtils.statusMessage("§4Invalid Location")
+                    statusMessage(playerIn, "status.principium.transport_rod.invalid_loc")
                 }
             }
         } else {
@@ -76,7 +75,7 @@ object TransportRod : BaseItem("transport_rod") {
                 EnumFacing.WEST -> BlockPos(pos.x + 1, pos.y, pos.z)
                 EnumFacing.EAST -> BlockPos(pos.x - 1, pos.y, pos.z)
             }
-            return if (GeneralUtils.checkHeadspace(worldIn, newPos)) {
+            return if (checkHeadspace(worldIn, newPos)) {
                 player.setPositionAndRotationAndUpdate(newPos.x + 0.5, newPos.y.toDouble(), newPos.z + 0.5)
                 worldIn.playSound(player, newPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
                 EnumActionResult.SUCCESS
@@ -86,7 +85,7 @@ object TransportRod : BaseItem("transport_rod") {
             }
         } else {
             player.getHeldItem(hand).tagCompound!!.setIntArray("storedPos", IntArray(0).plus(listOf(pos.x, pos.y + 1, pos.z)))
-            worldIn.ifClient { GeneralUtils.statusMessage("Set to ${pos.x}, ${pos.y + 1}, ${pos.z}") }
+            statusMessage(player, "status.principium.transport_rod.set_stored_pos", pos.x, pos.y+1, pos.z) // "Set to ${pos.x}, ${pos.y + 1}, ${pos.z}"
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
@@ -101,7 +100,7 @@ object TransportRod : BaseItem("transport_rod") {
 
     override fun onLeftClickEntity(stack: ItemStack, player: EntityPlayer, entity: Entity): Boolean {
         if (entity is EntityPlayer && !entity.isSneaking){
-            player.world.ifClient { GeneralUtils.statusMessage("Players must be sneaking to teleport.") }
+            statusMessage(player, "status.principium.transport_rod.target_not_sneaking") // "Players must be sneaking to teleport."
             return false
         } else if (entity is EntityLivingBase) {
             val array = stack.tagCompound!!.getIntArray("storedPos") ?: return false
