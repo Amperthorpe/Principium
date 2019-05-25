@@ -2,17 +2,16 @@ package com.alleluid.principium.common.items.tools
 
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
-import net.minecraft.block.state.IBlockState
+import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemPickaxe
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
+object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND){
     const val name = "double_pick"
 
     init {
@@ -22,8 +21,8 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND) {
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
-        tooltip.add("Always mines the two blocks in front of you.")
-        tooltip.add("Sneak to mine normally.")
+        tooltip.add(I18n.format("info.$MOD_ID.$name.info1"))
+        tooltip.add(I18n.format("info.$MOD_ID.$name.info2"))
     }
 
     fun registerItemModel() {
