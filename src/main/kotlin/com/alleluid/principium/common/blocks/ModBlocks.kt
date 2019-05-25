@@ -16,11 +16,10 @@ import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.registries.IForgeRegistry
-import com.alleluid.principium.GeneralUtils.Formatting as mcf
 
 object ModBlocks {
 
-    object blockPrincipic : BaseBlock(Material.GLASS, "block_principic") {
+    object BlockPrincipic : BaseBlock(Material.GLASS, "block_principic") {
         init {
             lightValue = 15
             blockHardness = 0.3f
@@ -29,15 +28,15 @@ object ModBlocks {
         }
     }
 
-    val blockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
+    val BlockMachineBase = BaseBlock(Material.IRON, "block_machine_base")
 
 
     @JvmStatic
     fun register(registry: IForgeRegistry<Block>) {
         registry.registerAll(
-                blockMachineBase,
+                BlockMachineBase,
                 BlockEgg,
-                blockPrincipic,
+                BlockPrincipic,
                 FramedGlowBlock,
                 BlockCounter,
                 BlockPedestal,
@@ -52,9 +51,9 @@ object ModBlocks {
     @JvmStatic
     fun registerItemBlocks(registry: IForgeRegistry<Item>) {
         registry.registerAll(
-                blockMachineBase.createItemBlock(),
+                BlockMachineBase.createItemBlock(),
                 BlockEgg.createItemBlock(),
-                blockPrincipic.createItemBlock(),
+                BlockPrincipic.createItemBlock(),
                 FramedGlowBlock.createItemBlock(),
                 BlockCounter.createItemBlock(),
                 BlockPedestal.createItemBlock(),
@@ -66,9 +65,9 @@ object ModBlocks {
 
     @JvmStatic
     fun registerModels() {
-        blockMachineBase.registerItemModel()
+        BlockMachineBase.registerItemModel()
         BlockEgg.registerItemModel()
-        blockPrincipic.registerItemModel()
+        BlockPrincipic.registerItemModel()
         FramedGlowBlock.registerItemModel()
         BlockCounter.registerItemModel()
         BlockPedestal.registerItemModel()
@@ -89,6 +88,6 @@ object ModBlocks {
 
     @JvmStatic
     fun registerOreDict(){
-        blockPrincipic.initOreDict("blockPrincipic")
+        BlockPrincipic.initOreDict("blockPrincipic")
     }
 }
