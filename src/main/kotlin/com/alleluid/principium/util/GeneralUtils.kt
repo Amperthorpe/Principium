@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.Vec3d
 import com.google.common.collect.Multimap
+import net.minecraft.util.text.TextComponentString
 import net.minecraft.util.text.TextComponentTranslation
 import java.util.*
 
@@ -21,6 +22,13 @@ fun statusMessage(player: EntityPlayer, key: String, vararg args: Any) {
 fun chatMessage(player: EntityPlayer, key: String, vararg args: Any) {
     if (player.world.isRemote){
         player.sendStatusMessage(TextComponentTranslation(key, args), false)
+    }
+}
+
+@Deprecated("Replace with translation status!")
+fun noTranslateMessage(player: EntityPlayer, msg: String, isStatus: Boolean){
+    if (player.world.isRemote){
+        player.sendStatusMessage(TextComponentString(msg), isStatus)
     }
 }
 

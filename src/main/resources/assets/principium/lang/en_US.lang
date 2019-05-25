@@ -24,6 +24,18 @@ info.principium.debugger.lore1=Pay no attention to the item behind the curtain.
 info.principium.double_pick.info1=Will always mine the two blocks in front of you.
 info.principium.double_pick.info2=Sneak to mine normally.
 
+item.principium.transport_rod.lore1=Zzzvoop!
+item.principium.transport_rod.info1=Right click to teleport to the block you're looking at.
+item.principium.transport_rod.info2=Range §f§l%s§r§7. Will search upwards §f§l%s§r§7 blocks for a space.
+item.principium.transport_rod.info3=Right click a block to teleport through it.
+item.principium.transport_rod.info4=Shift right click a block to set as destination. Left click entity to teleport them there.
+
+item.principium.sword_principic.lore1=The strong will be made weak, and the weak shall bow before me.
+item.principium.sword_principic.info1=Damages to half a heart, but won't kill.
+
+item.principium.long_fall_boots.lore1=We do what we must because we can.
+item.principium.long_fall_boots.info1=Negates fall damage.
+
 # blocks
 tile.principium.block_principic.name=§6Principic Block
 tile.principium.block_machine_base.name=Mechanism Block
@@ -37,6 +49,7 @@ tile.principium.block_box.name=Storage Box
 # block info (tooltips)
 info.principium.block_pillow.lore1=IT'S SO FLUFFY
 info.principium.block_pillow.info1=Negates fall damage when landed on.
+info.principium.block_box.info1=Two chests in one full size block
 
 # status
 status.principium.laser_drill.precise_mode=Precise Mode: %s
