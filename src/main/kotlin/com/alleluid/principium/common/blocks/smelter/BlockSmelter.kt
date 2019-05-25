@@ -1,8 +1,8 @@
 package com.alleluid.principium.common.blocks.smelter
 
 import com.alleluid.principium.ModGuiID
-import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.blocks.BaseBlockTileEntity
+import com.alleluid.principium.util.noTranslateMessage
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
@@ -43,7 +43,7 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, ModG
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        GeneralUtils.chatMessage("Rem: ${worldIn.isRemote} | Tile energy: ${getTileEntity(worldIn, pos).energy}")
+        noTranslateMessage(playerIn, "Rem: ${worldIn.isRemote} | Tile energy: ${getTileEntity(worldIn, pos).energy}", false)
 //        worldIn.ifServer {PacketHandler.INSTANCE.sendToAllAround(MachineSyncMessage(getTileEntity(worldIn, pos).energy, pos),
 //                NetworkRegistry.TargetPoint(playerIn.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 2.0))}
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
