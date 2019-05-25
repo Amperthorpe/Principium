@@ -3,6 +3,7 @@ package com.alleluid.principium.client
 import com.alleluid.principium.*
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.weapons.BaseWeapon
+import com.alleluid.principium.util.statusMessage
 import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
 import net.minecraft.util.EnumHand
@@ -26,7 +27,7 @@ object ClientHandler {
                 is BaseWeapon -> {
                     if (event.button == 0 && event.isButtonstate) {
                         val count = mc.player.inventory.getStackInSlot(0).count
-                        GeneralUtils.statusMessage(count.toString())
+                        statusMessage(mc.player, count.toString())
                         PacketHandler.INSTANCE.sendToServer(ShootMessage(count.toFloat()))
                         event.isCanceled = true
                     }
