@@ -68,12 +68,12 @@ object TransportRod : BaseItem("transport_rod") {
         didAltTeleport = true
         if (!player.isSneaking) {
             val newPos = when (facing) {
-                EnumFacing.DOWN -> BlockPos(pos.x, pos.y + 1, pos.z)
-                EnumFacing.UP -> BlockPos(pos.x, pos.y - 2, pos.z) // -2 to allow for head room
+                EnumFacing.DOWN  -> BlockPos(pos.x, pos.y + 1, pos.z)
+                EnumFacing.UP    -> BlockPos(pos.x, pos.y - 2, pos.z) // -2 to allow for head room
                 EnumFacing.NORTH -> BlockPos(pos.x, pos.y, pos.z + 1)
                 EnumFacing.SOUTH -> BlockPos(pos.x, pos.y, pos.z - 1)
-                EnumFacing.WEST -> BlockPos(pos.x + 1, pos.y, pos.z)
-                EnumFacing.EAST -> BlockPos(pos.x - 1, pos.y, pos.z)
+                EnumFacing.WEST  -> BlockPos(pos.x + 1, pos.y, pos.z)
+                EnumFacing.EAST  -> BlockPos(pos.x - 1, pos.y, pos.z)
             }
             return if (worldIn.getBlockState(pos).getBlockHardness(worldIn, pos) >= 0 && checkHeadspace(worldIn, newPos)) {
                 player.setPositionAndRotationAndUpdate(newPos.x + 0.5, newPos.y.toDouble(), newPos.z + 0.5)
