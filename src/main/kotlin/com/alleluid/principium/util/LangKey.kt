@@ -6,9 +6,13 @@ fun langKey(type: LangType, key: String): String {
     return "$type.$MOD_ID.$key"
 }
 
-enum class LangType(typeStr: String){
-    INFO("info"),
-    STATUS("status"),
-    CHAT("chat"),
-    GUI("gui")
+enum class LangType{
+    INFO,
+    STATUS,
+    CHAT,
+    GUI;
+
+    override fun toString(): String {
+        return super.toString().toLowerCase()
+    }
 }
