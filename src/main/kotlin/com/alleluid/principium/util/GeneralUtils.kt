@@ -12,15 +12,15 @@ import com.google.common.collect.Multimap
 import net.minecraft.util.text.TextComponentTranslation
 import java.util.*
 
-fun statusMessage(player: EntityPlayer, key: String) {
+fun statusMessage(player: EntityPlayer, key: String, vararg args: Any) {
     if (player.world.isRemote){
-        player.sendStatusMessage(TextComponentTranslation(key), true)
+        player.sendStatusMessage(TextComponentTranslation(key, args), true)
     }
 }
 
-fun chatMessage(player: EntityPlayer, key: String) {
+fun chatMessage(player: EntityPlayer, key: String, vararg args: Any) {
     if (player.world.isRemote){
-        player.sendStatusMessage(TextComponentTranslation(key), false)
+        player.sendStatusMessage(TextComponentTranslation(key, args), false)
     }
 }
 
