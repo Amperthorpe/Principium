@@ -3,6 +3,7 @@ package com.alleluid.principium.common.items
 import com.alleluid.principium.MOD_ID
 import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.util.Formatting
+import com.alleluid.principium.util.ITooltipped
 import com.alleluid.principium.util.LangType
 import com.alleluid.principium.util.langKey
 import net.minecraft.client.resources.I18n
@@ -20,12 +21,8 @@ open class BaseItem(val name: String): Item(){
         creativeTab = PrincipiumMod.creativeTab
     }
 
-    internal val loreText: MutableList<String> = mutableListOf()
-    internal val infoText: MutableList<String> = mutableListOf()
-    // Adds string as key already fully qualified as type.mod_id.name.
-    fun MutableList<String>.addNamedKey(key: String){
-        this.add(I18n.format(langKey(LangType.INFO, "$name.$key")))
-    }
+    val loreText = mutableListOf<String>()
+    val infoText = mutableListOf<String>()
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         this.loreText.forEach { tooltip.add(Formatting.LORE + it + Formatting.RESET) }
@@ -33,6 +30,11 @@ open class BaseItem(val name: String): Item(){
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }
 
+
+    // Adds string as key already fully qualified as type.mod_id.name.
+    fun MutableList<String>.addNamedKey(key: String){
+        this.add(I18n.format(langKey(LangType.INFO, "$name.$key")))
+    }
 
     open fun registerItemModel() {
         PrincipiumMod.proxy.registerItemRenderer(this, 0, name)
