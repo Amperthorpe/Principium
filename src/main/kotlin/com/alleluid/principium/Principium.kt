@@ -1,7 +1,6 @@
 package com.alleluid.principium
 
 import com.alleluid.principium.client.PrincipiumTab
-import com.alleluid.principium.client.render.RenderBullet
 import com.alleluid.principium.common.blocks.ModBlocks
 import com.alleluid.principium.common.commands.myCommand
 import com.alleluid.principium.common.entities.EntityBullet
@@ -23,7 +22,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
-import kotlin.reflect.jvm.javaMethod
 
 const val MOD_ID = "principium"
 const val MOD_NAME = "Principium"
