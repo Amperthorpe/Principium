@@ -10,12 +10,9 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import com.alleluid.principium.GeneralUtils.Formatting as umf
-import com.alleluid.principium.GeneralUtils.ifClient
-import com.alleluid.principium.GeneralUtils.replaceModifer
-import com.alleluid.principium.GeneralUtils.spawnParticleVec
+import com.alleluid.principium.util.Formatting as umf
 import com.alleluid.principium.common.items.BaseItem
-import com.alleluid.principium.util.BlockUtils
+import com.alleluid.principium.util.*
 import com.google.common.collect.Multimap
 import net.minecraft.block.BlockShulkerBox
 import net.minecraft.enchantment.Enchantment
@@ -36,9 +33,9 @@ object LaserDrill : BaseItem("laser_drill") {
     private const val weaponTraceDist = 100.0
 
     init {
-        loreText.add("This drill is the drill that will pierce the heavens!")
-        infoText.add("Left click to burst mine, right click is a laser blast.")
-        infoText.add("Shift right click will switch to Precise Mode.")
+        loreText.addNamedKey("lore1") // "This drill is the drill that will pierce the heavens!"
+        infoText.addNamedKey("info1") // "Left click to burst mine, right click is a laser blast."
+        infoText.addNamedKey("info2") // "Shift right click will switch to Precise Mode."
         infoText.add("")
     }
 
@@ -97,7 +94,7 @@ object LaserDrill : BaseItem("laser_drill") {
             }
         }
         val dropsList: MutableList<ItemStack> = mutableListOf()
-        if (BlockUtils.canBlockBeBroken(worldIn, playerIn, pos)) {
+        if (canBlockBeBroken(worldIn, playerIn, pos)) {
             val state = worldIn.getBlockState(pos)
             val block = state.block
 
@@ -111,7 +108,7 @@ object LaserDrill : BaseItem("laser_drill") {
             } else if (isSilky && block.canSilkHarvest(worldIn, pos, worldIn.getBlockState(pos), playerIn)) {
                 dropsList.add(block.getPickBlock(worldIn.getBlockState(pos), raytrace, worldIn, pos, playerIn))
             } else {
-                dropsList.addAll(BlockUtils.getBlockDrops(worldIn, playerIn, pos, fortuneLvl))
+                dropsList.addAll(getBlockDrops(worldIn, playerIn, pos, fortuneLvl))
             }
 
             for (item in dropsList) {
@@ -191,7 +188,8 @@ object LaserDrill : BaseItem("laser_drill") {
             // Precise Mode Toggle
             val preciseMode = stack.tagCompound!!.getBoolean("preciseMode")
             stack.tagCompound!!.setBoolean("preciseMode", !preciseMode)
-            worldIn.ifClient { GeneralUtils.statusMessage("preciseMode: ${!preciseMode}") }
+            statusMessage(playerIn, langKey(LangType.STATUS, "laser_drill.precise_mode"), !preciseMode)
+            //"preciseMode: ${!preciseMode}"
         }
         return super.onItemRightClick(worldIn, playerIn, handIn)
     }
