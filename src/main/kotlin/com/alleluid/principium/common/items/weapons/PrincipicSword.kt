@@ -1,19 +1,18 @@
 package com.alleluid.principium.common.items.weapons
 
-import com.alleluid.principium.GeneralUtils
 import com.alleluid.principium.common.items.BaseItem
+import com.alleluid.principium.util.statusMessage
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
-import com.alleluid.principium.GeneralUtils.Formatting as ufm
 
 
 object PrincipicSword : BaseItem("sword_principic") {
     init {
-        loreText.add("The strong will be made weak, and the weak shall bow before me.")
-        infoText.add("Damages to half a heart, but won't kill.")
+        loreText.addNamedKey("lore1") //The strong will be made weak, and the weak shall bow before me.
+        infoText.addNamedKey("info1") //Damages to half a heart, but won't kill.
 
     }
 
@@ -22,7 +21,7 @@ object PrincipicSword : BaseItem("sword_principic") {
     }
 
     override fun itemInteractionForEntity(stack: ItemStack, playerIn: EntityPlayer, target: EntityLivingBase, hand: EnumHand): Boolean {
-        if (!playerIn.world.isRemote) GeneralUtils.statusMessage(target.health.toString())
+        statusMessage(playerIn, target.health.toString())
         return super.itemInteractionForEntity(stack, playerIn, target, hand)
     }
 }
