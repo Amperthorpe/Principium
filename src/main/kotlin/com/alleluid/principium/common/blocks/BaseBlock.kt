@@ -6,6 +6,7 @@ import com.alleluid.principium.GeneralUtils.Formatting
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
@@ -29,6 +30,12 @@ open class BaseBlock(material: Material, val name: String): Block(material){
         this.infoText.forEach { tooltip.add(it) }
         super.addInformation(stack, worldIn, tooltip, flagIn)
     }
+
+        // Adds string as key already fully qualified as type.mod_id.name.
+    fun MutableList<String>.addNamedKey(key: String){
+        this.add(I18n.format(langKey(LangType.INFO, "$name.$key")))
+    }
+
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item {
         return Item.getItemFromBlock(this)
