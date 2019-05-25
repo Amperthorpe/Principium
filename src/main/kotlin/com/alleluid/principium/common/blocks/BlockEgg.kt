@@ -1,6 +1,5 @@
 package com.alleluid.principium.common.blocks
 
-import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
@@ -20,6 +19,7 @@ object BlockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg") {
     private val WEIRD_EGG_AABB = AxisAlignedBB(0.0625, 0.0, 0.0625, 0.9375, 1.0, 0.9375)
     init {
         loreText.add("¯\\_(ツ)_/¯")
+        // Shrugs need no translation
     }
 
     override fun causesSuffocation(state: IBlockState) = false
@@ -37,7 +37,7 @@ object BlockEgg : BaseBlock(Material.DRAGON_EGG, "block_egg") {
             if (worldIn.isAirBlock(it)){
                 worldIn.setBlockState(it, this.defaultState)
 
-                worldIn.ifClient {
+                if (worldIn.isRemote) {
                     worldIn.spawnParticle(EnumParticleTypes.HEART, false, it.x.toDouble(), it.y.toDouble(), it.z.toDouble(), 0.0, 0.0, 0.0)
                     playerIn.playSound(SoundEvents.BLOCK_STONE_PLACE, 1f, 1f)
                 }
