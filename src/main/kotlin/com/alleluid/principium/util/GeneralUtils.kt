@@ -4,27 +4,25 @@ import net.minecraft.entity.Entity
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
-import net.minecraftforge.event.world.BlockEvent
-import net.minecraft.util.NonNullList
-import net.minecraft.item.ItemStack
 import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.ai.attributes.IAttribute
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.Vec3d
 import com.google.common.collect.Multimap
+import net.minecraft.util.text.TextComponentTranslation
 import java.util.*
 
-
-fun statusMessage(player: EntityPlayer, key: String, ) {
+fun statusMessage(player: EntityPlayer, key: String) {
+    if (player.world.isRemote){
+        player.sendStatusMessage(TextComponentTranslation(key), true)
+    }
 }
 
-fun chatMessage(msg: String) = statusMessage(msg, false)
-
-fun TODO(reason: String) {
-    chatMessage("TODO: $reason")
+fun chatMessage(player: EntityPlayer, key: String) {
+    if (player.world.isRemote){
+        player.sendStatusMessage(TextComponentTranslation(key), false)
+    }
 }
-
 
 fun checkHeadspace(world: World, pos: BlockPos): Boolean {
     return world.isAirBlock(pos) && world.isAirBlock(pos.up())
