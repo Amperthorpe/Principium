@@ -75,7 +75,7 @@ object TransportRod : BaseItem("transport_rod") {
                 EnumFacing.WEST -> BlockPos(pos.x + 1, pos.y, pos.z)
                 EnumFacing.EAST -> BlockPos(pos.x - 1, pos.y, pos.z)
             }
-            return if (checkHeadspace(worldIn, newPos)) {
+            return if (worldIn.getBlockState(pos).getBlockHardness(worldIn, pos) >= 0 && checkHeadspace(worldIn, newPos)) {
                 player.setPositionAndRotationAndUpdate(newPos.x + 0.5, newPos.y.toDouble(), newPos.z + 0.5)
                 worldIn.playSound(player, newPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
                 EnumActionResult.SUCCESS
