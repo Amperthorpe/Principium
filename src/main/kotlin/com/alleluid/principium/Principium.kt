@@ -60,10 +60,6 @@ object PrincipiumMod {
             clientSide = "com.alleluid.principium.proxy.ClientProxy")
     var proxy = CommonProxy()
 
-
-    @Mod.Instance
-    var instance = PrincipiumMod
-
     @JvmStatic
     var creativeTab = PrincipiumTab
 
