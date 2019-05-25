@@ -1,6 +1,5 @@
 package com.alleluid.principium.common.items
 
-import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemStack
@@ -13,14 +12,13 @@ import net.minecraft.world.World
 
 object Debugger : BaseItem("debugger"){
     init {
-        loreText.add("Pay no attention to the item behind the curtain")
+        loreText.addNamedKey("lore1") // "Pay no attention to the item behind the curtain"
     }
 
     override fun onItemUse(player: EntityPlayer, worldIn: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
-        worldIn.ifClient {
-            val te = worldIn.getTileEntity(pos) ?: return@ifClient Unit
-            println(te.tileData.toString())
-            Unit
+        if (worldIn.isRemote) {
+            val te = worldIn.getTileEntity(pos)
+            println(te?.tileData.toString())
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
