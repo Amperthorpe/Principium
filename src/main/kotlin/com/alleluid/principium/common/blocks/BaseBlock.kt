@@ -34,8 +34,8 @@ open class BaseBlock(material: Material, val name: String): Block(material){
     }
 
         // Adds string as key already fully qualified as type.mod_id.name.
-    fun MutableList<String>.addNamedKey(key: String){
-        this.add(I18n.format(langKey(LangType.INFO, "$name.$key")))
+    fun MutableList<String>.addNamedKey(key: String, vararg args: Any){
+        this.add(I18n.format(langKey(LangType.INFO, "$name.$key"), args))
     }
 
 
