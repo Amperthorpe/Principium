@@ -1,7 +1,6 @@
 package com.alleluid.principium.common
 
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
-import com.alleluid.principium.GeneralUtils.ifClient
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
@@ -27,7 +26,6 @@ abstract class BaseContainer(val playerInv: InventoryPlayer, val TEInv: BaseInve
     }
 
     override fun transferStackInSlot(playerIn: EntityPlayer, index: Int): ItemStack {
-        playerIn.world.ifClient { println(index) }
         var itemstackCopy = ItemStack.EMPTY
         val slot = inventorySlots[index]
 
