@@ -28,7 +28,7 @@ abstract class BaseBlockTileEntity<TE : TileEntity>(material: Material, private 
 
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        return if (guiID != null) {
+        return if (guiID != null && worldIn.isBlockModifiable(playerIn, pos)) {
             if (!worldIn.isRemote) {
                 if (!playerIn.isSneaking) {
                     playerIn.openGui(PrincipiumMod, guiID.ordinal, worldIn, pos.x, pos.y, pos.z)

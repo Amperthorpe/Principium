@@ -11,7 +11,10 @@ import net.minecraftforge.event.world.BlockEvent
 
 fun canBlockBeBroken(world: World, player: EntityPlayer, pos: BlockPos): Boolean {
     val state = world.getBlockState(pos)
-    if (world.isAirBlock(pos) || state.block.getBlockHardness(state, world, pos) < 0) return false
+    if (world.isAirBlock(pos)
+            || state.block.getBlockHardness(state, world, pos) < 0
+            || !world.isBlockModifiable(player, pos)
+    ) return false
     val event = BlockEvent.BreakEvent(world, pos, world.getBlockState(pos), player)
     MinecraftForge.EVENT_BUS.post(event)
     return !event.isCanceled

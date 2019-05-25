@@ -33,8 +33,8 @@ object DoublePick : ItemPickaxe(ToolMaterial.DIAMOND){
         if (!player.isSneaking) {
             val secondPos = if (player.position.y < pos.y) pos.down() else pos.up()
             val state = player.world.getBlockState(secondPos)
-            if (state.getBlockHardness(player.world, pos) >= 0 && player.canHarvestBlock(state))
-                if (player.world.destroyBlock(secondPos, true))
+            if (state.getBlockHardness(player.world, pos) >= 0 && player.world.isBlockModifiable(player, pos) && player.canHarvestBlock(state))
+                if (player.world.isBlockModifiable(player, secondPos) && player.world.destroyBlock(secondPos, true))
                     itemstack.damageItem(1, player)
         }
         return super.onBlockStartBreak(itemstack, pos, player)
