@@ -12,7 +12,10 @@ import net.minecraft.util.NonNullList
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class ContainerSmelter(player: EntityPlayer, val smelter: TileEntitySmelter) : BaseContainer(player.inventory, smelter) {
+class ContainerSmelter(val player: EntityPlayer, val smelter: TileEntitySmelter) : BaseContainer(player.inventory, smelter) {
+    val energy
+        get() = smelter.energyStored
+
     init {
         val inventory = smelter.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         addSlotToContainer(object : SlotItemHandler(inventory, 0, 77, 20) {
@@ -32,8 +35,6 @@ class ContainerSmelter(player: EntityPlayer, val smelter: TileEntitySmelter) : B
         })
 
         playerInventorySetup(0, 0)
-
-
 
     }
 
