@@ -1,6 +1,5 @@
 package com.alleluid.principium.common.items.basic
 
-import com.alleluid.principium.PrincipiumMod
 import com.alleluid.principium.common.items.BaseItem
 
 abstract class ItemSubstruct(suffix: String) : BaseItem("substruct_$suffix")

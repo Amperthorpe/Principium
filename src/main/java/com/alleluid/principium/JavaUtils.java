@@ -12,7 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class JavaUtils {
+    @SuppressWarnings("UnusedReturnValue")
     @Nullable
     public static RayTraceResult getEntityIntercept(World world, EntityPlayer player,
                                             Vec3d start, Vec3d look, Vec3d end,
@@ -36,7 +38,7 @@ public class JavaUtils {
         List<Entity> list = world.getEntitiesInAABBexcluding(player,
                 player.getEntityBoundingBox()
                         .expand(direction.x, direction.y, direction.z)
-                        .grow(1.0, 1.0, 1.0), Predicates.and(EntitySelectors.NOT_SPECTATING,
+                        .grow(1.0, 1.0, 1.0), Predicates.and(EntitySelectors.NOT_SPECTATING::apply,
                         Entity::canBeCollidedWith));
 
         double distanceToEntity = distance;

@@ -19,7 +19,7 @@ val myCommand  = object : CommandBase(){
     override fun getUsage(sender: ICommandSender): String = "commands.principium.usage"
 
     override fun getTabCompletions(server: MinecraftServer, sender: ICommandSender, args: Array<String>, targetPos: BlockPos?): MutableList<String> {
-        return if (args.size == 1) CommandBase.getListOfStringsMatchingLastWord(args, *server.onlinePlayerNames) else mutableListOf()
+        return if (args.size == 1) getListOfStringsMatchingLastWord(args, *server.onlinePlayerNames) else mutableListOf()
     }
 
 }

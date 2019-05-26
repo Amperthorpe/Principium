@@ -100,6 +100,7 @@ object LaserDrill : BaseItem("laser_drill") {
 
             // Special handling for shulker boxes; add to drops then ensure no dropping as item
             if (block is BlockShulkerBox) {
+                @Suppress("DEPRECATION")
                 dropsList.add(block.getItem(worldIn, pos, state))
                 val shulker = worldIn.getTileEntity(pos) as TileEntityShulkerBox
                 shulker.isDestroyedByCreativePlayer = true
@@ -171,12 +172,11 @@ object LaserDrill : BaseItem("laser_drill") {
                 }
                 for (i in 1..(eyePos.distanceTo(effectsEndPoint) * 5).toInt()) {
 //                    val lookEye = look.add(eyePos.subtract(0.0, 1.0, 0.0))
-                    val lookEye = look
                     worldIn.spawnParticle(EnumParticleTypes.END_ROD,
                             true,
-                            lookEye.x + (i / 5 * look.x),
-                            lookEye.y + (i / 5 * look.y),
-                            lookEye.z + (i / 5 * look.z),
+                            look.x + (i / 5 * look.x),
+                            look.y + (i / 5 * look.y),
+                            look.z + (i / 5 * look.z),
                             worldIn.rand.nextGaussian() * (0.1 * look.x),
                             worldIn.rand.nextGaussian() * (0.1 * look.y),
                             worldIn.rand.nextGaussian() * (0.1 * look.z)

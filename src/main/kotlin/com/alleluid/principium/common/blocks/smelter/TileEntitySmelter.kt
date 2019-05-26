@@ -1,7 +1,6 @@
 package com.alleluid.principium.common.blocks.smelter
 
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
-import com.alleluid.principium.common.items.ModItems
 import com.alleluid.principium.common.items.basic.ItemSubstruct
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -11,9 +10,9 @@ import net.minecraftforge.items.ItemStackHandler
 
 class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable, IEnergyStorage
 {
-    val SLOT_INPUT = 0
-    val SLOT_FUEL = 1
-    val SLOT_OUTPUT = 2
+    val slotInput = 0
+    val slotFuel = 1
+    val slotOutput = 2
 
     var energy = 0
     val capacity = 100_000
@@ -47,7 +46,7 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
     var timer = 0
     override fun update() {
-        val fuel = inventory.getStackInSlot(SLOT_FUEL)
+        val fuel = inventory.getStackInSlot(slotFuel)
         if (world.totalWorldTime % 20 == 0L && !fuel.isEmpty){
             if (receiveEnergy(1000, false) > 0){
                 if (!world.isRemote)
@@ -56,7 +55,7 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         }
 
 //        val fuelValue = 100
-//        val fuel = inventory.getStackInSlot(SLOT_FUEL)
+//        val fuel = inventory.getStackInSlot(slotFuel)
 //        if (!fuel.isEmpty && fuel.item == ModItems.ItemSubstruct && energy + fuelValue < maxEnergyStored){
 //            val quotient = (fuel.count * fuelValue) / maxEnergyStored
 //            receiveEnergy(fuelValue * quotient, false)

@@ -1,6 +1,5 @@
 package com.alleluid.principium.common.items
 
-import com.alleluid.principium.common.items.basic.ItemSubstructBasic
 import com.alleluid.principium.common.items.basic.Substructs
 import com.alleluid.principium.common.items.tools.DoublePick
 import com.alleluid.principium.common.items.tools.LaserDrill

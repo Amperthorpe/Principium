@@ -4,8 +4,6 @@ import com.alleluid.principium.common.entities.EntityBullet
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.EntityArrow
-import net.minecraft.entity.projectile.EntitySpectralArrow
-import net.minecraft.entity.projectile.EntityTippedArrow
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumHand
 import net.minecraft.util.EnumParticleTypes

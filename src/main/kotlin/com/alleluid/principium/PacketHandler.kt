@@ -3,17 +3,11 @@ package com.alleluid.principium
 import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.weapons.BaseWeapon
-import com.alleluid.principium.common.items.weapons.WeaponPistol
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.init.Items
-import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
-import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext

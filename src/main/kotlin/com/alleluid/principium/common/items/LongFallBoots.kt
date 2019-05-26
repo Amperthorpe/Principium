@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 
-class LongFallBootsBase(slot: EntityEquipmentSlot, val name: String) : ItemArmor(ItemArmor.ArmorMaterial.CHAIN, 0, slot){
+class LongFallBootsBase(slot: EntityEquipmentSlot, val name: String) : ItemArmor(ArmorMaterial.CHAIN, 0, slot){
     init {
         translationKey = "$MOD_ID.$name"
         registryName = ResourceLocation(MOD_ID, name)

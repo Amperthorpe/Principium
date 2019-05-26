@@ -1,6 +1,9 @@
 package com.alleluid.principium.client
 
-import com.alleluid.principium.*
+import com.alleluid.principium.MOD_ID
+import com.alleluid.principium.MineBlockMessage
+import com.alleluid.principium.PacketHandler
+import com.alleluid.principium.ShootMessage
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.weapons.BaseWeapon
 import com.alleluid.principium.util.statusMessage
@@ -8,7 +11,6 @@ import net.minecraft.client.Minecraft
 import net.minecraft.init.Items
 import net.minecraft.util.EnumHand
 import net.minecraftforge.client.event.MouseEvent
-import net.minecraftforge.client.event.RenderTooltipEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side

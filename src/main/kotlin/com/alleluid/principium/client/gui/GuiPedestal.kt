@@ -10,7 +10,7 @@ import net.minecraft.inventory.Container
 import net.minecraft.util.ResourceLocation
 
 class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container){
-    private val BG_TEXTURE: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/single_slot.png")
+    private val backgroundTexture: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/single_slot.png")
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
@@ -20,7 +20,7 @@ class GuiPedestal(container: Container, private val playerInv: InventoryPlayer) 
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         GlStateManager.color(1f, 1f, 1f, 1f)
-        mc.textureManager.bindTexture(BG_TEXTURE)
+        mc.textureManager.bindTexture(backgroundTexture)
         val x = (width - xSize) / 2
         val y = (height - ySize) / 2
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)

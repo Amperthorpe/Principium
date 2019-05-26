@@ -3,10 +3,10 @@ package com.alleluid.principium.common.blocks.box
 import com.alleluid.principium.common.BaseContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.InventoryPlayer
-import net.minecraft.inventory.Slot
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
+
 class ContainerBox(playerInv: InventoryPlayer, box: TileEntityBox) : BaseContainer(playerInv, box){
 
     init {

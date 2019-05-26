@@ -1,8 +1,6 @@
 package com.alleluid.principium.client.gui
 
 import com.alleluid.principium.MOD_ID
-import com.alleluid.principium.MachineSyncMessage
-import com.alleluid.principium.PacketHandler
 import com.alleluid.principium.common.blocks.smelter.BlockSmelter
 import com.alleluid.principium.common.blocks.smelter.ContainerSmelter
 import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
@@ -14,7 +12,7 @@ import net.minecraft.inventory.Container
 import net.minecraft.util.ResourceLocation
 
 class GuiSmelter(val container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container) {
-    private val BG_TEXTURE: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/gui_energy_furnace_blank.png")
+    private val backgroundTexture: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/gui_energy_furnace_blank.png")
     private var energy = 0
     init {
         if (container is ContainerSmelter)
@@ -29,7 +27,7 @@ class GuiSmelter(val container: Container, private val playerInv: InventoryPlaye
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         GlStateManager.color(1f, 1f, 1f, 1f)
-        mc.textureManager.bindTexture(BG_TEXTURE)
+        mc.textureManager.bindTexture(backgroundTexture)
         val x = (width - xSize) / 2
         val y = (height - ySize) / 2
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)

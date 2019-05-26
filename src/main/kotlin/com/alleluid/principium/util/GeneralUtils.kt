@@ -25,7 +25,7 @@ fun chatMessage(player: EntityPlayer, key: String, vararg args: Any) {
     }
 }
 
-@Deprecated("Replace with translation status!")
+@Deprecated("Replace with translation status!", ReplaceWith("statusMessage"))
 fun noTranslateMessage(player: EntityPlayer, msg: String, isStatus: Boolean){
     if (player.world.isRemote){
         player.sendStatusMessage(TextComponentString(msg), isStatus)
