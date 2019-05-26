@@ -49,7 +49,6 @@ object TransportRod : BaseItem("transport_rod") {
                         playerIn.fallDistance = 0f
                         playerIn.setPositionAndRotationAndUpdate(adjustedPos.x + 0.5, adjustedPos.y.toDouble(), adjustedPos.z + 0.5)
                     } else {
-//                        playerIn.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1f, 1f)
                         worldIn.playSound(playerIn, adjustedPos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
                         particleGroup(worldIn, EnumParticleTypes.DRAGON_BREATH, adjustedPos.x, adjustedPos.y, adjustedPos.z, 0.5f)
                     }
@@ -104,6 +103,11 @@ object TransportRod : BaseItem("transport_rod") {
             return false
         } else if (entity is EntityLivingBase) {
             val array = stack.tagCompound!!.getIntArray("storedPos") ?: return false
+            if (player.world.isRemote){
+                player.world.playSound(player, entity.position, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.3f, 1f)
+                particleGroup(player.world, EnumParticleTypes.DRAGON_BREATH, entity, 0.5f)
+
+            }
             entity.setPositionAndRotationAndUpdate(array[0] + 0.5, array[1].toDouble(), array[2] + 0.5)
             return true
         }
