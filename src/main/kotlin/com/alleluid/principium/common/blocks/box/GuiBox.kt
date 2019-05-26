@@ -1,4 +1,4 @@
-package com.alleluid.principium.client.gui
+package com.alleluid.principium.common.blocks.box
 
 import com.alleluid.principium.common.blocks.box.BlockBox
 import net.minecraft.client.gui.inventory.GuiContainer

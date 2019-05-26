@@ -1,8 +1,8 @@
 package com.alleluid.principium
 
-import com.alleluid.principium.client.gui.GuiBox
-import com.alleluid.principium.client.gui.GuiPedestal
-import com.alleluid.principium.client.gui.GuiSmelter
+import com.alleluid.principium.common.blocks.box.GuiBox
+import com.alleluid.principium.common.blocks.pedestal.GuiPedestal
+import com.alleluid.principium.common.blocks.smelter.GuiSmelter
 import com.alleluid.principium.common.blocks.box.ContainerBox
 import com.alleluid.principium.common.blocks.box.TileEntityBox
 import com.alleluid.principium.common.blocks.pedestal.ContainerPedestal
