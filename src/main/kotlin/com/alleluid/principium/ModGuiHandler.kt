@@ -33,7 +33,7 @@ class ModGuiHandler : IGuiHandler{
     override fun getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): Container? {
         return when (ModGuiID.values()[ID]) {
             ModGuiID.PEDESTAL -> ContainerPedestal(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntityPedestal)
-            ModGuiID.SMELTER -> ContainerSmelter(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntitySmelter)
+            ModGuiID.SMELTER -> ContainerSmelter(player, world.getTileEntity(BlockPos(x, y, z)) as TileEntitySmelter)
             ModGuiID.BOX -> ContainerBox(player.inventory, world.getTileEntity(BlockPos(x, y, z)) as TileEntityBox)
         }
     }
