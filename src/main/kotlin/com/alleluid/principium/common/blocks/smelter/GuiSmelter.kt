@@ -8,7 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.inventory.Container
 import net.minecraft.util.ResourceLocation
 
-class GuiSmelter(val container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container) {
+class GuiSmelter(private val container: Container, private val playerInv: InventoryPlayer) : GuiContainer(container) {
     private val backgroundTexture: ResourceLocation = ResourceLocation(MOD_ID, "textures/gui/gui_energy_furnace_blank.png")
     private var energy = 0
     init {
