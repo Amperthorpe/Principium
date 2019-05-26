@@ -147,6 +147,7 @@ object LaserDrill : BaseItem("laser_drill") {
             val effectsEndPoint = if (entTrace != null) {
                 if (blockTrace == null || blockTrace.typeOfHit == RayTraceResult.Type.MISS
                         || !worldIn.getBlockState(blockTrace.blockPos).isFullCube) {
+                    entTrace.entityHit.setFire(5)
                     playerIn.attackTargetEntityWithCurrentItem(entTrace.entityHit)
                     entTrace.hitVec
                 } else {
