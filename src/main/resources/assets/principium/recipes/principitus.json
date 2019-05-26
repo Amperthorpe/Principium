@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "CIR",
-    "GBD",
-    "SEL"
+    "CdR",
+    "vGs",
+    "eIl"
   ],
   "key": {
     "C": {
@@ -12,39 +12,39 @@
     },
     "I": {
       "type": "forge:ore_dict",
-      "ore": "ingotIron"
+      "ore": "blockIron"
     },
     "R": {
       "type": "forge:ore_dict",
-      "ore": "dustRedstone"
+      "ore": "blockRedstone"
     },
-    "D": {
+    "d": {
       "type": "forge:ore_dict",
       "ore": "gemDiamond"
     },
-    "L": {
+    "l": {
       "type": "forge:ore_dict",
       "ore": "gemLapis"
     },
-    "E": {
+    "e": {
       "type": "forge:ore_dict",
       "ore": "gemEmerald"
     },
-    "S": {
+    "v": {
       "type": "forge:ore_dict",
       "ore": "record"
     },
+    "s": {
+      "item": "minecraft:slime_ball"
+    },
     "G": {
       "type": "forge:ore_dict",
-      "ore": "ingotGold"
-    },
-    "B": {
-      "type": "forge:ore_dict",
-      "ore": "blockIron"
+      "ore": "blockGold"
     }
   },
   "result": {
-    "item": "principium:principitus"
+    "item": "principium:principitus",
+    "count": 2
 
   }
 }
