@@ -4,6 +4,7 @@ import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
 import com.alleluid.principium.common.items.basic.*
 import com.alleluid.principium.common.misc.SmelterFields
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
 import net.minecraftforge.items.ItemStackHandler
@@ -24,6 +25,8 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
     var potentialCapacity = 50_000
     var maxReceive = 1000
     var maxExtract = 1000
+    //Idea: accumulate xp and have it speed up machine slightly.
+    var storedExperience = 0
 
     var isProcessing = false
     // Out of 1000
@@ -54,21 +57,48 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
     override fun update() {
         val fuel = inventory.getStackInSlot(slotFuel)
-        if (world.totalWorldTime % 20 == 0L && !fuel.isEmpty){
-            if (receiveEnergy(1000, false) > 0){
-                if (!world.isRemote)
+        val input = inventory.getStackInSlot(slotInput)
+        val output = inventory.getStackInSlot(slotOutput)
+
+        // Debug vals
+        val timeToProcess = 20
+        val energyPerTick = 100
+
+        if (isProcessing)
+            --processingProgress
+
+        if (!world.isRemote) {
+            // Handle potential from fuels
+            if (!fuel.isEmpty && potential < potentialCapacity){
+                val potenPerFuel = when(fuel.item){
+                    is ItemSubstructDiamond -> 1600
+                    is ItemSubstructGold -> 800
+                    is ItemSubstructIron -> 400
+                    is ItemSubstructBasic -> 200
+                    else -> 0
+                }
+
+                val tryReceived = receivePotential(potenPerFuel)
+                if (tryReceived > 0)
                     fuel.shrink(1)
             }
-        }
 
-//        val fuelValue = 100
-//        val fuel = inventory.getStackInSlot(slotFuel)
-//        if (!fuel.isEmpty && fuel.item == ModItems.ItemSubstruct && energy + fuelValue < maxEnergyStored){
-//            val quotient = (fuel.count * fuelValue) / maxEnergyStored
-//            receiveEnergy(fuelValue * quotient, false)
-//            fuel.shrink(quotient)
-//        }
+            //Handle smelting using potential
+            if (!input.isEmpty){
+                val smeltResult = FurnaceRecipes.instance().getSmeltingResult(input)
+                if (!smeltResult.isEmpty && processingProgress < 1){
+                    isProcessing = true
+                    when {
+                        output.isEmpty -> inventory.setStackInSlot(slotOutput, smeltResult)
+                        smeltResult.item == output.item -> output.grow(smeltResult.count)
+                    }
+                    processingProgress = timeToProcess
+                }
+
+            }
+        }
     }
+
 
     override val inventory = object : ItemStackHandler(3) {
         override fun onContentsChanged(slot: Int) {
@@ -97,6 +127,27 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
         _potential = compound.getInteger("energy")
         super.readFromNBT(compound)
     }
+
+    fun getFields(): SmelterFields {
+        //return relevant ints to pass to container
+        return SmelterFields(potential, potentialCapacity, processingProgress)
+    }
+
+    fun setFields(fields: SmelterFields){
+        _potential = fields.potential
+        potentialCapacity = fields.capacity
+        processingProgress = fields.progress
+    }
+
+//    override fun getUpdatePacket(): SPacketUpdateTileEntity? {
+//        return SPacketUpdateTileEntity(pos, 0, writeToNBT(tileData))
+//    }
+//
+//    override fun getUpdateTag() = tileData
+//
+//    override fun onDataPacket(net: NetworkManager, pkt: SPacketUpdateTileEntity) {
+//        readFromNBT(pkt.nbtCompound)
+//    }
 
 }
 
