@@ -1,13 +1,13 @@
 package com.alleluid.principium
 
-import com.alleluid.principium.common.blocks.smelter.TileEntitySmelter
+import com.alleluid.principium.common.blocks.smelter.ContainerSmelter
 import com.alleluid.principium.common.items.tools.LaserDrill
 import com.alleluid.principium.common.items.weapons.BaseWeapon
+import com.alleluid.principium.common.misc.SmelterFields
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.util.EnumHand
-import net.minecraft.util.math.BlockPos
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
@@ -23,7 +23,7 @@ object PacketHandler {
     @JvmStatic
     fun registerMessages() {
         INSTANCE.registerMessage(ShootMessage.ShootMessageHandler::class.java, ShootMessage::class.java, uid++, Side.SERVER)
-        INSTANCE.registerMessage(MachineSyncMessage.MachineSyncMesssageHandler::class.java, MachineSyncMessage::class.java, uid++, Side.CLIENT)
+        INSTANCE.registerMessage(SmelterSyncMessage.SmelterSyncMesssageHandler::class.java, SmelterSyncMessage::class.java, uid++, Side.CLIENT)
         INSTANCE.registerMessage(MineBlockMessage.MineBlockMesssageHandler::class.java, MineBlockMessage::class.java, uid++, Side.SERVER)
     }
 }
@@ -69,36 +69,29 @@ class MineBlockMessage : IMessage {
     }
 }
 
-class MachineSyncMessage(var energy: Int, var pos: BlockPos) : IMessage {
+class SmelterSyncMessage(var fields: SmelterFields = SmelterFields()) : IMessage {
     override fun toBytes(buf: ByteBuf) {
-        buf.writeInt(energy)
-        buf.writeInt(pos.x)
-        buf.writeInt(pos.y)
-        buf.writeInt(pos.z)
-
+        buf.writeInt(fields.potential)
+        buf.writeInt(fields.capacity)
+        buf.writeInt(fields.progress)
     }
 
     override fun fromBytes(buf: ByteBuf) {
-        energy = buf.readInt()
-        val x = buf.readInt()
-        val y = buf.readInt()
-        val z = buf.readInt()
+        val potential = buf.readInt()
+        val capacity = buf.readInt()
+        val progress = buf.readInt()
 
-        pos = BlockPos(x, y, z)
-
+        fields = SmelterFields(potential, capacity, progress)
     }
 
-    class MachineSyncMesssageHandler : IMessageHandler<MachineSyncMessage, IMessage> {
-        private var energy = 0
-        override fun onMessage(message: MachineSyncMessage?, ctx: MessageContext?): IMessage? {
-            val player = Minecraft.getMinecraft().player
-            val pos = message?.pos ?: BlockPos.ORIGIN
-            Minecraft.getMinecraft().addScheduledTask {
-                val te = player.world.getTileEntity(pos)
-                if (te is TileEntitySmelter)
-                    te.energy = energy
+    class SmelterSyncMesssageHandler : IMessageHandler<SmelterSyncMessage, IMessage> {
+        override fun onMessage(message: SmelterSyncMessage?, ctx: MessageContext?): IMessage? {
+            if (message != null){
+                Minecraft.getMinecraft().addScheduledTask {
+                    val container = Minecraft.getMinecraft().player.openContainer
+                    (container as ContainerSmelter).updateFields(message.fields)
+                }
             }
-
             return null
         }
     }
