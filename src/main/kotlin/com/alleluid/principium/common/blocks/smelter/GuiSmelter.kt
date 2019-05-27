@@ -13,12 +13,9 @@ class GuiSmelter(container: Container, private val playerInv: InventoryPlayer) :
     private val containerSmelter = container as ContainerSmelter
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
-        drawVerticalLine(345, 50, 216, 0x000000)
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-        drawVerticalLine(245, 50, 216, 0x404040)
         renderHoveredToolTip(mouseX, mouseY)
-        drawVerticalLine(385, 50, 216, 0xffffff)
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
@@ -50,7 +47,6 @@ class GuiSmelter(container: Container, private val playerInv: InventoryPlayer) :
 
     // For...some reason these coords aren't the same scale as setting draw positions.
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
-        noTranslateMessage(mc.player, "Pos: $mouseX, $mouseY",false)
         super.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
