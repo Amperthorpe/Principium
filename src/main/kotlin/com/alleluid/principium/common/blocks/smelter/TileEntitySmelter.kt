@@ -1,50 +1,57 @@
 package com.alleluid.principium.common.blocks.smelter
 
 import com.alleluid.principium.common.blocks.BaseInventoryTileEntity
-import com.alleluid.principium.common.items.basic.ItemSubstruct
+import com.alleluid.principium.common.items.basic.*
+import com.alleluid.principium.common.misc.SmelterFields
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
-import net.minecraftforge.energy.IEnergyStorage
 import net.minecraftforge.items.ItemStackHandler
 
-class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable, IEnergyStorage
+class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITickable
 {
     val slotInput = 0
     val slotFuel = 1
     val slotOutput = 2
 
-    var energy = 0
-    val capacity = 100_000
+    private var _potential = 0
+    var potential: Int = _potential
+        get() = _potential
+        set(value) {
+            field = value
+            markDirty()
+        }
+    var potentialCapacity = 50_000
     var maxReceive = 1000
     var maxExtract = 1000
 
-    override fun canExtract() = this.maxExtract > 0
-    override fun canReceive() = this.maxReceive > 0
-    override fun getMaxEnergyStored() = this.capacity
-    override fun getEnergyStored() = this.energy
+    var isProcessing = false
+    // Out of 1000
+    var processingProgress = 0
 
-    override fun extractEnergy(maxExtract: Int, simulate: Boolean): Int {
+    fun canExtract() = this.maxExtract > 0
+    fun canReceive() = this.maxReceive > 0
+
+    fun extractPotential(maxExtract: Int, simulate: Boolean = false): Int {
         if (!canExtract())
             return 0
 
-        val energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract))
+        val potentialExtracted = Math.min(_potential, Math.min(this.maxExtract, maxExtract))
         if (!simulate)
-            energy -= energyExtracted
-        return energyExtracted
+            _potential -= potentialExtracted
+        return potentialExtracted
     }
 
-    override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
+    fun receivePotential(maxReceive: Int, simulate: Boolean = false): Int {
         if (!canReceive())
             return 0
 
-        val energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive))
+        val potentialReceived = Math.min(potentialCapacity - _potential, Math.min(this.maxReceive, maxReceive))
         if (!simulate)
-            energy += energyReceived
-        return energyReceived
+            _potential += potentialReceived
+        return potentialReceived
     }
 
-    var timer = 0
     override fun update() {
         val fuel = inventory.getStackInSlot(slotFuel)
         if (world.totalWorldTime % 20 == 0L && !fuel.isEmpty){
@@ -81,13 +88,13 @@ class TileEntitySmelter : BaseInventoryTileEntity("tile_entity_smelter", 3), ITi
 
     override fun writeToNBT(compound: NBTTagCompound): NBTTagCompound {
         compound.setTag("inventory", inventory.serializeNBT())
-        compound.setInteger("energy", energy)
+        compound.setInteger("energy", _potential)
         return super.writeToNBT(compound)
     }
 
     override fun readFromNBT(compound: NBTTagCompound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"))
-        energy = compound.getInteger("energy")
+        _potential = compound.getInteger("energy")
         super.readFromNBT(compound)
     }
 
