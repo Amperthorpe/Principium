@@ -28,7 +28,7 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, ModG
 
     override fun breakBlock(worldIn: World, pos: BlockPos, state: IBlockState) {
         val tile: TileEntitySmelter = getTileEntity(worldIn, pos)
-        val itemHandler: IItemHandler? = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
+        val itemHandler: IItemHandler? = tile.getCapability<IItemHandler?>(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)
         if (itemHandler != null){
             for (slot in 0 until itemHandler.slots) {
                 val stack = itemHandler.getStackInSlot(slot)
@@ -43,9 +43,8 @@ object BlockSmelter : BaseBlockTileEntity<TileEntitySmelter>(Material.ROCK, ModG
     }
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        noTranslateMessage(playerIn, "Rem: ${worldIn.isRemote} | Tile energy: ${getTileEntity(worldIn, pos).energy}", false)
-//        worldIn.ifServer {PacketHandler.INSTANCE.sendToAllAround(MachineSyncMessage(getTileEntity(worldIn, pos).energy, pos),
-//                NetworkRegistry.TargetPoint(playerIn.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 2.0))}
+//        noTranslateMessage(playerIn, "Tile energy: ${getTileEntity(worldIn, pos).potential}", false)
+//        println("Tile energy: ${getTileEntity(worldIn, pos).potential}")
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
     }
 
